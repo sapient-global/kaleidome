@@ -1,0 +1,57 @@
+
+//  Buttons
+//   ========================================================================== */
+
+$button-background-focus: lighten($secondary-color, 4%);
+$button-font-size: 1.3rem;
+$button-height: 36px;
+$button-padding: 0;
+$button-radius: 2px;
+// Disabled styles
+$button-disabled-background: $color-alabaster-gray;
+$button-disabled-color: $dark-gray;
+// Raised buttons
+$button-raised-background: $secondary-color;
+$button-raised-background-hover: lighten($button-raised-background, 5%);
+$button-raised-color: $brand-white;
+// Large buttons
+$button-large-icon-font-size: 1.6rem;
+$button-large-height: $button-height * 1.5;
+// Flat buttons
+$button-flat-color: $brand-white;
+$button-flat-disabled-color: lighten($dark-gray, 10%);
+// Floating buttons
+$button-floating-background: $secondary-color;
+$button-floating-background-hover: $button-floating-background;
+$button-floating-color: $brand-white;
+$button-floating-size: 37px;
+$button-floating-large-size: $button-floating-size * 1.5;
+$button-floating-radius: 50%;
+
+
+// Forms
+// ========================================================================== */
+// Text Inputs + Textarea
+$input-height: 48px;
+$input-border-color: $color-alabaster-gray;
+$input-border: 1px solid $input-border-color;
+$input-background: $brand-white;
+$input-error-color: $error-color;
+$input-success-color: $success-color;
+$input-focus-color: $secondary-color;
+$input-font-size: 1rem;
+$input-margin: 0 0 15px 0;
+$input-padding: 0;
+$input-transition: all .3s;
+$label-font-size: .8rem;
+$input-disabled-color: rgba($dark-gray, .26);
+$input-disabled-solid-color: $color-alabaster-gray;
+$input-disabled-border: 1px dotted $input-disabled-color;
+$input-invalid-border: 1px solid $input-error-color;
+$placeholder-text-color: lighten($dark-gray, 20%);
+
+// 13. Navigation Bar
+// ========================================================================== */
+$navbar-height-mobile: 56px;
+$navbar-font-color: $brand-white;
+$navbar-brand-font-size: 2.1rem;

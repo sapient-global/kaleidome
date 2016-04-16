@@ -1,0 +1,32 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  order: 1;
+  flex-grow: 2;
+  align-self: flex-start;
+}
+
+.navbar {
+  order: 2;
+  align-self: flex-end;
+  width: 100vw;
+}
+
+.navbar-list {
+  width: 100%;
+  height: 100%;
+}
+
+.share-form {
+  position: relative;
+  width: 100vw;
+  padding: 0 1.3%;
+}
+
+.kaleidoscope {
+  width: 100%;
+  height: 100%;
+}

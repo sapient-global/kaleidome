@@ -1,0 +1,7 @@
+{
+  "css": {
+     "convert_quotes": "single",
+     "newline_between_rules": true,
+     "selector_separator_newline ": true
+  }
+}
