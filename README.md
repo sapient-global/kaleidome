@@ -21,3 +21,9 @@ gulp build
 - Replace texts of Nav bar with Icons
 - Add Sapient Logo somewhere
 - Get https and server
+- Use fonts
+- Remove scoll bars
+- Remove normalize
+- Add comments to explain code
+- Add a success message when tweet is sent
+- Perhaps add web service for offline access? in BTconf the WIFI is kind of ....
