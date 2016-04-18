@@ -6,8 +6,7 @@
 
 export default class {
   constructor( opts ) {
-    let key, ref, ref1, val;
-    this.options = ( !opts ) ? opts : {};
+    this.options = ( opts ) ? opts : {};
     this.defaults = {
       offsetRotation: 0,
       offsetScale: 1,
@@ -17,15 +16,11 @@ export default class {
       slices: 12,
       zoom: 1
     };
-    ref = this.defaults;
-    for ( key in ref ) {
-      val = ref[ key ];
-      this[ key ] = val;
-    }
 
-    ref1 = this.options;
-    for ( key in ref1 ) {
-      val = ref1[ key ];
+    const mergedOptions = Object.assign( this.defaults, this.options );
+
+    for ( let key in mergedOptions ) {
+      let val = mergedOptions[ key ];
       this[ key ] = val;
     }
 
@@ -35,21 +30,26 @@ export default class {
     if ( this.context == null ) {
       this.context = this.domElement.getContext( '2d' );
     }
-    if ( this.image == null ) {
-      this.image = document.createElement( 'img' );
-    }
+
+    const dataImg = this.image;
+    this.image = document.createElement( 'img' );
+    this.image.src = dataImg;
   }
 
   draw() {
     const HALF_PI = Math.PI / 2;
     const TWO_PI = Math.PI * 2;
-    var cx, i, index, ref, results, scale, step;
     this.domElement.width = this.domElement.height = this.radius * 2;
     this.context.fillStyle = this.context.createPattern( this.image, 'repeat' );
-    scale = this.zoom * ( this.radius / Math.min( this.image.width, this.image.height ) );
-    step = this.TWO_PI / this.slices;
-    cx = this.image.width / 2;
-    results = [];
+    let scale = this.zoom * ( this.radius / Math.min( this.image.width, this.image.height ) );
+    let step = this.TWO_PI / this.slices;
+    let cx = this.image.width / 2;
+
+    let i;
+    let index;
+    let results = [];
+    let ref;
+
     for ( index = i = 0, ref = this.slices; 0 <= ref ? i <= ref : i >= ref; index = 0 <= ref ? ++i : --i ) {
       this.context.save();
       this.context.translate( this.radius, this.radius );
@@ -61,16 +61,16 @@ export default class {
       this.context.closePath();
       this.context.rotate( this.HALF_PI );
       this.context.scale( scale, scale );
-      this.context.scale( [ -1,
-        1
-      ][ index % 2 ], 1 );
+      this.context.scale( [ -1, 1 ][ index % 2 ], 1 );
       this.context.translate( this.offsetX - cx, this.offsetY );
       this.context.rotate( this.offsetRotation );
       this.context.scale( this.offsetScale, this.offsetScale );
       this.context.fill();
+      //This returns undedfined.
+      //Find out how to render the already added canvas
       results.push( this.context.restore() );
     }
-
+    console.log( results );
     return results;
   };
 };

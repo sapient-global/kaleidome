@@ -87,20 +87,6 @@ function html() {
     .pipe( gulp.dest( paths.dist ) );
 }
 
-function minifyImages() {
-  return gulp.src( 'src/images/**/*' )
-    .pipe( $.cache( $.imagemin( {
-      progressive: true,
-      interlaced: true,
-      // don't remove IDs from SVGs, they are often used
-      // as hooks for embedding and styling
-      svgoPlugins: [ {
-        cleanupIDs: false
-      } ]
-    } ) ) )
-    .pipe( gulp.dest( `${paths.dist}/images` ) );
-}
-
 function bundleDev() {
   const config = webpackConfig( true, `${paths.src}/scripts/${paths.main}`, PORT, false );
   return gulp.src( `${paths.src}/scripts/${paths.main}` )

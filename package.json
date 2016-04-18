@@ -13,7 +13,6 @@
     "type": "stash",
     "url": "https://tools.sapient.com/stash/scm/etde/btconf-2016.git"
   },
-  "keywords": [],
   "author": "Sapient Nitro Team Black developers",
   "license": "MIT",
   "bugs": {
@@ -40,10 +39,7 @@
     "gulp-eslint": "^1.1.1",
     "gulp-filter": "^3.0.0",
     "gulp-htmlmin": "^1.3.0",
-    "gulp-imagemin": "^2.4.0",
-    "gulp-istanbul": "^0.10.3",
     "gulp-jscs": "^3.0.0",
-    "gulp-less": "^3.0.5",
     "gulp-load-plugins": "^1.2.0",
     "gulp-plumber": "^1.0.1",
     "gulp-postcss": "^6.1.0",
@@ -54,7 +50,6 @@
     "gulp-useref": "^3.0.7",
     "gulp-util": "^3.0.7",
     "json-loader": "^0.5.4",
-    "less-loader": "^2.2.2",
     "node-sass": "^3.4.2",
     "postcss-loader": "^0.8.2",
     "raf.js": "0.0.4",
@@ -63,7 +58,6 @@
     "run-sequence": "^1.1.5",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.0",
-    "three": "^0.75.0",
     "twit": "^2.2.3",
     "twitter": "^1.2.5",
     "url-loader": "^0.5.7",
@@ -77,8 +71,5 @@
     "main": "btconf-2016",
     "mainVarName": "btconf2016",
     "dist": "dist"
-  },
-  "dependencies": {
-    "normalize-scss": "^4.0.3"
   }
 }

@@ -110,7 +110,7 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
       /(node_modules|~)\/(crappy\-bundled\-lib|jquery)\//gi
     ]
   },
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   plugins: ( [
     // Avoid publishing files when compilation failed:
     new webpack.NoErrorsPlugin(),
