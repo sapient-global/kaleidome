@@ -34,16 +34,14 @@ function init() {
   const photo = document.querySelector( '.photo' );
 
   const kaleidoscope = new Kaleidoscope( {
-    image: photo.src,
-    slices: 13
+    slices: 20
   } );
-  kaleidoscope.draw();
 
-  kaleidoscope.domElement.style.position = 'absolute';
-  kaleidoscope.domElement.style.marginLeft = -kaleidoscope.radius + 'px';
-  kaleidoscope.domElement.style.marginTop = -kaleidoscope.radius + 'px';
-  kaleidoscope.domElement.style.left = '50%';
-  kaleidoscope.domElement.style.top = '50%';
+  kaleidoscope.image.onload = () => {
+    kaleidoscope.draw();
+  };
+
+  kaleidoscope.image.src = photo.src;
 
   options.tx = kaleidoscope.offsetX;
   options.ty = kaleidoscope.offsetY;

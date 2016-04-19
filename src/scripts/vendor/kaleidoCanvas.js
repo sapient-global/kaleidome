@@ -12,6 +12,7 @@ export default class {
       offsetScale: 1,
       offsetX: 0,
       offsetY: 0,
+      image: new Image(),
       radius: 260,
       slices: 12,
       zoom: 1
@@ -24,31 +25,28 @@ export default class {
       this[ key ] = val;
     }
 
-    if ( this.domElement == null ) {
+    if ( !this.domElement ) {
       this.domElement = document.createElement( 'canvas' );
     }
-    if ( this.context == null ) {
+    if ( !this.context ) {
       this.context = this.domElement.getContext( '2d' );
     }
-
-    const dataImg = this.image;
-    this.image = document.createElement( 'img' );
-    this.image.src = dataImg;
   }
 
   draw() {
     const HALF_PI = Math.PI / 2;
     const TWO_PI = Math.PI * 2;
-    this.domElement.width = this.domElement.height = this.radius * 2;
-    this.context.fillStyle = this.context.createPattern( this.image, 'repeat' );
-    let scale = this.zoom * ( this.radius / Math.min( this.image.width, this.image.height ) );
-    let step = this.TWO_PI / this.slices;
-    let cx = this.image.width / 2;
-
+    const scale = this.zoom * ( this.radius / Math.min( this.image.width, this.image.height ) );
+    const step = TWO_PI / this.slices;
+    const cx = this.image.width / 2;
+    const size = this.radius * 2;
     let i;
     let index;
-    let results = [];
     let ref;
+
+    this.context.fillStyle = this.context.createPattern( this.image, 'repeat' );
+    this.domElement.width = size;
+    this.domElement.height = size;
 
     for ( index = i = 0, ref = this.slices; 0 <= ref ? i <= ref : i >= ref; index = 0 <= ref ? ++i : --i ) {
       this.context.save();
@@ -59,18 +57,14 @@ export default class {
       this.context.arc( 0, 0, this.radius, step * -0.51, step * 0.51 );
       this.context.lineTo( 0.5, 0.5 );
       this.context.closePath();
-      this.context.rotate( this.HALF_PI );
+      this.context.rotate( HALF_PI );
       this.context.scale( scale, scale );
       this.context.scale( [ -1, 1 ][ index % 2 ], 1 );
       this.context.translate( this.offsetX - cx, this.offsetY );
       this.context.rotate( this.offsetRotation );
       this.context.scale( this.offsetScale, this.offsetScale );
       this.context.fill();
-      //This returns undedfined.
-      //Find out how to render the already added canvas
-      results.push( this.context.restore() );
+      this.context.restore();
     }
-    console.log( results );
-    return results;
   };
 };

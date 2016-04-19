@@ -31,17 +31,11 @@ $link-color: $brand-blue;
 // ==========================================================================
 // Fonts
 // ==========================================================================
-$font-family-mono-sans: sapientsans, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$font-family-serif: sapientCentroSlab, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$font-family-mono: Monaco, monospace, sans-serif;
-$main-font: $font-family-serif;
+$font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $main-font-size: 16px;
-$double-font-size: 24px;
-$block-margin: 20px;
 
 //
 // Imports
 // ==========================================================================
 
-//@import 'fonts';
 @import 'utils';
