@@ -9,6 +9,9 @@
     "build": "gulp build",
     "dev": "WEBPACK_ENV=dev webpack-dev-server --https"
   },
+  "engines": {
+    "node": ">=5.0.0"
+  },
   "repository": {
     "type": "stash",
     "url": "https://tools.sapient.com/stash/scm/etde/btconf-2016.git"
@@ -59,7 +62,6 @@
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.0",
     "twit": "^2.2.3",
-    "twitter": "^1.2.5",
     "url-loader": "^0.5.7",
     "vinyl-source-stream": "^1.1.0",
     "webpack": "^1.13.0",
