@@ -14,6 +14,16 @@ const paths = {
   bundleName: `${config.main}.js`
 };
 
+const sassLoaders = [
+  'css-loader',
+  'postcss-loader',
+  'resolve-url!',
+  'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve( __dirname, './src/styles' )
+]
+
+const sassResolvePaths = path.resolve( __dirname, './src/styles' );
+const sassPaths = `indentedSyntax=sass&includePaths[]= ${sassResolvePaths}`;
+
 
 const browsers = {
   browsers: [ 'last 2 version', 'ie >= 11' ]
@@ -27,7 +37,7 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
   entry: ( DEBUG && WEBPACKSERVER ? [
     `webpack-dev-server/client?http://localhost:${PORT}`,
   ] : [] ).concat( [
-    `${paths.src}/styles/style.less`,
+    `${paths.src}/styles/style.scss`,
     'babel-polyfill',
     PATH,
   ] ),
@@ -44,6 +54,11 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
       'node_modules'
     ]
   },
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  },
   module: {
     loaders: [ {
         test: /\.js$/,
@@ -51,10 +66,10 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
         include: paths.src,
         loader: 'babel-loader'
       }, {
-        test: /\.less$/,
-        loader: DEBUG ? 'style!css!postcss-loader!less' :
-        ExtractTextPlugin.extract( 'style-loader',
-        'css-loader!postcss-loader!less-loader' )
+        test: /\.scss$/,
+        //loader: [ 'style', 'css?sourceMap', 'sass?sourceMap' ].join('!')
+        loader: DEBUG ?
+          'style!css?sourceMap!resolve-url!postcss-loader!sass?sourceMap!' : ExtractTextPlugin.extract( 'style-loader', 'css-loader!resolve-url!postcss-loader!sass!' )
       },
       // Load images
       {
@@ -75,6 +90,12 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
       }, {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader'
+      }, {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        loader: 'url-loader?limit=100000'
+      }, {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ],
     postcss: function() {
@@ -82,11 +103,14 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
         browsers: [ 'last 2 versions' ]
       } ) ];
     },
+    sassLoader: {
+      includePaths: [ `${paths.src}/styles` ]
+    },
     noParse: [
       /(node_modules|~)\/(crappy\-bundled\-lib|jquery)\//gi
     ]
   },
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   plugins: ( [
     // Avoid publishing files when compilation failed:
     new webpack.NoErrorsPlugin(),
@@ -105,6 +129,9 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
     new webpack.optimize.UglifyJsPlugin( {
       output: {
         comments: false
+      },
+      compress: {
+        warnings: false
       },
       exclude: [ /\.min\.js$/gi ] // skip pre-minified libs
     } )
