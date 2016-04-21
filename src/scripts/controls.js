@@ -53,12 +53,6 @@ function init() {
     tweetButton.classList.remove( 'u-hidden' );
     photo.classList.add( 'u-hidden' );
 
-    kaleidoskopeContainer.querySelector( 'canvas' );
-    const context = canvas.getContext( '2d' );
-    const data = canvas.toDataURL( 'image/png' );
-    const img = document.querySelector( '.js-image-to-share' );
-    img.setAttribute( 'src', data );
-
     kaleidoskopeContainer.classList.add( 'u-hidden' );
     shareContainer.classList.remove( 'u-hidden' );
   } );
