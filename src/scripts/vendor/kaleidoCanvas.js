@@ -7,12 +7,12 @@
 export default class {
   constructor( opts ) {
     this.options = ( opts ) ? opts : {};
+    this.image = new Image();
     this.defaults = {
       offsetRotation: 0,
       offsetScale: 1,
       offsetX: 0,
       offsetY: 0,
-      image: new Image(),
       radius: 260,
       slices: 12,
       zoom: 1
@@ -26,11 +26,15 @@ export default class {
     }
 
     if ( !this.domElement ) {
-      this.domElement = document.createElement( 'canvas' );
+      this.domElement = document.querySelector( '.kaleidoscope' );
     }
     if ( !this.context ) {
       this.context = this.domElement.getContext( '2d' );
     }
+
+    this.image.onload = () => {
+      this.draw();
+    };
   }
 
   draw() {
@@ -44,9 +48,9 @@ export default class {
     let index;
     let ref;
 
-    this.context.fillStyle = this.context.createPattern( this.image, 'repeat' );
     this.domElement.width = size;
     this.domElement.height = size;
+    this.context.fillStyle = this.context.createPattern( this.image, 'repeat' );;
 
     for ( index = i = 0, ref = this.slices; 0 <= ref ? i <= ref : i >= ref; index = 0 <= ref ? ++i : --i ) {
       this.context.save();

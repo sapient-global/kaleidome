@@ -11,8 +11,7 @@ const options = {
   tr: 0,
 };
 
-function uptate( _this, kaleidoscope ) {
-  return () => {
+function updateKaleidoscopeShape( kaleidoscope ) {
     if ( options.interactive ) {
       const delta = options.tr - kaleidoscope.offsetRotation;
       const theta = Math.atan2( Math.sin( delta ), Math.cos( delta ) );
@@ -21,33 +20,25 @@ function uptate( _this, kaleidoscope ) {
       kaleidoscope.offsetRotation += ( theta - kaleidoscope.offsetRotation ) * options.ease;
       kaleidoscope.draw();
     }
-    //Change to raf
-    return setTimeout( update, 1000 / 60 );
-  };
+    return requestAnimationFrame( updateKaleidoscopeShape.bind(this, kaleidoscope) );
 };
 
 function init() {
   const shareButton = document.querySelector( '.js-button-share' );
   const tweetButton = document.querySelector( '.js-button-tweet' );
   const kaleidoButton = document.querySelector( '.js-button-kaleido' );
-  const kaleidoscopeContainer = document.querySelector( '.kaleidoscope' );
+  const kaleidoscopeContainer = document.querySelector( '.kaleidoscope-container' );
   const photo = document.querySelector( '.photo' );
 
   const kaleidoscope = new Kaleidoscope( {
     slices: 20
   } );
 
-  kaleidoscope.image.onload = () => {
-    kaleidoscope.draw();
-  };
-
   kaleidoscope.image.src = photo.src;
 
   options.tx = kaleidoscope.offsetX;
   options.ty = kaleidoscope.offsetY;
   options.tr = kaleidoscope.offsetRotation;
-
-  kaleidoscopeContainer.appendChild( kaleidoscope.domElement );
 
   kaleidoscopeContainer.addEventListener( 'mousemove', ( e ) => {
     const cx = window.innerWidth / 2;
@@ -59,7 +50,7 @@ function init() {
     options.tx = hx * kaleidoscope.radius * -2;
     options.ty = hy * kaleidoscope.radius * 2;
     options.tr = Math.atan2( hy, hx );
-    return options.tr;
+    updateKaleidoscopeShape(kaleidoscope);
   }, false );
 }
 

@@ -7,7 +7,7 @@ function init() {
   const video = document.querySelector( '.video-recorder' );
   const photo = document.querySelector( '.photo' );
   const shareContainer = document.querySelector( '.share-container' );
-  const kaleidoskopeContainer = document.querySelector( '.kaleidoscope' );
+  const kaleidoskopeContainer = document.querySelector( '.kaleidoscope-container' );
 
   const buttonPhoto = document.querySelector( '.js-button-photo' );
   const buttonClear = document.querySelector( '.js-button-clear' );
