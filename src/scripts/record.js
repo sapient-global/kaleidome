@@ -34,13 +34,6 @@ function _takePicture( canvas, video, photo ) {
   context.drawImage( video, 0, 0, size.width, size.height );
   const data = canvas.toDataURL( 'image/png' );
   photo.setAttribute( 'src', data );
-
-  // const images = document.querySelectorAll( '.kaleidoscope-image' );
-  // for ( let i = 0; i < images.length; i++ ) {
-  //   let image = images[ i ];
-  //   console.log(data);
-  //   image.style.backgroundImage = 'url(' + data + ');';
-  // }
 }
 
 function _errorCallback( error ) {
