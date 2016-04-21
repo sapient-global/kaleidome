@@ -149,7 +149,7 @@ gulp.task( 'bundle', bundleDev );
 
 gulp.task( 'bundleDev', [ 'lint' ], bundleDev );
 
-gulp.task( 'build', [ 'clean', 'html', 'test', 'bundleDist' ] );
+gulp.task( 'build', [ 'clean', 'sass', 'html', 'bundleDist' ] );
 
 gulp.task( 'build-dev', [ 'clean', 'html', 'sass', 'bundleDev' ] );
 

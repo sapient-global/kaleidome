@@ -67,9 +67,9 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
         loader: 'babel-loader'
       }, {
         test: /\.scss$/,
-        //loader: [ 'style', 'css?sourceMap', 'sass?sourceMap' ].join('!')
         loader: DEBUG ?
-          'style!css?sourceMap!resolve-url!postcss-loader!sass?sourceMap!' : ExtractTextPlugin.extract( 'style-loader', 'css-loader!resolve-url!postcss-loader!sass!' )
+          'style!css?sourceMap!resolve-url!postcss-loader!sass?sourceMap!' :
+          ExtractTextPlugin.extract( 'style-loader', 'css?sourceMap!resolve-url!postcss-loader!sass?sourceMap!' )
       },
       // Load images
       {
