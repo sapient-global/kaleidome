@@ -1,0 +1,42 @@
+::input-placeholder {
+  color: $placeholder-text-color;
+}
+
+input {
+  // General Styles
+  background-color: transparent;
+  border: 0;
+  border-bottom: $input-border;
+  border-radius: 0;
+  outline: none;
+  height: $input-height;
+  width: 100%;
+  font-size: $input-font-size;
+  margin: $input-margin;
+  padding: $input-padding;
+  box-shadow: none;
+  box-sizing: content-box;
+  transition: $input-transition;
+  z-index: 1;
+
+  &:focus:not([readonly]) {
+    border-bottom: 1px solid $input-focus-color;
+    box-shadow: 0 1px 0 0 $input-focus-color;
+
+    + label {
+      color: $input-focus-color;
+      font-size: $label-font-size;
+      transform: translateY(-140%);
+    }
+  }
+}
+
+label {
+  color: $placeholder-text-color;
+  position: absolute;
+  top: .8rem;
+  font-size: 1rem;
+  cursor: text;
+  transition: .2s ease-out;
+  z-index: -1;
+}

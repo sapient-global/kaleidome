@@ -1,0 +1,41 @@
+// ==========================================================================
+// Paths
+// ==========================================================================
+$images-path: '../../images/';
+$fonts-path: '../../fonts';
+$roboto-font-path: $fonts-path + '/roboto/';
+
+// ==========================================================================
+// Colors
+// ==========================================================================
+$brand-black: #040707;
+$brand-red: #de2728;
+$brand-blue: #21addd;
+$brand-gray: #dfe5e6;
+$dark-gray: #999999;
+$brand-white: #ffffff;
+$color-alabaster-gray: #f7f7f7;
+
+
+$primary-color: $brand-red;
+$primary-color-light: lighten($primary-color, 15%);
+$primary-color-dark: darken($primary-color, 15%);
+
+$secondary-color: $brand-blue;
+$success-color: #4caf50;
+$error-color: $brand-red;
+$link-color: $brand-blue;
+
+
+
+// ==========================================================================
+// Fonts
+// ==========================================================================
+$font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$main-font-size: 16px;
+
+//
+// Imports
+// ==========================================================================
+
+@import 'utils';

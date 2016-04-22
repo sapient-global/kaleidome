@@ -1,6 +1,10 @@
 {
-  "preset": "airbnb",
-  "excludeFiles": ["build/**", "node_modules/**"],
-  "validateQuoteMarks": null,
-  "disallowSpacesInsideTemplateStringPlaceholders": null
+  "preset": "google",
+  "maximumLineLength": null,
+  "esnext": true,
+  "disallowSpacesInsideObjectBrackets": false,
+  "requireSpacesInsideParentheses": "all",
+  "disallowSpacesInsideObjectBrackets": false,
+  "disallowSpacesInsideArrayBrackets": false,
+  "disallowSpacesInsideParentheses": false
 }
