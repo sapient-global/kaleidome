@@ -7,7 +7,7 @@ function init() {
   const video = document.querySelector( '.video-recorder' );
   const photo = document.querySelector( '.photo' );
   const shareContainer = document.querySelector( '.share-container' );
-  const kaleidoskopeContainer = document.querySelector( '.kaleidoscope' );
+  const kaleidoskopeContainer = document.querySelector( '.kaleidoscope-container' );
 
   const buttonPhoto = document.querySelector( '.js-button-photo' );
   const buttonClear = document.querySelector( '.js-button-clear' );
@@ -52,12 +52,6 @@ function init() {
     shareButton.classList.add( 'u-hidden' );
     tweetButton.classList.remove( 'u-hidden' );
     photo.classList.add( 'u-hidden' );
-
-    kaleidoskopeContainer.querySelector( 'canvas' );
-    const context = canvas.getContext( '2d' );
-    const data = canvas.toDataURL( 'image/png' );
-    const img = document.querySelector( '.js-image-to-share' );
-    img.setAttribute( 'src', data );
 
     kaleidoskopeContainer.classList.add( 'u-hidden' );
     shareContainer.classList.remove( 'u-hidden' );

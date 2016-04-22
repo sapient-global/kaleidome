@@ -57,7 +57,7 @@ function lint( files ) {
 }
 
 function lintSrc() {
-  return lint( 'src/scripts/*.js' );
+  return lint( 'src/scripts/**/*.js' );
 }
 
 function lintGulpfile() {
