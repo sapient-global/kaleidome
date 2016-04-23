@@ -1,0 +1,19 @@
+.characters-left-counter {
+  margin: $input-margin;
+  display: inline-block;
+}
+
+.tweet-thumbnail {
+  max-height: 20vh;
+  width: auto;
+  margin: 0 auto;
+}
+
+.success-message {
+  color: $success-color;
+  font-weight: normal;
+}
+
+.tweet-content-form {
+  padding: $global-padding;
+}

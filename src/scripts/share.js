@@ -3,7 +3,6 @@
 //{status: 'foo', hashtags: [], media: [], username: ''}
 //post: https://api.twitter.com/1.1/statuses/update.json
 //https://github.com/desmondmorris/node-twitter/tree/master/examples#media
-'use strict';
 
 import Twitter from 'twit';
 

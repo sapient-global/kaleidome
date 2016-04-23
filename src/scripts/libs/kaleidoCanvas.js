@@ -1,8 +1,7 @@
-//Based on: http://codepen.io/soulwire/pen/pwchL
-//TODO: update the logic to be able to receive a canvas that is already in the dom and update its
-//props
-//Maybe get ideas from: https://github.com/kazuhikoarase/kaleidoscope/blob/master/kaleidoscope.html
-'use strict';
+/**
+ * This is a library based on http://codepen.io/soulwire/pen/pwchL
+ * given an image, creates a Kaleidoscope out of it
+ */
 
 export default class {
   constructor( opts ) {

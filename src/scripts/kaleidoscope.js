@@ -1,7 +1,6 @@
-'use strict';
-
 import raf from 'raf.js';
 import Kaleidoscope from './libs/kaleidoCanvas.js';
+import isMobile from './libs/isMobile.js';
 
 const options = {
   interactive: true,
@@ -43,7 +42,9 @@ function init() {
     img.setAttribute( 'src', data );
   } );
 
-  kaleidoscopeContainer.addEventListener( 'mousemove', ( e ) => {
+  const pointerMove = ( isMobile.test() ) ? 'touchmove' : 'mousemove';
+
+  kaleidoscopeContainer.addEventListener( pointerMove, ( e ) => {
     const cx = window.innerWidth / 2;
     const cy = window.innerHeight / 2;
     const dx = e.pageX / window.innerWidth;

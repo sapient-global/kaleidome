@@ -1,0 +1,34 @@
+::input-placeholder {
+  color: $placeholder-text-color;
+}
+
+input,
+textarea {
+  z-index: 1;
+  box-sizing: content-box;
+  padding: $input-padding;
+  font-size: $input-font-size;
+  // General Styles
+  background-color: transparent;
+  border: 0;
+  border-bottom: $input-border;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+  transition: $input-transition;
+
+  &:focus:not([readonly]) {
+    border-bottom: 1px solid $input-focus-color;
+    box-shadow: 0 1px 0 0 $input-focus-color;
+  }
+}
+
+input {
+  height: $input-height;
+  margin: $input-margin;
+}
+
+textarea {
+  width: 100%;
+  height: $input-height * 2;
+}

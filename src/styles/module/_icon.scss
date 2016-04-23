@@ -1,0 +1,24 @@
+.icon {
+  background-color: $primary-color;
+  border-radius: 50%;
+  padding: 10px;
+  width: $button-height;
+  height: $button-height;
+}
+
+.icon-logo-home {
+  fill: $brand_white;
+}
+
+.icon-logo-content {
+  fill: $logo-color;
+}
+
+.icon-take-photo {
+  width: 55px;
+  height: 55px;
+}
+
+.icon-text {
+  @include visually-hidden;
+}

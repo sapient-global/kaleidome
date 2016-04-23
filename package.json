@@ -1,4 +1,4 @@
-{
+ {
   "name": "btconf-2016",
   "version": "0.0.1",
   "description": "A kaleidoscope app for BT2016",
@@ -10,21 +10,21 @@
     "dev": "WEBPACK_ENV=dev webpack-dev-server --https"
   },
   "engines": {
-    "node": ">=5.0.0"
+    "node": "~5.8.0"
   },
+  "engineStrict": true,
   "repository": {
     "type": "stash",
     "url": "https://tools.sapient.com/stash/scm/etde/btconf-2016.git"
   },
   "author": "Sapient Nitro Team Black developers",
-  "license": "MIT",
+  "license": "GPL-2.0",
   "bugs": {
     "url": "https://tools.sapient.com/confluence/display/ETD/Beyond+Tellerand"
   },
   "homepage": "https://tools.sapient.com/confluence/display/ETD/Beyond+Tellerand",
   "devDependencies": {
     "autoprefixer": "^6.3.3",
-    "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.3.26",
     "babel-eslint": "^4.1.6",
     "babel-loader": "^6.2.0",
@@ -33,6 +33,7 @@
     "babel-register": "^6.3.13",
     "css-loader": "^0.23.1",
     "del": "^2.2.0",
+    "eslint": "^2.8.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "glob": "^6.0.3",

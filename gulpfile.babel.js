@@ -1,5 +1,3 @@
-'use strict';
-
 import gulp from 'gulp';
 import loadPlugins from 'gulp-load-plugins';
 import del from 'del';
@@ -87,6 +85,11 @@ function html() {
     .pipe( gulp.dest( paths.dist ) );
 }
 
+function copy() {
+  return gulp.src( `${paths.src}/images/*.png` )
+    .pipe( gulp.dest( `${paths.dist}/images/` ) );
+}
+
 function bundleDev() {
   const config = webpackConfig( true, `${paths.src}/scripts/${paths.main}`, PORT, false );
   return gulp.src( `${paths.src}/scripts/${paths.main}` )
@@ -109,6 +112,7 @@ function serve() {
   return new WebpackDevServer( webpack( config ), {
       contentBase: config.output.path,
       publicPath: config.output.publicPath,
+      https: true,
       watchOptions: {
         aggregateTimeout: 100
       }
@@ -127,6 +131,8 @@ function serve() {
    ========================================================================== */
 
 gulp.task( 'html', html );
+
+gulp.task( 'copy', copy );
 
 gulp.task( 'sass', sass );
 
@@ -149,9 +155,9 @@ gulp.task( 'bundle', bundleDev );
 
 gulp.task( 'bundleDev', [ 'lint' ], bundleDev );
 
-gulp.task( 'build', [ 'clean', 'sass', 'html', 'bundleDist' ] );
+gulp.task( 'build', [ 'clean', 'sass', 'copy', 'html', 'bundleDist' ] );
 
-gulp.task( 'build-dev', [ 'clean', 'html', 'sass', 'bundleDev' ] );
+gulp.task( 'build-dev', [ 'clean', 'html', 'copy', 'sass', 'bundleDev' ] );
 
 gulp.task( 'serve', function( cb ) {
   runSequence( 'clean', [ 'build-dev', 'watch' ], serve );

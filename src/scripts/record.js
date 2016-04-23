@@ -1,16 +1,23 @@
-'use strict';
+import isMobile from './libs/isMobile.js';
 
 let isStreaming = false;
 
 const mediaSettings = {
   audio: false,
-  video: true //video: { facingMode: "user" }  For Front Camera
+  video: true
 };
 
 let size = {
-  width: 400,
+  width: 489,
   height: 360,
 };
+
+function detectAspectRatio() {
+  const desktopRatio = 4 / 3;
+  const mobileHeight = window.innerHeight;
+  const desktopHeight = size.width / desktopRatio;
+  size.height = ( isMobile.test() ) ? mobileHeight : desktopHeight;
+}
 
 function _clearPhoto( canvas, photo, video ) {
   const context = canvas.getContext( '2d' );
@@ -34,6 +41,8 @@ function _takePicture( canvas, video, photo ) {
   context.drawImage( video, 0, 0, size.width, size.height );
   const data = canvas.toDataURL( 'image/png' );
   photo.setAttribute( 'src', data );
+  photo.setAttribute( 'width', size.width );
+  photo.setAttribute( 'height', size.height );
 }
 
 function _errorCallback( error ) {
@@ -56,7 +65,7 @@ function init() {
   const photo = document.querySelector( '.photo' );
 
   const buttonPhoto = document.querySelector( '.js-button-photo' );
-  const buttonClear = document.querySelector( '.js-button-clear' );
+  const buttonClear = document.querySelector( '.js-button-again' );
 
   _captureMedia( _recordVideo );
 
@@ -68,17 +77,14 @@ function init() {
     _clearPhoto( canvas, photo, video );
   } );
 
+  size.width = window.innerWidth;
+  detectAspectRatio();
+
   video.addEventListener( 'canplay', () => {
     if ( !isStreaming ) {
-      size.width = window.innerWidth || 489;
-      size.height = size.width / ( 4 / 3 ); //window.innerHeight - 20;
-
-      if ( isNaN( size.height ) ) {
-        size.height = size.width / ( 4 / 3 );
-      }
-
       video.setAttribute( 'width', size.width );
       video.setAttribute( 'height', size.height );
+
       canvas.setAttribute( 'width', size.width );
       canvas.setAttribute( 'height', size.height );
       isStreaming = true;

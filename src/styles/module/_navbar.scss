@@ -1,0 +1,41 @@
+.navbar {
+  position: relative;
+  z-index: 100;
+}
+
+.navbar-list {
+  margin: 0;
+}
+
+.navbar-item {
+  float: left;
+  padding: 0;
+  width: 50%;
+}
+
+.navbar-item-button {
+  display: inline-block;
+  padding: 0 15px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color .3s;
+  height: 100%;
+  line-height: $navbar-height;
+
+  &:hover {
+    background-color: rgba($brand-black, .1);
+  }
+}
+
+.navbar-item--negative {
+  background-color: $color-alabaster-grey;
+
+  .navbar-item-button {
+    color: $brand-black;
+  }
+}
+
+.navbar-item--positive {
+  background-color: $primary-color;
+  color: $navbar-font-color;
+}

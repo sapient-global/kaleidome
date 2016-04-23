@@ -1,12 +1,11 @@
 {
   "parser": "babel-eslint",
+  "root": true,
   "rules": {
+    "computed-property-spacing": [2, "always"],
     "strict": 0,
-    "quotes": [ 2, "single" ],
-
-    "computed-property-spacing": [ 2, "always" ],
-    "strict": [ 2, "global" ],
-    "array-bracket-spacing": [ 2, "always" ]
+    "array-bracket-spacing": [2, "always"],
+    "space-in-parens": [2, "always"]
   },
   "env": {
     "browser": true,
