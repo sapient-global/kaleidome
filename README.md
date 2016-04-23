@@ -44,7 +44,8 @@ If your version is old, having a new version of node will bring you great benefi
 $ gulp serve
 ``
 *Notes:*
-This will be served under: http://localhost:9000
+This will be served under: https://localhost:9000, with this you can test the feature in your phone
+when connected on the same wifi
 
 ### Create bundle for distribution
 
