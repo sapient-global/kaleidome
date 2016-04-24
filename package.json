@@ -1,4 +1,4 @@
- {
+{
   "name": "btconf-2016",
   "version": "0.0.1",
   "description": "A kaleidoscope app for BT2016",
@@ -31,9 +31,11 @@
     "babel-polyfill": "^6.3.14",
     "babel-preset-es2015": "^6.3.13",
     "babel-register": "^6.3.13",
+    "body-parser": "^1.15.0",
     "css-loader": "^0.23.1",
     "del": "^2.2.0",
     "eslint": "^2.8.0",
+    "express": "^4.13.4",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "glob": "^6.0.3",
