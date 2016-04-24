@@ -73,8 +73,8 @@ function init() {
   } );
 
   buttonTweet.addEventListener( 'click', () => {
-    step4ShareIt.classList.add( 'u-hidden' );
-    step5Goodbye.classList.remove( 'u-hidden' );
+    // step4ShareIt.classList.add( 'u-hidden' );
+    // step5Goodbye.classList.remove( 'u-hidden' );
   } );
 
 };
