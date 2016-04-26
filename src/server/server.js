@@ -1,10 +1,9 @@
 'use strict';
 
+const multiparty = require('multiparty');
 const express = require( 'express' );
-const Twitter = require( 'twit' );
 const http = require( 'http' );
 const path = require( 'path' );
-const bodyParser = require( 'body-parser' );
 const tweetRoute = require( './tweetRoute.js' );
 
 const app = express();
@@ -13,7 +12,7 @@ const host = isProd() ? '0.0.0.0' : 'localhost';
 const opts = {
   port: process.env.PORT || 1947,
   host: process.env.HOST || process.env.HOSTNAME || host,
-  baseDir: __dirname + '/dist'
+  baseDir: __dirname + '/'
 };
 const renderPort = ( opts.port ) ? `:${opts.port}` : '';
 const location = `http://${opts.host}${renderPort}`;
@@ -26,22 +25,9 @@ function isProd() {
    Setup the server config
    ========================================================================== */
 
-app.use( bodyParser.json() ); // to support JSON-encoded bodies
-app.use( bodyParser.urlencoded( { // to support URL-encoded bodies
-  extended: true
-} ) );
 app.set( 'port', opts.port );
 app.use( express.static( opts.baseDir ) );
 
-// var urlencode = require('urlencode');
-// var json = require('json-middleware');
-// var multipart = require('connect-multiparty');
-// var multipartMiddleware = multipart();
-//
-// app.use(json);
-// app.use(urlencode);
-// app.use('/url/that/accepts/form-data', multipartMiddleware);
-//
 
 /* ==========================================================================
    Init the server
@@ -62,4 +48,20 @@ app.get( '/', ( req, res ) => {
   fs.createReadStream( path.join( opts.baseDir, '/index.html' ) ).pipe( res );
 } );
 
-app.post( '/tweet', tweetRoute );
+//app.post( '/tweet', tweetRoute );
+app.post('/tweet', function(req, res) {
+  var formData = new multiparty.Form();
+  console.log( formData );
+
+  formData.parse(req, function(err, fields, files) {
+    Object.keys(fields).forEach(function(name) {
+      console.log('got field named ' + name);
+    });
+
+    Object.keys(files).forEach(function(name) {
+      console.log('got file named ' + name);
+    });
+      tweetRoute(req, res, fields, files);
+  });
+
+});

@@ -1,21 +1,21 @@
 const Twitter = require( 'twit' );
 
-module.exports = function( req, res ) {
+module.exports = function( req, res, fields, files ) {
   /* ==========================================================================
      Setup Twitter POST request
      ========================================================================== */
 
   // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
   const client = new Twitter( {
-    consumer_key: process.env.TWITTER_CONSUMER_KEY || 'a',
-    consumer_secret: process.env.TWITTER_CONSUMER_SECRET || 'b',
-    access_token: process.env.TWITTER_ACCESS_TOKEN_KEY || 'c',
-    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET || 'd',
+    consumer_key: process.env.TWITTER_CONSUMER_KEY || 'mkWcVL0Gu5W5qUDzvCkqpIybj',
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET || '1nu3nQDkcOsXnF5VmNW7Q9RpmH9A5OtQRQiZ2ln4zZ1jBv0GuI',
+    access_token: process.env.TWITTER_ACCESS_TOKEN_KEY || '9977852-Ultqtl125nPYOAKSDbZHFjMT9jhC0pBQMzNV0wmS1x',
+    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET || 'Z8gfBbmNubvckGTxbWSLV4AO90MizrfbNDEmzJqXMcAD1',
   } );
 
   //Get the params out of the request
-  const tweetText = req.body.tweetText;
-  const tweetImageData = req.body.imageData;
+  const tweetText = fields.tweetText;
+  const tweetImageData = fields.imageData;
 
   client.post( 'media/upload', {
     media_data: tweetImageData
@@ -29,14 +29,31 @@ module.exports = function( req, res ) {
         media_ids: [ media.media_id_string ]
       };
 
-      client.post( 'statuses/update', status, function( error, tweet, response ) {
+      client.post( 'statuses/update', status, function( error, data, response ) {
         if ( !error ) {
-          console.log( tweet );
-          res.send( response, 200 );
-          // Show a success message and redirect to home
+          console.log( 'data', tweet );
+
+          client.get( 'statuses/home_timeline', {exclude_replies: true, count: 10}, function( error, data, response ) {
+            if(!error){
+              //show the last 10 tweet (?)
+              console.log( 'data', data.length );
+
+            }
+          });
+        }else{
+          console.log(error)
         }
       } );
+    }else{
+      console.error(error);
     }
+
+    res.writeHead( 200, {
+        'Content-Type': 'text/html'
+      }
+    );
+
+
   } );
   // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
 };

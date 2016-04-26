@@ -17,7 +17,7 @@
     "type": "stash",
     "url": "https://tools.sapient.com/stash/scm/etde/btconf-2016.git"
   },
-  "author": "Sapient Nitro Team Black developers",
+  "author": "Sapient Nitro Team Black XT Developers",
   "license": "GPL-2.0",
   "bugs": {
     "url": "https://tools.sapient.com/confluence/display/ETD/Beyond+Tellerand"
@@ -56,6 +56,7 @@
     "gulp-useref": "^3.0.7",
     "gulp-util": "^3.0.7",
     "json-loader": "^0.5.4",
+    "multiparty": "4.1.2",
     "node-sass": "^3.4.2",
     "postcss-loader": "^0.8.2",
     "raf.js": "0.0.4",
