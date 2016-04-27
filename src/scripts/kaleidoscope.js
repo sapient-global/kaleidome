@@ -11,28 +11,33 @@ const options = {
   tr: 0,
 };
 
-var count = 0;
-var animationframeID;
+let animationframeID;
 
-function updateKaledo ( kaleidoscope ){
+function calculateRandomNumber( factor = 100 ) {
+  return Math.random() * factor;
+}
+
+function updateKaledo( kaleidoscope ) {
   if ( options.interactive ) {
 
     /*
-     *  fonr some reason those values are sometimes 'NaN',
+     *  for some reason those values are sometimes 'NaN',
      *  so, when it happens I pretend they are not with a random value.
      *  - clever, isn't it?
      *  - no, it is a hack!
      *  - well, it works on my machine.
      */
-    var kaleidoscopeoffsetX = isNaN( kaleidoscope.offsetX ) ? Math.random() * 100 : kaleidoscope.offsetX;
-    var kaleidoscopeoffsetY = isNaN( kaleidoscope.offsetY ) ? Math.random() * 100 : kaleidoscope.offsetY;
-    var kaleidoscopeoffsetRotation = isNaN( kaleidoscope.offsetRotation ) ? ( Math.random() * 1000 ) : kaleidoscope.offsetRotation;
-    var optionstr = isNaN( options.tr ) ? ( Math.random() * 10 ) : options.tr;
-    var optionstx = isNaN( options.tx ) ? ( Math.random() * 10 ) : options.tx;
-    var optionsty = isNaN( options.ty ) ? ( Math.random() * 10 ) : options.ty;
+    const kaleidoscopeoffsetX = isNaN( kaleidoscope.offsetX ) ? calculateRandomNumber() : kaleidoscope.offsetX;
+    const kaleidoscopeoffsetY = isNaN( kaleidoscope.offsetY ) ? calculateRandomNumber() : kaleidoscope.offsetY;
+    const kaleidoscopeoffsetRotation = isNaN( kaleidoscope.offsetRotation ) ? calculateRandomNumber() : kaleidoscope.offsetRotation;
+
+    const optionstr = isNaN( options.tr ) ? calculateRandomNumber( 10 ) : options.tr;
+    const optionstx = isNaN( options.tx ) ? calculateRandomNumber( 10 ) : options.tx;
+    const optionsty = isNaN( options.ty ) ? calculateRandomNumber( 10 ) : options.ty;
 
     const delta = optionstr - kaleidoscope.offsetRotation;
     const theta = Math.atan2( Math.sin( delta ), Math.cos( delta ) );
+
     kaleidoscope.offsetX += ( optionstx - kaleidoscopeoffsetX ) * options.ease;
     kaleidoscope.offsetY += ( optionsty - kaleidoscopeoffsetY ) * options.ease;
     kaleidoscope.offsetRotation += ( theta - kaleidoscopeoffsetRotation ) * options.ease;
@@ -41,7 +46,7 @@ function updateKaledo ( kaleidoscope ){
 }
 
 function updateKaleidoscopeShape( kaleidoscope ) {
-  animationframeID =  requestAnimationFrame( updateKaledo.bind( this, kaleidoscope ) );
+  animationframeID = requestAnimationFrame( updateKaledo.bind( this, kaleidoscope ) );
 };
 
 function init() {
