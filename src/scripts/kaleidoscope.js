@@ -10,16 +10,37 @@ const options = {
   tr: 0,
 };
 
-function updateKaleidoscopeShape( kaleidoscope ) {
+var count = 0;
+var animationframeID;
+
+function updateKaledo ( kaleidoscope ){
   if ( options.interactive ) {
-    const delta = options.tr - kaleidoscope.offsetRotation;
+
+    /*
+     *  fonr some reason those values are sometimes 'NaN',
+     *  so, when it happens I pretend they are not with a random value.
+     *  - clever, isn't it?
+     *  - no, it is a hack!
+     *  - well, it works on my machine.
+     */
+    var kaleidoscopeoffsetX = isNaN(kaleidoscope.offsetX) ? Math.random() * 100 : kaleidoscope.offsetX;
+    var kaleidoscopeoffsetY = isNaN(kaleidoscope.offsetY) ? Math.random() * 100 : kaleidoscope.offsetY;
+    var kaleidoscopeoffsetRotation = isNaN(kaleidoscope.offsetRotation) ? (Math.random() * 1000) : kaleidoscope.offsetRotation;
+    var optionstr = isNaN(options.tr) ? (Math.random() * 10) : options.tr;
+    var optionstx = isNaN(options.tx) ? (Math.random() * 10) : options.tx;
+    var optionsty = isNaN(options.ty) ? (Math.random() * 10) : options.ty;
+
+    const delta = optionstr - kaleidoscope.offsetRotation;
     const theta = Math.atan2( Math.sin( delta ), Math.cos( delta ) );
-    kaleidoscope.offsetX += ( options.tx - kaleidoscope.offsetX ) * options.ease;
-    kaleidoscope.offsetY += ( options.ty - kaleidoscope.offsetY ) * options.ease;
-    kaleidoscope.offsetRotation += ( theta - kaleidoscope.offsetRotation ) * options.ease;
+    kaleidoscope.offsetX += ( optionstx - kaleidoscopeoffsetX ) * options.ease;
+    kaleidoscope.offsetY += ( optionsty - kaleidoscopeoffsetY ) * options.ease;
+    kaleidoscope.offsetRotation += ( theta - kaleidoscopeoffsetRotation ) * options.ease;
     kaleidoscope.draw();
   }
-  return requestAnimationFrame( updateKaleidoscopeShape.bind( this, kaleidoscope ) );
+}
+
+function updateKaleidoscopeShape(kaleidoscope) {
+  animationframeID =  requestAnimationFrame( updateKaledo.bind( this, kaleidoscope) );
 };
 
 function init() {
@@ -43,6 +64,11 @@ function init() {
   } );
 
   const pointerMove = ( isMobile.test() ) ? 'touchmove' : 'mousemove';
+  const pointerStop = ( isMobile.test() ) ? 'touchend' : 'mousestop';
+
+  kaleidoscopeContainer.addEventListener( pointerStop, ( e ) => {
+    animationframeID = cancelAnimationFrame( animationframeID );
+  });
 
   kaleidoscopeContainer.addEventListener( pointerMove, ( e ) => {
     const cx = window.innerWidth / 2;
