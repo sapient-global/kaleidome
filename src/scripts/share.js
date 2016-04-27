@@ -25,8 +25,8 @@ function _shareImage() {
   const username = document.querySelector( '.js-username' );
   var imageData = document.querySelector( '.js-image-to-share' ).src;
 
-  var indexOfComma = imageData.indexOf(',');
-  imageData = imageData.substring(indexOfComma+1);
+  var indexOfComma = imageData.indexOf( ',' );
+  imageData = imageData.substring( indexOfComma+1 );
 
   const tweetText = `@${username.value}, I am at #btconf and visited the @SapientNitro bot! ${tweetTextarea.value}`;
 

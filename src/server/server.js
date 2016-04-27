@@ -1,5 +1,5 @@
 'use strict';
-
+const async = require('async');
 const multiparty = require('multiparty');
 const express = require( 'express' );
 const http = require( 'http' );
@@ -25,16 +25,16 @@ function isProd() {
    Setup the server config
    ========================================================================== */
 
-app.set( 'port', opts.port );
-app.use( express.static( opts.baseDir ) );
+   app.set( 'port', opts.port );
+   app.use( express.static( opts.baseDir ) );
 
 
 /* ==========================================================================
    Init the server
    ========================================================================== */
-const server = http.createServer( app );
-server.listen( opts.port, opts.host, () => {
-  console.log( `Server running on: ${location}` );
+   const server = http.createServer( app );
+   server.listen( opts.port, opts.host, () => {
+    console.log( `Server running on: ${location}` );
 } );
 
 /* ==========================================================================
@@ -42,26 +42,27 @@ server.listen( opts.port, opts.host, () => {
    ========================================================================== */
 
 app.get( '/', ( req, res ) => {
-  res.writeHead( 200, {
-    'Content-Type': 'text/html'
-  } );
-  fs.createReadStream( path.join( opts.baseDir, '/index.html' ) ).pipe( res );
+    res.writeHead( 200, {
+      'Content-Type': 'text/html'
+    } );
+    fs.createReadStream( path.join( opts.baseDir, '/index.html' ) ).pipe( res );
 } );
 
 //app.post( '/tweet', tweetRoute );
 app.post('/tweet', function(req, res) {
-  var formData = new multiparty.Form();
-  console.log( formData );
+    var formData = new multiparty.Form();
 
-  formData.parse(req, function(err, fields, files) {
-    Object.keys(fields).forEach(function(name) {
-      console.log('got field named ' + name);
-    });
+    formData.parse(req, function(err, fields, files) {
+        /*
+        Object.keys(fields).forEach(function(name) {
+          console.log('got field named ' + name);
+        });
 
-    Object.keys(files).forEach(function(name) {
-      console.log('got file named ' + name);
+        Object.keys(files).forEach(function(name) {
+          console.log('got file named ' + name);
+        });
+        */
+        tweetRoute(req, res, fields, files);
     });
-      tweetRoute(req, res, fields, files);
-  });
 
 });
