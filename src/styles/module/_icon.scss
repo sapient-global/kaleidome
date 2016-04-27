@@ -17,8 +17,15 @@
 .icon-take-photo {
   width: 55px;
   height: 55px;
+  cursor: pointer;
+  position: relative;
+  bottom: 3px;
+  svg {
+    z-index:-1;
+  }
 }
 
 .icon-text {
   @include visually-hidden;
+  z-index:-1;
 }

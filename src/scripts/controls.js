@@ -37,6 +37,7 @@ function init() {
     //Elems
     step1TakePhoto.classList.add( 'u-hidden' );
     step2ReviewPhoto.classList.remove( 'u-hidden' );
+    return false;
   } );
 
   // Option in step 1: Take another photo

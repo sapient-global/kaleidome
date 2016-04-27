@@ -71,6 +71,7 @@ function init() {
 
   buttonPhoto.addEventListener( 'click', () => {
     _takePicture( canvas, video, photo );
+    return false;
   } );
 
   buttonClear.addEventListener( 'click', () => {

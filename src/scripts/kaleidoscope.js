@@ -1,6 +1,7 @@
 import raf from 'raf.js';
 import Kaleidoscope from './libs/kaleidoCanvas.js';
 import isMobile from './libs/isMobile.js';
+import isPointer from './libs/isPointer.js';
 
 const options = {
   interactive: true,
@@ -63,8 +64,12 @@ function init() {
     img.setAttribute( 'src', data );
   } );
 
-  const pointerMove = ( isMobile.test() ) ? 'touchmove' : 'mousemove';
-  const pointerStop = ( isMobile.test() ) ? 'touchend' : 'mousestop';
+  //Ensure that Pointer can be used
+  const moveEvent = ( isPointer.test() ) ? 'pointermove' : 'touchmove';
+  const stopEvent = ( isPointer.test() ) ? 'pointerup' : 'touchend';
+
+  const pointerMove = ( isMobile.test() ) ? moveEvent : 'mousemove';
+  const pointerStop = ( isMobile.test() ) ? stopEvent : 'mousestop';
 
   kaleidoscopeContainer.addEventListener( pointerStop, ( e ) => {
     animationframeID = cancelAnimationFrame( animationframeID );

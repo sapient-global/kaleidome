@@ -6,7 +6,7 @@ function request(data ) {
   xhttp.send( data );
 
   xhttp.onreadystatechange = () => {
-    if ( xhttp.readyState == 4 && xhttp.status == 200 ) {
+    if ( xhttp.readyState === 4 && xhttp.status === 200 ) {
       const step4ShareIt = document.querySelector( '.step-4-share-it' );
       const step5Goodbye = document.querySelector( '.step-5-goodbye' );
       step4ShareIt.classList.add( 'u-hidden' );
