@@ -19,7 +19,10 @@
   height: 55px;
   cursor: pointer;
   position: relative;
-  bottom: 3px;
+  bottom: 5px;
+  position: absolute;
+  left: 50%;
+  margin-left: -26px;
   svg {
     z-index:-1;
   }

@@ -9,6 +9,10 @@ body {
   padding: $global-padding;
 }
 
+article {
+  position: relative;
+}
+
 .header--no-nav {
   height: $header-height--no-nav;
 }
@@ -41,10 +45,6 @@ body {
 .icon-take-photo,
 .header {
   z-index: 100;
-}
-
-.icon-take-photo {
-  vertical-align: center;
 }
 
 .video-responsive {
