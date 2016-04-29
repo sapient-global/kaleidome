@@ -112,7 +112,7 @@ function serve() {
   return new WebpackDevServer( webpack( config ), {
       contentBase: config.output.path,
       publicPath: config.output.publicPath,
-      //  https: true,
+      https: true,
       watchOptions: {
         aggregateTimeout: 100
       }

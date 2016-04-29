@@ -1,7 +1,7 @@
 // ==========================================================================
 // Paths
 // ==========================================================================
-$images-path: '../../images';
+$images-path: '/images';
 
 // ==========================================================================
 // Colors
@@ -38,8 +38,8 @@ $small-font-size: .8rem;
 // Layout sizes
 // ==========================================================================
 
-$navbar-height: 7vh;
-$header-height: 5vh;
+$navbar-height: 48px;
+$header-height: 50px;
 $header-height--no-nav: 25vh;
 $content-height: 88vh;
 $content-height--no-nav: 70vh;

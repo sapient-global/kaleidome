@@ -1,5 +1,5 @@
 const Twitter = require( 'twit' );
-const async = require('async');
+const async = require( 'async' );
 
 module.exports = function( req, res, fields, files ) {
   /* ==========================================================================
@@ -18,41 +18,41 @@ module.exports = function( req, res, fields, files ) {
   const tweetText = fields.tweetText;
   const tweetImageData = fields.imageData;
 
-    client.post( 'media/upload', {
-      media_data: tweetImageData
-    }, function( error, media, response ) {
-      if ( !error ) {
-        // If successful, a media object will be returned.
-        console.log( media );
-        // Lets tweet it
-        const status = {
-          status: tweetText,
-          media_ids: [ media.media_id_string ]
-        };
-
-        client.post( 'statuses/update', status, function( error, data, response ) {
-          if ( !error ) {
-            console.log( 'data', data );
-
-            client.get( 'statuses/home_timeline', {exclude_replies: true, count: 10}, function( error, data, response ) {
-              if(!error){
-                //show the last 10 tweet (?)
-                console.log( 'data', data.length );
-
-              }
-            });
-          }else{
-            console.log(error);
-          }
-        } );
-      }else{
-        console.error(error);
-      }
-    });
-
-    res.send('OK');
-
+  client.post( 'media/upload', {
+    media_data: tweetImageData
+  }, function( error, media, response ) {
+    if ( !error ) {
+      // If successful, a media object will be returned.
+      console.log( media );
+      // Lets tweet it
+      const status = {
+        status: tweetText,
+        media_ids: [ media.media_id_string ]
+      };
   // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
+      client.post( 'statuses/update', status, function( error, data, response ) {
+        if ( !error ) {
+          console.log( 'data', data );
+
+          client.get( 'statuses/home_timeline', {
+            exclude_replies: true,
+            count: 10
+          }, function( error, data, response ) {
+            if ( !error ) {
+              //show the last 10 tweet (?)
+              console.log( 'data', data.length );
+            }
+          } );
+        } else {
+          console.log( error );
+        }
+      } );
+    } else {
+      console.error( error );
+    }
+  } );
+
+  res.send( 'OK' );
 };
 
 //https://dev.twitter.com/rest/reference/post/statuses/update_with_media

@@ -71,7 +71,7 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
           'style!css?sourceMap!resolve-url!postcss-loader!sass?sourceMap!' :
           ExtractTextPlugin.extract( 'style-loader', 'css?sourceMap!resolve-url!postcss-loader!sass?sourceMap!' )
       },
-      // Load images
+      // // Load images
       {
         test: /\.jpg/,
         loader: 'url-loader?limit=10000&mimetype=image/jpg'
@@ -87,13 +87,16 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
       }, {
         test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'url-loader?limit=10000&mimetype=application/font-woff'
-      }, {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      },
+      {
+        test: /\.(ttf|eot|svg|png|woff)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader'
-      }, {
+      },
+      {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
         loader: 'url-loader?limit=100000'
-      }, {
+      },
+      {
         test: /\.json$/,
         loader: 'json-loader'
       }

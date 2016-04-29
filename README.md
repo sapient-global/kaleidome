@@ -35,6 +35,52 @@ This has been tested only on the latest version of node, therefore to build this
 
 If your version is old, having a new version of node will bring you great benefits, for example, it [supports already without any flag some features of ES2015](https://nodejs.org/en/docs/es6/)
 
+#Creating your self-signed certificate for local Development
+
+If you don't have openSSL, install it.
+
+Mac OS X:
+``
+$ brew install openssl
+``
+Windows
+http://gnuwin32.sourceforge.net/packages/openssl.htm
+
+GNU/Linux
+``
+$apt-get install openssl
+``
+
+### Generate private key and certificate signing request
+``
+$  openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
+...
+
+$ openssl rsa -passin pass:x -in server.pass.key -out server.key
+writing RSA key
+
+$ rm server.pass.key
+$ openssl req -new -key server.key -out server.csr
+
+Country Name (2 letter code) [AU]:DE
+State or Province Name (full name) [Some-State]:NRW
+Locality Name (eg, city) []:Cologne
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Sapient
+Organizational Unit Name (eg, section) []:XT
+Common Name (e.g. server FQDN or YOUR name) []:
+Email Address []:
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:btconf2016
+An optional company name []:
+``
+### Generate SSL certificate
+The self-signed SSL certificate is generated from the server.key private key and server.csr files.
+
+``
+$ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+``
 
 ## Development mode
 

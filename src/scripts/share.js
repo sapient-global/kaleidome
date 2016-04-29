@@ -1,7 +1,7 @@
 function request( data ) {
   const xhttp = new XMLHttpRequest();
 
-  xhttp.open( 'POST', 'http://localhost:1947/tweet', true );
+  xhttp.open( 'POST', 'https://localhost:1947/tweet', true );
   xhttp.send( data );
 
   xhttp.onreadystatechange = () => {
