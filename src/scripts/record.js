@@ -56,7 +56,11 @@ function _recordVideo( stream ) {
 }
 
 function _captureMedia( successCallback ) {
-  navigator.mediaDevices.getUserMedia( mediaSettings ).then( successCallback ).catch( _errorCallback );
+  try {
+    navigator.mediaDevices.getUserMedia( mediaSettings ).then( successCallback ).catch( _errorCallback );
+  } catch ( e ) {
+    console.log( 'navigator.getUserMedia error: ', e );
+  }
 };
 
 function init() {

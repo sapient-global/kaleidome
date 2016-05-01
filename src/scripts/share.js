@@ -1,4 +1,4 @@
-function request(data ) {
+function request( data ) {
   const xhttp = new XMLHttpRequest();
 
   xhttp.open( 'POST', 'http://localhost:1947/tweet', true );
@@ -31,10 +31,10 @@ function _shareImage() {
   const tweetText = `@${username.value}, I am at #btconf and visited the @SapientNitro bot! ${tweetTextarea.value}`;
 
   var data = new FormData();
-  data.append('tweetText', tweetText);
-  data.append('imageData', imageData);
+  data.append( 'tweetText', tweetText );
+  data.append( 'imageData', imageData );
 
-  request(data);
+  request( data );
 }
 
 function init() {
