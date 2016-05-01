@@ -4,6 +4,6 @@
 
 export default {
   test() {
-    return window.navigator.pointerEnabled;
+        return window.navigator.pointerEnabled;
   }
 };

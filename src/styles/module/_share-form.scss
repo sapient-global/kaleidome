@@ -1,3 +1,9 @@
+.error,
+.error input,
+.error textarea{
+    color: $error-color;
+}
+
 .characters-left-counter {
   margin: $input-margin;
   display: inline-block;

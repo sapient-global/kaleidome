@@ -12,6 +12,10 @@
   box-shadow: none;
   // Gets rid of tap active state
   -webkit-tap-highlight-color: transparent;
+
+  &:disabled{
+    opacity: .5;
+  }
 }
 
 .btn-raised {

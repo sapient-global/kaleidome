@@ -20,15 +20,30 @@ function request( data ) {
 };
 }
 
-function _shareImage() {
+const TWEET_TEXT = ", I am at the #eventHashtag! Amazing, @sapientxt is also here!";
+const TWEET_MAX_CHARS = 120;
+
+function _getTweetText() {
   const tweetTextarea = document.querySelector( '.js-tweet-text' );
   const username = document.querySelector( '.js-username' );
+
+  const tweetText = `@${username.value}`+ TWEET_TEXT + ` ${tweetTextarea.value}`;
+console.log( tweetText );
+  return tweetText;
+}
+
+function _getTweetMedia() {
   var imageData = document.querySelector( '.js-image-to-share' ).src;
 
   var indexOfComma = imageData.indexOf( ',' );
   imageData = imageData.substring( indexOfComma+1 );
 
-  const tweetText = `@${username.value}, I am at #btconf and visited the @SapientNitro bot! ${tweetTextarea.value}`;
+  return imageData;
+}
+
+function _shareImage() {
+  var imageData = _getTweetMedia();
+  const tweetText = _getTweetText();
 
   var data = new FormData();
   data.append( 'tweetText', tweetText );
@@ -37,22 +52,51 @@ function _shareImage() {
   request( data );
 }
 
+function _getCharsLeft() {
+  return TWEET_MAX_CHARS - _getTweetText().length ;
+}
+
+function _setCharsLeft() {
+  const tweetCharLeft = document.querySelector( '.js-characters-left' );
+  tweetCharLeft.innerHTML = _getCharsLeft() ;
+  _checkCharsLeft();
+}
+
+function _checkCharsLeft() {
+  var tweetButton = document.querySelector( '.js-button-tweet' );
+  var shareContainer = document.querySelector( '.js-tweet-content' );
+  var cssCLasses = shareContainer.className;
+  if( _getCharsLeft() < 0 ){
+    if(cssCLasses.indexOf('error') === -1){
+      shareContainer.className += ' error';
+    }
+    tweetButton.disabled = true;
+  }else{
+    shareContainer.className = shareContainer.className.replace('error','');
+    tweetButton.disabled = false;
+  }
+}
+
 function init() {
-  const shareButton = document.querySelector( '.js-button-share' );
+
   const tweetButton = document.querySelector( '.js-button-tweet' );
-  const shareContainer = document.querySelector( '.share-container' );
   const tweetTextarea = document.querySelector( '.js-tweet-text' );
+  const tweetContent = document.querySelector( '.js-tweet-content' );
 
+  tweetContent.querySelector( '.js-message' ).innerHTML = TWEET_TEXT;
 
-  tweetButton.addEventListener( 'click', ( e ) => {
+  tweetContent.querySelector( 'input' ).addEventListener('input', ( e ) =>{
+    _setCharsLeft(e);
+  });
+
+  tweetContent.querySelector( 'textarea' ).addEventListener('input', ( e ) =>{
+    _setCharsLeft(e);
+  });
+
+  tweetButton.addEventListener( 'click' , ( e ) => {
     e.preventDefault();
-    _shareImage();
-  } );
-
-  //
-  // tweetTextarea.addEventListener( 'blur', ( e ) => {
-  //
-  // } );
+      _shareImage(  e );
+  });
 }
 
 export default {
