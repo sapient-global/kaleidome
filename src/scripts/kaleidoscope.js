@@ -76,7 +76,7 @@ function init() {
   const pointerMove = ( isMobile.test() ) ? moveEvent : 'mousemove';
   const pointerStop = ( isMobile.test() ) ? stopEvent : 'mousestop';
 
-console.log( pointerMove, pointerStop );
+  console.log( pointerMove, pointerStop );
 
   kaleidoscopeContainer.addEventListener( pointerStop, ( e ) => {
     console.log( e );
