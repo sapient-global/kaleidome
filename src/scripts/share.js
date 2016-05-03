@@ -25,7 +25,7 @@ function request( data ) {
   };
 }
 
-const TWEET_TEXT = ", I am at the #eventHashtag! Amazing, @sapientxt is also here!";
+const TWEET_TEXT = ', I am at the #eventHashtag! Amazing, @sapientxt is also here!';
 const TWEET_MAX_CHARS = 120;
 
 function _getTweetText() {
