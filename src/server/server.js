@@ -16,7 +16,7 @@ const opts = {
   baseDir: __dirname + '/'
 };
 const renderPort = ( opts.port ) ? `:${opts.port}` : '';
-const location = `http://${opts.host}${renderPort}`;
+const location = `https://${opts.host}${renderPort}`;
 
 function isProd() {
   return environment === 'production';
@@ -35,15 +35,15 @@ app.use( express.static( opts.baseDir ) );
    ========================================================================== */
 
 const sslConf = {
-  key: fs.readFileSync( 'server.key' ),
-  cert: fs.readFileSync( 'server.crt' ),
+  key: fs.readFileSync( '../../server.key' ),
+  cert: fs.readFileSync( '../../server.crt' ),
   requestCert: isProd() ? true : false,
   rejectUnauthorized: isProd() ? true : false
 };
 
 const server = https.createServer( sslConf, app );
 server.listen( opts.port, opts.host, () => {
-  console.log( `Server running on: ${location}` );
+  console.log( `Server running on: ${location} [environment: ${environment}]` );
 } );
 
 /* ==========================================================================
@@ -62,15 +62,6 @@ app.post( '/tweet', function( req, res ) {
   var formData = new multiparty.Form();
 
   formData.parse( req, function( err, fields, files ) {
-    /*
-    Object.keys(fields).forEach(function(name) {
-      console.log('got field named ' + name);
-    });
-
-    Object.keys(files).forEach(function(name) {
-      console.log('got file named ' + name);
-    });
-    */
     tweetRoute( req, res, fields, files );
   } );
 
