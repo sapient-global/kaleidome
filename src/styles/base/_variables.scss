@@ -1,12 +1,13 @@
 // ==========================================================================
 // Paths
 // ==========================================================================
+
 $images-path: '/images';
+$fonts-path: '/fonts';
 
 // ==========================================================================
 // Colors
 // ==========================================================================
-
 $brand-black: #040707;
 $brand-red: #de2728;
 $brand-blue: #21addd;
@@ -15,13 +16,10 @@ $dark-grey: #999999;
 $brand-white: #ffffff;
 $color-alabaster-grey: #f7f7f7;
 $logo-color: #231f20;
-
-
-$primary-color: $brand-red;
+$primary-color: $brand-blue;
 $primary-color-light: lighten($primary-color, 15%);
 $primary-color-dark: darken($primary-color, 15%);
-
-$secondary-color: $brand-blue;
+$secondary-color: $brand-red;
 $success-color: #4caf50;
 $error-color: $brand-red;
 $link-color: $brand-blue;
@@ -29,61 +27,74 @@ $link-color: $brand-blue;
 // ==========================================================================
 // Fonts
 // ==========================================================================
+$font-family: 'sapientsans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-headings: 'sapientCentroSlab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-$font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$main-font-size: 16px;
+$base-font-size-in-pixels: 16;
+$relative-pixels: (1 / $base-font-size-in-pixels); // = .0625
+$em-pixels: $relative-pixels * 1em;
+
+$main-font-size: 14px;
 $small-font-size: .8rem;
 
 // ==========================================================================
 // Layout sizes
 // ==========================================================================
-
 $navbar-height: 48px;
-$header-height: 50px;
-$header-height--no-nav: 25vh;
-$content-height: 88vh;
-$content-height--no-nav: 70vh;
+$header-height: 28px;
+$header-height--no-nav: 20vh;
+$content-height: 80vh;
+$content-height--no-nav: 94vh;
+$content-height--no-nav--big-header: 80vh;
 $global-padding: 1.3%;
+
+// ==========================================================================
+// z-index
+// ==========================================================================
+$zindex-everform: -100;
+$zindex-broken-image: 2;
+$zindex-header-and-button: 100;
+$zindex-video: 90;
+$zindex-navbar: 99;
+$zindex-icon-camera: -1;
+
+$zindex-loading-animation-container: 1;
+$zindex-loading-animation-waves: 2;
+$zindex-loading-animation-icon: 3;
 
 // ==========================================================================
 // Buttons
 // ==========================================================================
-
 $button-height: 48px;
 $button-padding: 0;
 $button-margin: 0 0 15px 0;
 $button-font-color: $brand-white;
-
 // Raised buttons
 $button-raised-background: $primary-color;
 $button-raised-background-hover: $primary-color-light;
 
-
 // ==========================================================================
 // Forms
 // ==========================================================================
-
 $input-height: 48px;
-
 $input-border-color: $brand-grey;
 $input-border: 1px solid $brand-grey;
-
 $input-background: $brand-white;
 $input-error-color: $error-color;
 $input-success-color: $success-color;
 $input-focus-color: $secondary-color;
 $input-invalid-border: 1px solid $input-error-color;
-
 $input-font-size: 1rem;
 $input-margin: 0 0 15px 0;
 $input-padding: 0 $global-padding;
 $input-transition: all .3s;
-
 $placeholder-text-color: lighten($dark-grey, 20%);
 
 // ==========================================================================
 // Nav bar
 // ==========================================================================
-
 $navbar-font-color: $brand-white;
 $navbar-brand-font-size: 2.1rem;
+
+$kaleidoscope-height: 270px;
+$kaleidoscope-height--thumbnail: 210px;

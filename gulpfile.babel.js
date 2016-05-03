@@ -85,9 +85,14 @@ function html() {
     .pipe( gulp.dest( paths.dist ) );
 }
 
-function copy() {
+function copyImgs() {
   return gulp.src( `${paths.src}/images/*.png` )
     .pipe( gulp.dest( `${paths.dist}/images/` ) );
+}
+
+function copyFonts() {
+  return gulp.src( `${paths.src}/fonts/**/*.*` )
+    .pipe( gulp.dest( `${paths.dist}/fonts/` ) );
 }
 
 function bundleDev() {
@@ -132,7 +137,11 @@ function serve() {
 
 gulp.task( 'html', html );
 
-gulp.task( 'copy', copy );
+gulp.task( 'copyImgs', copyImgs );
+
+gulp.task( 'copyFonts', copyFonts );
+
+gulp.task( 'copy', [ 'copyImgs', 'copyFonts' ] );
 
 gulp.task( 'sass', sass );
 

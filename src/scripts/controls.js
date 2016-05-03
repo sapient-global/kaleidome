@@ -20,6 +20,7 @@ function init() {
   const step3KaleidoscopeContainer = document.querySelector( '.step-3-play-with-kaleidoscope' );
   const step4ShareIt = document.querySelector( '.step-4-share-it' );
   const step5Goodbye = document.querySelector( '.step-5-goodbye' );
+  const header = document.querySelector( '.header' );
 
   const buttonPhoto = document.querySelector( '.js-button-photo' );
   const buttonAgain = document.querySelector( '.js-button-again' );
@@ -34,6 +35,7 @@ function init() {
     buttonKaleidoMe.classList.add( 'u-hidden' );
     buttonAgain.classList.add( 'u-hidden' );
     buttonCancel.classList.add( 'u-hidden' );
+    header.classList.remove( 'u-light-background' );
 
     step1TakePhoto.classList.remove( 'u-hidden' );
     step2ReviewPhoto.classList.add( 'u-hidden' );
@@ -68,6 +70,7 @@ function init() {
   buttonKaleidoMe.addEventListener( 'click', () => {
     buttonAgain.classList.add( 'u-hidden' );
     buttonKaleidoMe.classList.add( 'u-hidden' );
+    header.classList.remove( 'u-light-foreground' );
 
     buttonCancel.classList.remove( 'u-hidden' );
     buttonShare.classList.remove( 'u-hidden' );
@@ -82,6 +85,7 @@ function init() {
   buttonShare.addEventListener( 'click', () => {
     buttonShare.classList.add( 'u-hidden' );
     buttonTweet.classList.remove( 'u-hidden' );
+    header.classList.add( 'u-light-background' );
 
     step3KaleidoscopeContainer.classList.add( 'u-hidden' );
     step4ShareIt.classList.remove( 'u-hidden' );

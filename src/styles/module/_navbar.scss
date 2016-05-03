@@ -1,6 +1,6 @@
 .navbar {
   position: relative;
-  z-index: 99;
+  z-index: $zindex-navbar;
 }
 
 .navbar-list {

@@ -67,6 +67,8 @@ function init() {
   const canvas = window.canvas = document.querySelector( 'canvas' );
   const video = document.querySelector( '.video-recorder' );
   const photo = document.querySelector( '.photo' );
+  const navbar = document.querySelector( '.navbar' );
+  const content = document.querySelector( '.js-all-content' );
 
   const buttonPhoto = document.querySelector( '.js-button-photo' );
   const buttonClear = document.querySelector( '.js-button-again' );
@@ -75,10 +77,14 @@ function init() {
 
   buttonPhoto.addEventListener( 'click', () => {
     _takePicture( canvas, video, photo );
+    navbar.classList.remove( 'u-hidden' );
+    content.classList.remove( 'content--no-nav' );
   } );
 
   buttonClear.addEventListener( 'click', () => {
     _clearPhoto( canvas, photo, video );
+    navbar.classList.add( 'u-hidden' );
+    content.classList.add( 'content--no-nav' );
   } );
 
   size.width = window.innerWidth;

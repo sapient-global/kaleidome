@@ -30,6 +30,10 @@ article {
   height: $content-height--no-nav;
 }
 
+.content--no-nav--big-header {
+  height: $content-height--no-nav--big-header;
+}
+
 .navbar {
   order: 3;
   align-self: flex-end;
@@ -42,12 +46,16 @@ article {
   position: relative;
 }
 
-.icon-take-photo,
-.header {
-  z-index: 100;
+.header,
+.icon-take-photo {
+  z-index: $zindex-header-and-button;
 }
 
-.video-responsive {
-  z-index: 90;
+.responsive-video {
+  z-index: $zindex-video;
   position: relative;
+}
+
+.step-3-play-with-kaleidoscope .main-title {
+  margin-bottom: 15px;
 }

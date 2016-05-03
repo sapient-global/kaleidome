@@ -4,10 +4,11 @@
   padding: 10px;
   width: $button-height;
   height: $button-height;
+  fill: $brand_white;
 }
 
-.icon-logo-home {
-  fill: $brand_white;
+.icon-loading {
+  background-color: transparent;
 }
 
 .icon-logo-content {
@@ -23,12 +24,13 @@
   position: absolute;
   left: 50%;
   margin-left: -26px;
+
   svg {
-    z-index:-1;
+    z-index: $zindex-icon-camera;
   }
 }
 
 .icon-text {
   @include visually-hidden;
-  z-index:-1;
+  z-index: $zindex-icon-camera;
 }

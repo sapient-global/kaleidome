@@ -8,15 +8,50 @@ html {
   box-sizing: inherit;
 }
 
+.background-everform {
+  position: absolute;
+  z-index: $zindex-everform;
+  fill: $dark-grey;
+  transform: translateX(-70%) translateY(-29%) rotateY(143deg);
+}
+
 body {
   padding: 0;
   margin: 0;
   font-family: $font-family;
   font-size: $main-font-size;
   line-height: 1.5;
+  font-weight: 300;
   background-color: $brand-white;
   background-image: url('#{$images-path}/bg-pattern.png');
   background-repeat: repeat;
+}
+
+h1,
+h2 {
+  margin: 0 0 5px;
+  line-height: 1;
+}
+
+h1 {
+  font-size: 48 * $em-pixels;
+  font-family: $font-family-headings;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 28 * $em-pixels;
+  font-weight: 300;
+}
+
+.subtitle {
+  color: $primary-color;
+}
+
+ol,
+p,
+ul {
+  margin-top: 0;
 }
 
 a {
@@ -64,7 +99,7 @@ img {
     padding: $global-padding;
     display: block;
     position: absolute;
-    z-index: 2;
+    z-index: $zindex-broken-image;
     top: 0;
     left: 0;
     width: 100%;

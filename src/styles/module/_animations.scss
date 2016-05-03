@@ -1,0 +1,130 @@
+.icon-loading-animation {
+  background-color: $brand-grey;
+  width: $button-height;
+  height: $button-height;
+  border-radius: 50%;
+  z-index: $zindex-loading-animation-container;
+  overflow: hidden;
+  position: relative;
+  top: 50%;
+
+  .bg {
+    background-color: $primary-color;
+    animation: animation-loading 6s;
+    animation-iteration-count: infinite;
+    position: absolute;
+    width: $button-height;
+    height: $button-height;
+    z-index: $zindex-loading-animation-waves;
+    transform: translateY(100%);
+    top: 0;
+    left: 0;
+  }
+
+  .icon {
+    position: relative;
+    z-index: $zindex-loading-animation-icon;
+  }
+}
+
+@keyframes animation-loading {
+  0% {
+    transform: translateY(100%);
+  }
+
+  5% {
+    transform: translateY(80%);
+  }
+
+  10% {
+    transform: translateY(60%);
+  }
+
+  15% {
+    transform: translateY(80%);
+  }
+
+  20% {
+    transform: translateY(50%);
+  }
+
+  25% {
+    transform: translateY(60%);
+  }
+
+  30% {
+    transform: translateY(40%);
+  }
+
+  35% {
+    transform: translateY(50%);
+  }
+
+  40% {
+    transform: translateY(20%);
+  }
+
+  45% {
+    transform: translateY(40%);
+  }
+
+  46% {
+    transform: translateY(10%);
+  }
+
+  47% {
+    transform: translateY(5%);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+
+  52% {
+    transform: translateY(5%);
+  }
+
+  53% {
+    transform: translateY(10%);
+  }
+
+  55% {
+    transform: translateY(40%);
+  }
+
+  60% {
+    transform: translateY(20%);
+  }
+
+  65% {
+    transform: translateY(50%);
+  }
+
+  70% {
+    transform: translateY(40%);
+  }
+
+  75% {
+    transform: translateY(60%);
+  }
+
+  80% {
+    transform: translateY(50%);
+  }
+
+  85% {
+    transform: translateY(80%);
+  }
+
+  90% {
+    transform: translateY(60%);
+  }
+
+  95% {
+    transform: translateY(80%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}

@@ -6,10 +6,16 @@ function request( data ) {
 
   xhttp.onreadystatechange = () => {
     if ( xhttp.readyState === 4 && xhttp.status === 200 ) {
-      const step4ShareIt = document.querySelector( '.step-4-share-it' );
-      const step5Goodbye = document.querySelector( '.step-5-goodbye' );
-      step4ShareIt.classList.add( 'u-hidden' );
-      step5Goodbye.classList.remove( 'u-hidden' );
+      window.location.href = '/goodbye.html';
+    } else {
+      const tweetErrorBox = document.querySelector( '.js-tweet-error' );
+      tweetErrorBox.classList.remove( 'u-hidden' );
+
+      const tweetForm = document.querySelector( '.tweet-content-form' );
+      tweetForm.classList.add( 'u-hidden' );
+
+      const header = document.querySelector( '.header' );
+      header.classList.remove( 'u-light-background' );
     }
   };
 
