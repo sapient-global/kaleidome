@@ -1,12 +1,14 @@
 .error,
 .error input,
-.error textarea {
+.error textarea,
+.error .characters-left-counter {
   color: $error-color;
 }
 
 .characters-left-counter {
   margin: $input-margin;
   display: inline-block;
+  margin: 5px 0 15px 0;
 }
 
 .tweet-thumbnail {

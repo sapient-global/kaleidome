@@ -4,6 +4,7 @@
 
 input,
 textarea {
+  font-family: $font-family;
   box-sizing: content-box;
   padding: $input-padding;
   font-size: $input-font-size;
