@@ -9,6 +9,10 @@ body {
   padding: $global-padding;
 }
 
+article {
+  position: relative;
+}
+
 .header--no-nav {
   height: $header-height--no-nav;
 }
@@ -26,6 +30,10 @@ body {
   height: $content-height--no-nav;
 }
 
+.content--no-nav--big-header {
+  height: $content-height--no-nav--big-header;
+}
+
 .navbar {
   order: 3;
   align-self: flex-end;
@@ -38,19 +46,16 @@ body {
   position: relative;
 }
 
-.icon-take-photo,
-.header {
-  z-index: 100;
-}
-
+.header,
 .icon-take-photo {
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
+  z-index: $zindex-header-and-button;
 }
 
-.video-responsive {
-  z-index: 90;
+.responsive-video {
+  z-index: $zindex-video;
   position: relative;
+}
+
+.step-3-play-with-kaleidoscope .main-title {
+  margin-bottom: 15px;
 }

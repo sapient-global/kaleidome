@@ -14,21 +14,9 @@ const paths = {
   bundleName: `${config.main}.js`
 };
 
-const sassLoaders = [
-  'css-loader',
-  'postcss-loader',
-  'resolve-url!',
-  'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve( __dirname, './src/styles' )
-]
-
-const sassResolvePaths = path.resolve( __dirname, './src/styles' );
-const sassPaths = `indentedSyntax=sass&includePaths[]= ${sassResolvePaths}`;
-
-
 const browsers = {
   browsers: [ 'last 2 version', 'ie >= 11' ]
 };
-
 
 export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
   cache: DEBUG,
@@ -68,10 +56,10 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
       }, {
         test: /\.scss$/,
         loader: DEBUG ?
-          'style!css?sourceMap!resolve-url!postcss-loader!sass?sourceMap!' :
-          ExtractTextPlugin.extract( 'style-loader', 'css?sourceMap!resolve-url!postcss-loader!sass?sourceMap!' )
+          'style!css?postcss-loader!sass?sourceMap!' :
+          ExtractTextPlugin.extract( 'style-loader', 'css?sourceMap!postcss-loader!sass?sourceMap!' )
       },
-      // Load images
+      // // Load images
       {
         test: /\.jpg/,
         loader: 'url-loader?limit=10000&mimetype=image/jpg'
@@ -84,16 +72,12 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
       }, {
         test: /\.svg/,
         loader: 'url-loader?limit=10000&mimetype=image/svg'
-      }, {
-        test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
-      }, {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader'
-      }, {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        loader: 'url-loader?limit=100000'
-      }, {
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        loader: 'file-loader?limit=100000&name=fonts/[name].[ext]'
+      },
+      {
         test: /\.json$/,
         loader: 'json-loader'
       }
@@ -102,9 +86,6 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
       return [ autoprefixer( {
         browsers: [ 'last 2 versions' ]
       } ) ];
-    },
-    sassLoader: {
-      includePaths: [ `${paths.src}/styles` ]
     },
     noParse: [
       /(node_modules|~)\/(crappy\-bundled\-lib|jquery)\//gi

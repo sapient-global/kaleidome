@@ -1,66 +1,105 @@
-//https://dev.twitter.com/rest/reference/post/statuses/update_with_media
-//https://dev.twitter.com/rest/media/uploading-media
-//{status: 'foo', hashtags: [], media: [], username: ''}
-//post: https://api.twitter.com/1.1/statuses/update.json
-//https://github.com/desmondmorris/node-twitter/tree/master/examples#media
+function request( data ) {
+  const xhttp = new XMLHttpRequest();
 
-import Twitter from 'twit';
+  xhttp.open( 'POST', 'https://localhost:1947/tweet', true );
+  xhttp.send( data );
 
-// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-const client = new Twitter( {
-  consumer_key: process.env.TWITTER_CONSUMER_KEY || 'a',
-  consumer_secret: process.env.TWITTER_CONSUMER_SECRET || 'b',
-  access_token: process.env.TWITTER_ACCESS_TOKEN_KEY || 'c',
-  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET || 'd',
-} );
+  xhttp.onreadystatechange = () => {
+    if ( xhttp.readyState === 4 && xhttp.status === 200 ) {
+      window.location.href = '/goodbye.html';
+    } else {
+      const tweetErrorBox = document.querySelector( '.js-tweet-error' );
+      tweetErrorBox.classList.remove( 'u-hidden' );
 
-function _shareImage() {
-  const tweetInput = document.querySelector( '.js-tweet-text' );
-  const img = document.querySelector( '.js-image-to-share' ).src;
-  const tweetText = tweetInput.value;
+      const tweetForm = document.querySelector( '.tweet-content-form' );
+      tweetForm.classList.add( 'u-hidden' );
 
-  client.post( 'media/upload', {
-    media_data: img
-  }, function( error, media, response ) {
-    if ( !error ) {
-      // If successful, a media object will be returned.
-      console.log( media );
-      // Lets tweet it
-      const status = {
-        status: `#btConf ${tweetText}`,
-        media_ids: [ media.media_id_string ]
-      };
-
-      client.post( 'statuses/update', status, function( error, tweet, response ) {
-        if ( !error ) {
-          console.log( tweet );
-          // Show a success message and redirect to home
-        }
-      } );
+      const header = document.querySelector( '.header' );
+      header.classList.remove( 'u-light-background' );
     }
-  } );
+  };
+
+  xhttp.onload = function() {
+    // do something to response
+    console.log( this.responseText );
+  };
 }
 
-// jscs:enable requireCamelCaseOrUpperCaseIdentifiers
+const TWEET_TEXT = ', I am at the #eventHashtag! Amazing, @sapientxt is also here!';
+const TWEET_MAX_CHARS = 120;
+
+function _getTweetText() {
+  const tweetTextarea = document.querySelector( '.js-tweet-text' );
+  const username = document.querySelector( '.js-username' );
+
+  const tweetText = `@${username.value}` + TWEET_TEXT + ` ${tweetTextarea.value}`;
+  console.log( tweetText );
+  return tweetText;
+}
+
+function _getTweetMedia() {
+  let imageData = document.querySelector( '.js-image-to-share' ).src;
+  const indexOfComma = imageData.indexOf( ',' );
+  imageData = imageData.substring( indexOfComma + 1 );
+
+  return imageData;
+}
+
+function _shareImage() {
+  const imageData = _getTweetMedia();
+  const tweetText = _getTweetText();
+
+  var data = new FormData();
+  data.append( 'tweetText', tweetText );
+  data.append( 'imageData', imageData );
+
+  request( data );
+}
+
+function _getCharsLeft() {
+  return TWEET_MAX_CHARS - _getTweetText().length;
+}
+
+function _setCharsLeft() {
+  const tweetCharLeft = document.querySelector( '.js-characters-left' );
+  tweetCharLeft.innerHTML = _getCharsLeft();
+  _checkCharsLeft();
+}
+
+function _checkCharsLeft() {
+  const tweetButton = document.querySelector( '.js-button-tweet' );
+  const shareContainer = document.querySelector( '.js-tweet-content' );
+  const data = new FormData();
+
+  if ( _getCharsLeft() < 0 ) {
+    if ( !shareContainer.classList.contains( 'error' ) ) {
+      shareContainer.classList.add( 'error' );
+    }
+    tweetButton.disabled = true;
+  } else {
+    shareContainer.classList.remove( 'error' );
+    tweetButton.disabled = false;
+  }
+
+  data.append( 'tweetText', tweetText );
+  data.append( 'imageData', imageData );
+
+  request( data );
+}
 
 function init() {
-  const shareButton = document.querySelector( '.js-button-share' );
   const tweetButton = document.querySelector( '.js-button-tweet' );
-  const shareContainer = document.querySelector( '.share-container' );
-  const tweetInput = document.querySelector( '.js-tweet-text' );
+  const tweetContent = document.querySelector( '.js-tweet-content' );
+
+  tweetContent.querySelector( '.js-message' ).innerHTML = TWEET_TEXT;
+
+  tweetContent.querySelector( 'input' ).addEventListener( 'input', ( e ) => {
+    _setCharsLeft( e );
+  } );
 
   tweetButton.addEventListener( 'click', ( e ) => {
     e.preventDefault();
-    _shareImage();
-  } );
-
-  tweetInput.addEventListener( 'blur', ( e ) => {
-    const label = document.querySelector( '.js-label' );
-    if ( tweetInput.value !== '' ) {
-      label.classList.add( 'u-hidden' );
-    } else {
-      label.classList.remove( 'u-hidden' );
-    }
+    _shareImage( e );
   } );
 }
 

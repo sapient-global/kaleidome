@@ -1,10 +1,16 @@
+.error,
+.error input,
+.error textarea {
+  color: $error-color;
+}
+
 .characters-left-counter {
   margin: $input-margin;
   display: inline-block;
 }
 
 .tweet-thumbnail {
-  max-height: 20vh;
+  max-height: $kaleidoscope-height--thumbnail;
   width: auto;
   margin: 0 auto;
 }
@@ -16,4 +22,6 @@
 
 .tweet-content-form {
   padding: $global-padding;
+  background-color: $brand-white;
+  margin-bottom: 15px;
 }

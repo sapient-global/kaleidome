@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 
   <head>
@@ -14,18 +13,23 @@
 
   <body>
     <header class="header">
-      <span class="header-text">Powered by</span>
+      <span class="header-powered-by--small">Powered by</span>
       <a href="http://www.sapientnitro.com/en-us.html#careers" target="_blank">
-        <svg class="logo icon-logo icon-logo-content" xmlns="http://www.w3.org/2000/svg" width="15" height="64.33" viewBox="0 0 39 64.33">
-          <path d="M19,50.35a4.94,4.94,0,0,1,5.07-4.76h5.5a4,4,0,0,0,4-4V36.09a4,4,0,0,0-4-4H23.74A5,5,0,0,1,19,27.06v-6a5,5,0,0,1,5.07-4.77l5.55,0a3.94,3.94,0,0,0,4-3.93V6.9a4,4,0,0,0-4-4h-5.5a4,4,0,0,0-4,4v5.55a5,5,0,0,1-4.77,5.07H9.54a4,4,0,0,0-4,4V27a4,4,0,0,0,4,4h5.59a5,5,0,0,1,5.07,4.77v6a4.9,4.9,0,0,1-4.77,5H9.54a4,4,0,0,0-4,4v5.5a4,4,0,0,0,4,4h5.53a4,4,0,0,0,4-4V50.35Z"
-            />
-        </svg>
+        <img src="/images/sn-logo.png" alt="SapietNitro" class="header-powered-by-image--inlined" />
       </a>
     </header>
 
-    <section class="content">
+    <section class="content content--no-nav js-all-content">
       <article class="step-1-take-photo u-center-vertically u-full-size">
-        <div class="">
+        <div class="icon-loading-animation">
+          <div class="bg">
+          </div>
+          <svg class="icon icon-loading icon-logo--white" xmlns="http://www.w3.org/2000/svg" width="39" height="64.33" viewBox="0 0 39 64.33">
+            <path d="M19,50.35a4.94,4.94,0,0,1,5.07-4.76h5.5a4,4,0,0,0,4-4V36.09a4,4,0,0,0-4-4H23.74A5,5,0,0,1,19,27.06v-6a5,5,0,0,1,5.07-4.77l5.55,0a3.94,3.94,0,0,0,4-3.93V6.9a4,4,0,0,0-4-4h-5.5a4,4,0,0,0-4,4v5.55a5,5,0,0,1-4.77,5.07H9.54a4,4,0,0,0-4,4V27a4,4,0,0,0,4,4h5.59a5,5,0,0,1,5.07,4.77v6a4.9,4.9,0,0,1-4.77,5H9.54a4,4,0,0,0-4,4v5.5a4,4,0,0,0,4,4h5.53a4,4,0,0,0,4-4V50.35Z"
+            />
+          </svg>
+        </div>
+        <div class="u-full-size u-center-vertically">
           <video class="video-recorder responsive-video" autoplay></video>
           <canvas class="u-hidden"></canvas>
         </div>
@@ -48,38 +52,40 @@
       </article>
 
       <article class="step-2-review-photo u-center-vertically u-full-size u-hidden">
-        <img class="photo responsive-img" src="#" alt="Your Photo">
+        <img class="photo responsive-img" src="/images/sn-logo.png" alt="Your Photo">
+        <small class="u-text-center js-not-supported u-hidden">
+          <i>You are seeing this image because your device does not support yet MediaDevices.getUserMedia()</i>
+        </small>
       </article>
 
       <article class="step-3-play-with-kaleidoscope u-text-center u-center-vertically u-full-size  kaleidoscope-container u-hidden">
-        <h2>So it works!</h2>
-        <p>Slide your finger over the Kaleidoscope to generate new patterns</p>
-        <p>When you are ready, simply Share!</p>
+        <h1 class="main-title u-text-center u-top-spacer--half">So it works!</h1>
+        <p class="u-bottom-spacer--tiny">Slide your finger over the Kaleidoscope to generate new patterns</p>
+        <p class="u-bottom-spacer--tiny">When you are ready, simply Share!</p>
         <canvas class="kaleidoscope"></canvas>
       </article>
 
 
-      <article class="step-4-share-it u-center-vertically u-full-size  u-hidden">
-        <div class="tweet-content-form">
+      <article class="step-4-share-it u-top-vertically u-full-size  u-hidden">
+        <div class="tweet-content-form  js-tweet-content">
           <span>@</span>
-          <input type="text" name="username" placeholder="johnDoesTwitter">
-          <span>I am at #btConf</span>
-          <textarea placeholder="Enter your tweet message here" name="tweet-text" class="tweet-text js-tweet-text"></textarea>
+          <input class="js-username" type="text" name="username" placeholder="johnDoesTwitter">
+          <span class="js-message">, I am at #test and visited the @Sapientxt guys! </span>
+          <textarea class="js-tweet-text" placeholder="Enter your tweet message here" name="tweet-text" class="tweet-text js-tweet-text"></textarea>
           <small class="characters-left-counter"><span class="js-characters-left">100</span> Characters left</small>
-          <img src="#" class="tweet-thumbnail responsive-img js-image-to-share" alt="Your kaleidoscope" />
         </div>
-      </article>
 
-      <article class="step-5-goodbye u-center-vertically u-full-size  u-hidden">
-        <div class="tweet-success u-text-center content-box">
-          <h2>Your tweet was shared!</h2>
-          <p>If you want to know how this app was built, visit ______</p>
-          <a class="btn btn-raised u-text-center" href="index.html">Play again</a>
+        <div class="js-tweet-error u-bottom-spacer u-top-spacer u-text-center u-hidden">
+          <h2>Oops!</h2>
+          <p>We could not share your tweet.</p>
+          <a class="btn btn-raised u-text-center" href="index.html">Try Again</a>
         </div>
+
+        <img src="#" class="tweet-thumbnail responsive-img js-image-to-share" alt="Your kaleidoscope" />
       </article>
     </section>
 
-    <nav class="navbar">
+    <nav class="navbar u-hidden">
       <ul class="navbar-list">
         <li class="navbar-item navbar-item--negative">
           <button class="navbar-item-button btn js-button-cancel u-hidden" type="button">
@@ -108,7 +114,6 @@
         </li>
       </ul>
     </nav>
-
     <script async defer src="btconf-2016.js"></script>
   </body>
 

@@ -3,6 +3,17 @@
   vertical-align: middle;
 }
 
-.header-text {
-  font-size: 1rem;
+.header-powered-by--small {
+  font-size: 1em;
+}
+
+.header-powered-by {
+  margin-bottom: 5px;
+}
+
+.header-powered-by-image--inlined {
+  max-width: 30%;
+  display: inherit;
+  vertical-align: middle;
+  margin-left: 6px;
 }
