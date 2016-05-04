@@ -2,12 +2,43 @@ function request( data ) {
   const xhttp = new XMLHttpRequest();
 
   xhttp.open( 'POST', 'https://localhost:1947/tweet', true );
+
   xhttp.send( data );
 
+  /*
   xhttp.onreadystatechange = () => {
-    if ( xhttp.readyState === 4 && xhttp.status === 200 ) {
+    if ( xhttp.readyState !== 4 ) {
+
+      const loading = document.querySelector( '.step-4-share-it .icon-loading-animation');
+      loading.classList.remove( 'u-hidden' );
+
+      const header = document.querySelector( '.header' );
+      header.classList.remove( 'u-light-background' );
+
+      const image = document.querySelector( '.js-image-to-share' );
+      image.classList.add( 'u-hidden' );
+
+      const tweetErrorBox = document.querySelector( '.js-tweet-error' );
+      tweetErrorBox.classList.add( 'u-hidden' );
+
+      const tweetForm = document.querySelector( '.tweet-content-form' );
+      tweetForm.classList.add( 'u-hidden' );
+
+      const navbar = document.querySelector( '.navbar');
+      navbar.classList.add( 'u-hidden' );
+
+    }
+  };
+  */
+
+  xhttp.onload = function() {
+    // do something to response
+    if(this.readyState === 4 && this.status === 200){
       window.location.href = '/goodbye.html';
-    } else {
+    }else{
+      const loading = document.querySelector( '.step-4-share-it .icon-loading-animation');
+      loading.classList.add( 'u-hidden' );
+
       const tweetErrorBox = document.querySelector( '.js-tweet-error' );
       tweetErrorBox.classList.remove( 'u-hidden' );
 
@@ -16,12 +47,10 @@ function request( data ) {
 
       const header = document.querySelector( '.header' );
       header.classList.remove( 'u-light-background' );
-    }
-  };
 
-  xhttp.onload = function() {
-    // do something to response
-    console.log( this.responseText );
+      const navbar = document.querySelector( '.navbar' );
+      navbar.classList.add( 'u-hidden' );
+    }
   };
 }
 
@@ -33,7 +62,6 @@ function _getTweetText() {
   const username = document.querySelector( '.js-username' );
 
   const tweetText = `@${username.value}` + TWEET_TEXT + ` ${tweetTextarea.value}`;
-  console.log( tweetText );
   return tweetText;
 }
 
@@ -46,6 +74,25 @@ function _getTweetMedia() {
 }
 
 function _shareImage() {
+
+  const loading = document.querySelector( '.step-4-share-it .icon-loading-animation');
+  loading.classList.remove( 'u-hidden' );
+
+  const header = document.querySelector( '.header' );
+  header.classList.remove( 'u-light-background' );
+
+  const image = document.querySelector( '.js-image-to-share' );
+  image.classList.add( 'u-hidden' );
+
+  const tweetErrorBox = document.querySelector( '.js-tweet-error' );
+  tweetErrorBox.classList.add( 'u-hidden' );
+
+  const tweetForm = document.querySelector( '.tweet-content-form' );
+  tweetForm.classList.add( 'u-hidden' );
+
+  const navbar = document.querySelector( '.navbar' );
+  navbar.classList.add( 'u-hidden' );
+
   const imageData = _getTweetMedia();
   const tweetText = _getTweetText();
 
@@ -69,7 +116,6 @@ function _setCharsLeft() {
 function _checkCharsLeft() {
   const tweetButton = document.querySelector( '.js-button-tweet' );
   const shareContainer = document.querySelector( '.js-tweet-content' );
-  const data = new FormData();
 
   if ( _getCharsLeft() < 0 ) {
     if ( !shareContainer.classList.contains( 'error' ) ) {
@@ -80,11 +126,6 @@ function _checkCharsLeft() {
     shareContainer.classList.remove( 'error' );
     tweetButton.disabled = false;
   }
-
-  data.append( 'tweetText', tweetText );
-  data.append( 'imageData', imageData );
-
-  request( data );
 }
 
 function init() {
@@ -93,7 +134,11 @@ function init() {
 
   tweetContent.querySelector( '.js-message' ).innerHTML = TWEET_TEXT;
 
-  tweetContent.querySelector( 'input' ).addEventListener( 'input', ( e ) => {
+  tweetContent.querySelector( '.js-username' ).addEventListener( 'input', ( e ) => {
+    _setCharsLeft( e );
+  } );
+
+  tweetContent.querySelector( '.js-tweet-text' ).addEventListener( 'input', ( e ) => {
     _setCharsLeft( e );
   } );
 
@@ -101,6 +146,8 @@ function init() {
     e.preventDefault();
     _shareImage( e );
   } );
+
+  _setCharsLeft();
 }
 
 export default {

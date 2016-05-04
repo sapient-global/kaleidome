@@ -25,6 +25,7 @@
   "homepage": "https://tools.sapient.com/confluence/display/ETD/Beyond+Tellerand",
   "devDependencies": {
     "autoprefixer": "^6.3.3",
+    "async": "latest",
     "babel-core": "^6.3.26",
     "babel-eslint": "^4.1.6",
     "babel-loader": "^6.2.0",

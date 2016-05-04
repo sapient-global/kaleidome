@@ -49,6 +49,11 @@ server.listen( opts.port, opts.host, () => {
 /* ==========================================================================
    Routes
    ========================================================================== */
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
 app.get( '/', ( req, res ) => {
   res.writeHead( 200, {
@@ -57,12 +62,11 @@ app.get( '/', ( req, res ) => {
   fs.createReadStream( path.join( opts.baseDir, '/index.html' ) ).pipe( res );
 } );
 
-//app.post( '/tweet', tweetRoute );
-app.post( '/tweet', function( req, res ) {
+app.post( '/tweet', ( req, res ) => {
   var formData = new multiparty.Form();
 
   formData.parse( req, function( err, fields, files ) {
     tweetRoute( req, res, fields, files );
-  } );
+  });
 
 } );
