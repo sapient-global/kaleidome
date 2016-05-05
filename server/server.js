@@ -29,14 +29,13 @@ function isProd() {
 app.set( 'port', opts.port );
 app.use( express.static( opts.baseDir ) );
 
-
 /* ==========================================================================
    Init the server
    ========================================================================== */
 
 const sslConf = {
-  key: fs.readFileSync( '../../server.key' ),
-  cert: fs.readFileSync( '../../server.crt' ),
+  key: fs.readFileSync( './server/server.key' ),
+  cert: fs.readFileSync( './server/server.crt' ),
   requestCert: isProd() ? true : false,
   rejectUnauthorized: isProd() ? true : false
 };
@@ -49,11 +48,11 @@ server.listen( opts.port, opts.host, () => {
 /* ==========================================================================
    Routes
    ========================================================================== */
-app.all('/*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+app.all( '/*', function( req, res, next ) {
+  res.header( "Access-Control-Allow-Origin", "*" );
+  res.header( "Access-Control-Allow-Headers", "X-Requested-With" );
   next();
-});
+} );
 
 app.get( '/', ( req, res ) => {
   res.writeHead( 200, {
@@ -62,11 +61,11 @@ app.get( '/', ( req, res ) => {
   fs.createReadStream( path.join( opts.baseDir, '/index.html' ) ).pipe( res );
 } );
 
-app.post( '/tweet', ( req, res ) => {
+app.post( '/tweet', function( req, res ) {
   var formData = new multiparty.Form();
 
   formData.parse( req, function( err, fields, files ) {
     tweetRoute( req, res, fields, files );
-  });
+  } );
 
 } );

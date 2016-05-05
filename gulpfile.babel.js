@@ -22,6 +22,7 @@ const paths = {
   main: `${config.main}.js`,
   src: path.join( __dirname, 'src' ),
   dist: config.dist,
+  server: path.join( __dirname, 'server' ),
   bundleName: path.basename( config.main, path.extname( config.main ) )
 };
 
@@ -30,7 +31,7 @@ const paths = {
    ========================================================================== */
 
 function clean( done ) {
-  del( [ `${paths.dist}/*`,`!${paths.dist}/.git`,`!${paths.dist}/Dockerfile`,`!${paths.dist}/nginx.conf.sigil` ] ).then( () => done() );
+  del( [ `${paths.dist}/*`, `!${paths.dist}/.git`, `!${paths.dist}/Dockerfile`, `!${paths.dist}/nginx.conf.sigil` ] ).then( () => done() );
 }
 
 function onError() {
@@ -90,6 +91,11 @@ function copyImgs() {
     .pipe( gulp.dest( `${paths.dist}/images/` ) );
 }
 
+function copyServer() {
+  return gulp.src( `${paths.server}/**/*` )
+    .pipe( gulp.dest( `${paths.dist}/` ) );
+}
+
 function copyFonts() {
   return gulp.src( `${paths.src}/fonts/**/*.*` )
     .pipe( gulp.dest( `${paths.dist}/fonts/` ) );
@@ -141,7 +147,9 @@ gulp.task( 'copyImgs', copyImgs );
 
 gulp.task( 'copyFonts', copyFonts );
 
-gulp.task( 'copy', [ 'copyImgs', 'copyFonts' ] );
+gulp.task( 'copyServer', copyServer );
+
+gulp.task( 'copy', [ 'copyImgs', 'copyFonts', 'copyServer' ] );
 
 gulp.task( 'sass', sass );
 
