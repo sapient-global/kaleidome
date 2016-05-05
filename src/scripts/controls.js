@@ -21,6 +21,8 @@ function init() {
   const step4ShareIt = document.querySelector( '.step-4-share-it' );
   const step5Goodbye = document.querySelector( '.step-5-goodbye' );
   const header = document.querySelector( '.header' );
+  const tweetError = document.querySelector( '.js-tweet-error' );
+  const tweetContent = document.querySelector( '.js-tweet-content' );
 
   const buttonPhoto = document.querySelector( '.js-button-photo' );
   const buttonAgain = document.querySelector( '.js-button-again' );
@@ -36,6 +38,8 @@ function init() {
     buttonAgain.classList.add( 'u-hidden' );
     buttonCancel.classList.add( 'u-hidden' );
     header.classList.remove( 'u-light-background' );
+    tweetError.classList.add( 'u-hidden' );
+    tweetContent.classList.remove( 'u-hidden' );
 
     step1TakePhoto.classList.remove( 'u-hidden' );
     step2ReviewPhoto.classList.add( 'u-hidden' );
