@@ -15,7 +15,7 @@ let size = {
 let mediaObjects = {
   stream: false,
   tracks: false
-}
+};
 
 function detectAspectRatio() {
   const desktopRatio = 4 / 3;

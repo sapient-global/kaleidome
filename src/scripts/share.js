@@ -1,5 +1,7 @@
-const TWEET_TEXT = ', I am at the #eventHashtag! Amazing, @sapientxt is also here!';
-const TWEET_MAX_CHARS = 120;
+import texts from '../texts.json';
+
+const TWEET_TEXT = texts.step4tweet.defaultText;
+const TWEET_MAX_CHARS = parseInt( texts.step4tweet.maxChars, 10 );
 
 function request( data ) {
   const xhttp = new XMLHttpRequest();
@@ -126,29 +128,31 @@ function _checkCharsLeft() {
 function init() {
   const tweetButton = document.querySelector( '.js-button-tweet' );
   const shareContainer = document.querySelector( '.js-tweet-content' );
-  const usernameInput = shareContainer.querySelector( 'input' );
-  const tweetTextArea = shareContainer.querySelector( 'textarea' );
+  const usernameInput = shareContainer.querySelector( '.js-username' );
+  const inputs = shareContainer.querySelectorAll( '.js-input' );
+  const body = document.querySelector( 'body' );
 
-  usernameInput.addEventListener( 'input', ( e ) => {
-    _setCharsLeft( e );
 
-    if ( e.target.value.length === 0 || shareContainer.classList.contains( 'tweet-form-error' ) ) {
-      tweetButton.disabled = true;
-    } else {
-      tweetButton.disabled = false;
-    }
-  } );
+  for ( let i = 0; i < inputs.length; i++ ) {
+    const currentInput = inputs[ i ];
+    currentInput.addEventListener( 'focus', () => {
+      body.classList.add( 'input-focused-body-min-height' );
+    } );
 
-  tweetTextArea.addEventListener( 'input', ( e ) => {
-    _setCharsLeft( e );
+    currentInput.addEventListener( 'blur', () => {
+      body.classList.remove( 'input-focused-body-min-height' );
+    } );
 
-    if ( _getCharsLeft() > 0 && usernameInput.value.length > 0 ) {
-      tweetButton.disabled = false;
-    } else {
-      tweetButton.disabled = true;
-    }
+    currentInput.addEventListener( 'input', ( e ) => {
+      _setCharsLeft( e );
 
-  } );
+      if ( ( _getCharsLeft() > 0 && usernameInput.value.length > 0 ) || !shareContainer.classList.contains( 'tweet-form-error' ) ) {
+        tweetButton.disabled = false;
+      } else {
+        tweetButton.disabled = true;
+      }
+    } );
+  }
 
   tweetButton.addEventListener( 'click', ( e ) => {
     e.preventDefault();

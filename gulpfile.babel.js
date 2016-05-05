@@ -81,9 +81,14 @@ function sass() {
     .pipe( gulp.dest( paths.dist ) );
 }
 
-function html() {
-  return gulp.src( 'src/*.html' )
-    .pipe( gulp.dest( paths.dist ) );
+function jade() {
+  const locals = require( `${paths.src}/texts.json` );
+
+  gulp.src( `${paths.src}/html/*.jade` )
+    .pipe( $.jade( {
+      locals: locals
+    } ) )
+    .pipe( gulp.dest( './dist/' ) );
 }
 
 function copyImgs() {
@@ -141,7 +146,7 @@ function serve() {
    Taks declarations
    ========================================================================== */
 
-gulp.task( 'html', html );
+gulp.task( 'jade', jade );
 
 gulp.task( 'copyImgs', copyImgs );
 
@@ -172,14 +177,14 @@ gulp.task( 'bundle', bundleDev );
 
 gulp.task( 'bundleDev', [ 'lint' ], bundleDev );
 
-gulp.task( 'build', [ 'clean', 'sass', 'copy', 'html', 'bundleDist' ] );
+gulp.task( 'build', [ 'clean', 'sass', 'copy', 'jade', 'bundleDist' ] );
 
-gulp.task( 'build-dev', [ 'clean', 'html', 'copy', 'sass', 'bundleDev' ] );
+gulp.task( 'build-dev', [ 'clean', 'jade', 'copy', 'sass', 'bundleDev' ] );
 
 gulp.task( 'serve', function( cb ) {
   runSequence( 'clean', [ 'build-dev', 'watch' ], serve );
 } );
 
 gulp.task( 'watch', function() {
-  gulp.watch( `${paths.src}/**/*`, [ 'html', 'sass', 'bundle' ] );
+  gulp.watch( `${paths.src}/**/*`, [ 'jade', 'sass', 'bundle' ] );
 } );
