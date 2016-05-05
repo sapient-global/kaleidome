@@ -132,7 +132,6 @@ function init() {
   const inputs = shareContainer.querySelectorAll( '.js-input' );
   const body = document.querySelector( 'body' );
 
-
   for ( let i = 0; i < inputs.length; i++ ) {
     const currentInput = inputs[ i ];
     currentInput.addEventListener( 'focus', () => {
