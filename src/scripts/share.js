@@ -1,3 +1,6 @@
+const TWEET_TEXT = ', I am at the #eventHashtag! Amazing, @sapientxt is also here!';
+const TWEET_MAX_CHARS = 120;
+
 function request( data ) {
   const xhttp = new XMLHttpRequest();
 
@@ -8,7 +11,6 @@ function request( data ) {
   /*
   xhttp.onreadystatechange = () => {
     if ( xhttp.readyState !== 4 ) {
-
       const loading = document.querySelector( '.step-4-share-it .icon-loading-animation');
       loading.classList.remove( 'u-hidden' );
 
@@ -33,10 +35,10 @@ function request( data ) {
 
   xhttp.onload = function() {
     // do something to response
-    if(this.readyState === 4 && this.status === 200){
+    if ( this.readyState === 4 && this.status === 200 ) {
       window.location.href = '/goodbye.html';
-    }else{
-      const loading = document.querySelector( '.step-4-share-it .icon-loading-animation');
+    } else {
+      const loading = document.querySelector( '.step-4-share-it .icon-loading-animation' );
       loading.classList.add( 'u-hidden' );
 
       const tweetErrorBox = document.querySelector( '.js-tweet-error' );
@@ -54,13 +56,9 @@ function request( data ) {
   };
 }
 
-const TWEET_TEXT = ', I am at the #eventHashtag! Amazing, @sapientxt is also here!';
-const TWEET_MAX_CHARS = 120;
-
 function _getTweetText() {
   const tweetTextarea = document.querySelector( '.js-tweet-text' );
   const username = document.querySelector( '.js-username' );
-
   const tweetText = `@${username.value}` + TWEET_TEXT + ` ${tweetTextarea.value}`;
   return tweetText;
 }
@@ -75,7 +73,7 @@ function _getTweetMedia() {
 
 function _shareImage() {
 
-  const loading = document.querySelector( '.step-4-share-it .icon-loading-animation');
+  const loading = document.querySelector( '.step-4-share-it .icon-loading-animation' );
   loading.classList.remove( 'u-hidden' );
 
   const header = document.querySelector( '.header' );
@@ -114,37 +112,49 @@ function _setCharsLeft() {
 }
 
 function _checkCharsLeft() {
-  const tweetButton = document.querySelector( '.js-button-tweet' );
   const shareContainer = document.querySelector( '.js-tweet-content' );
 
   if ( _getCharsLeft() < 0 ) {
-    if ( !shareContainer.classList.contains( 'error' ) ) {
-      shareContainer.classList.add( 'error' );
+    if ( !shareContainer.classList.contains( 'tweet-form-error' ) ) {
+      shareContainer.classList.add( 'tweet-form-error' );
     }
-    tweetButton.disabled = true;
   } else {
-    shareContainer.classList.remove( 'error' );
-    tweetButton.disabled = false;
+    shareContainer.classList.remove( 'tweet-form-error' );
   }
 }
 
 function init() {
   const tweetButton = document.querySelector( '.js-button-tweet' );
-  const tweetContent = document.querySelector( '.js-tweet-content' );
+  const shareContainer = document.querySelector( '.js-tweet-content' );
+  const usernameInput = shareContainer.querySelector( 'input' );
+  const tweetTextArea = shareContainer.querySelector( 'textarea' );
 
-  tweetContent.querySelector( '.js-message' ).innerHTML = TWEET_TEXT;
-
-  tweetContent.querySelector( '.js-username' ).addEventListener( 'input', ( e ) => {
+  usernameInput.addEventListener( 'input', ( e ) => {
     _setCharsLeft( e );
+
+    if ( e.target.value.length === 0 || shareContainer.classList.contains( 'tweet-form-error' ) ) {
+      tweetButton.disabled = true;
+    } else {
+      tweetButton.disabled = false;
+    }
   } );
 
-  tweetContent.querySelector( '.js-tweet-text' ).addEventListener( 'input', ( e ) => {
+  tweetTextArea.addEventListener( 'input', ( e ) => {
     _setCharsLeft( e );
+
+    if ( _getCharsLeft() > 0 && usernameInput.value.length > 0 ) {
+      tweetButton.disabled = false;
+    } else {
+      tweetButton.disabled = true;
+    }
+
   } );
 
   tweetButton.addEventListener( 'click', ( e ) => {
     e.preventDefault();
-    _shareImage( e );
+    if ( usernameInput.value.length > 0 ) {
+      _shareImage( e );
+    }
   } );
 
   _setCharsLeft();

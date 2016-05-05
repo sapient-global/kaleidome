@@ -30,6 +30,8 @@
           </svg>
         </div>
         <div class="u-full-size u-center-vertically">
+          <!-- To Display the video that we are going to get out of the camera, we need to add
+          the autoplay attribute to the video tag -->
           <video class="video-recorder responsive-video" autoplay></video>
           <canvas class="u-hidden"></canvas>
         </div>
@@ -69,9 +71,9 @@
       <article class="step-4-share-it u-top-vertically u-full-size  u-hidden">
         <div class="tweet-content-form  js-tweet-content">
           <span>@</span>
-          <input class="js-username" type="text" name="username" placeholder="johnDoesTwitter">
+          <input class="js-username" type="text" name="username" required placeholder="johnDoesTwitter">
           <span class="js-message">, I am at #test and visited the @Sapientxt guys! </span>
-          <textarea class="js-tweet-text" placeholder="Enter your tweet message here" name="tweet-text" class="tweet-text js-tweet-text"></textarea>
+          <textarea class="js-tweet-text u-top-spacer--half" placeholder="Enter your tweet message here" name="tweet-text" class="tweet-text js-tweet-text"></textarea>
           <small class="characters-left-counter"><span class="js-characters-left">100</span> Characters left</small>
         </div>
 
@@ -118,7 +120,7 @@
           </button>
         </li>
         <li class="navbar-item navbar-item--positive">
-          <button class="navbar-item-button btn js-button-tweet u-hidden" type="button">
+          <button class="navbar-item-button btn js-button-tweet u-hidden" disabled type="button">
             TWEET
           </button>
         </li>
