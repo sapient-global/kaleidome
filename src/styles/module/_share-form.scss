@@ -5,6 +5,13 @@
   color: $error-color;
 }
 
+input,
+textarea {
+  &:focus {
+    background-color: $color-alabaster-grey;
+  }
+}
+
 .characters-left-counter {
   margin: $input-margin;
   display: inline-block;
