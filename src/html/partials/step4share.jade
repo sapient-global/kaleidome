@@ -1,5 +1,5 @@
 article.step-4-share-it.u-top-vertically.u-full-size.u-hidden
-  .tweet-content-form.js-tweet-content
+  div.tweet-content-form.js-tweet-content
     span @
     input.js-username.js-input(type='text', name='username', required='', placeholder=step4tweet.inputPlaceholder)
     span.js-message
@@ -8,11 +8,12 @@ article.step-4-share-it.u-top-vertically.u-full-size.u-hidden
     small.characters-left-counter
       span.js-characters-left=step4tweet.maxChars
       | #{step4tweet.charsLeft}
+  include ./loadingAnimation.jade
+  +loading('u-hidden')
   div.js-tweet-error.u-bottom-spacer.u-top-spacer.u-text-center.u-hidden
     h2
       | #{step4tweet.errorTitle}
-    p
-    | #{step4tweet.errorMessage}
+    p=step4tweet.errorMessage
     a.btn.btn-raised.u-text-center(href='index.html')
       | #{step4tweet.errorButton}
   img.tweet-thumbnail.responsive-img.js-image-to-share(src='#', alt='Your kaleidoscope')

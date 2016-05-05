@@ -3,58 +3,41 @@ import texts from '../texts.json';
 const TWEET_TEXT = texts.step4tweet.defaultText;
 const TWEET_MAX_CHARS = parseInt( texts.step4tweet.maxChars, 10 );
 
+function handleResponse( response ) {
+  if ( response.readyState === 4 && response.status === 200 ) {
+    window.location.href = '/goodbye.html';
+
+  } else if ( response.readyState !== 4 && response.status !== 200 ) {
+    const loading = document.querySelector( '.step-4-share-it .icon-loading-animation' );
+    loading.classList.add( 'u-hidden' );
+
+    const tweetErrorBox = document.querySelector( '.js-tweet-error' );
+    tweetErrorBox.classList.remove( 'u-hidden' );
+
+    const tweetForm = document.querySelector( '.tweet-content-form' );
+    tweetForm.classList.add( 'u-hidden' );
+
+    const header = document.querySelector( '.header' );
+    header.classList.remove( 'u-light-background' );
+
+    const navbar = document.querySelector( '.navbar' );
+    navbar.classList.add( 'u-hidden' );
+  }
+}
+
 function request( data ) {
   const xhttp = new XMLHttpRequest();
 
-  xhttp.open( 'POST', 'https://localhost:1947/tweet', true );
+  xhttp.open( 'POST', '/tweet', true );
 
   xhttp.send( data );
 
-  /*
   xhttp.onreadystatechange = () => {
-    if ( xhttp.readyState !== 4 ) {
-      const loading = document.querySelector( '.step-4-share-it .icon-loading-animation');
-      loading.classList.remove( 'u-hidden' );
-
-      const header = document.querySelector( '.header' );
-      header.classList.remove( 'u-light-background' );
-
-      const image = document.querySelector( '.js-image-to-share' );
-      image.classList.add( 'u-hidden' );
-
-      const tweetErrorBox = document.querySelector( '.js-tweet-error' );
-      tweetErrorBox.classList.add( 'u-hidden' );
-
-      const tweetForm = document.querySelector( '.tweet-content-form' );
-      tweetForm.classList.add( 'u-hidden' );
-
-      const navbar = document.querySelector( '.navbar');
-      navbar.classList.add( 'u-hidden' );
-
-    }
+    handleResponse( xhttp );
   };
-  */
 
   xhttp.onload = function() {
-    // do something to response
-    if ( this.readyState === 4 && this.status === 200 ) {
-      window.location.href = '/goodbye.html';
-    } else {
-      const loading = document.querySelector( '.step-4-share-it .icon-loading-animation' );
-      loading.classList.add( 'u-hidden' );
-
-      const tweetErrorBox = document.querySelector( '.js-tweet-error' );
-      tweetErrorBox.classList.remove( 'u-hidden' );
-
-      const tweetForm = document.querySelector( '.tweet-content-form' );
-      tweetForm.classList.add( 'u-hidden' );
-
-      const header = document.querySelector( '.header' );
-      header.classList.remove( 'u-light-background' );
-
-      const navbar = document.querySelector( '.navbar' );
-      navbar.classList.add( 'u-hidden' );
-    }
+    handleResponse( this );
   };
 }
 
