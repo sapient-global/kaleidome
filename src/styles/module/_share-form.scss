@@ -1,14 +1,20 @@
-.error,
-.error input,
-.error textarea,
-.error .characters-left-counter {
+.tweet-form-error,
+.tweet-form-error input,
+.tweet-form-error textarea {
   color: $error-color;
+}
+
+input,
+textarea {
+  &:focus {
+    background-color: $color-alabaster-grey;
+  }
 }
 
 .characters-left-counter {
   margin: $input-margin;
   display: inline-block;
-  margin: 5px 0 15px 0;
+  margin-top: 5px;
 }
 
 .tweet-thumbnail {

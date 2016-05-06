@@ -1,0 +1,20 @@
+{
+  "name": "kaleidoMe-server",
+  "version": "1.0.0",
+  "description": "The server of the kaleidoMe app",
+  "author": "Sapient Nitro Team Black XT Developers",
+  "main": "server.js",
+  "license": "GPL-2.0",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "multiparty": "^4.1.2",
+    "twit": "^2.2.3"
+  },
+  "engines": {
+    "node": "~5.8.0"
+  },
+  "engineStrict": true
+}

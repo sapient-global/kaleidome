@@ -1,0 +1,58 @@
+{
+  "index": {
+    "title": "Hi there!",
+    "welcomeText": "Welcome to KaleidoMe",
+    "description": "Have fun with your mates and create an awesome kaleidoscope with you in it!",
+    "step1": "Take a Selfie",
+    "step2": "Set your favourite kaleidoscope pattern",
+    "step3": "Share it on Twitter",
+    "start": "START",
+    "noStorage": "We will not store your photo, we will use it only to create a kaleidoscope"
+  },
+  "goodbye": {
+    "title": "awesome",
+    "thanks": "Thanks for playing with KaleidoMe",
+    "shared": "Your tweet has been shared",
+    "commentedCode": "Take a look at the code here:",
+    "githubLink": "Add github link here",
+    "githubLinkText": "Add github link here",
+    "orCareers": "Or visit our careers page:",
+    "playAgain": "PLAY AGAIN"
+  },
+  "step1record": {
+    "altTextCameraButton": "Take Photo"
+  },
+  "step2photo": {
+    "notSupported": "You are seeing this image because your device does not support yet MediaDevices.getUserMedia()"
+  },
+  "step3kaleidome": {
+    "title": "How it works!",
+    "description": "Slide your finger over the Kaleidoscope to generate new patterns",
+    "shareThen": "When you are ready, simply Share!"
+  },
+  "step4tweet": {
+    "defaultText": ", I am at #test and visited the @Sapientxt guys! ",
+    "maxChars": "120",
+    "textareaPlaceholder": "Enter your tweet message here",
+    "inputPlaceholder": "johnDoesTwitter",
+    "charsLeft": " Characters left",
+    "errorTitle": "Oops!",
+    "errorMessage": "We could not share your tweet",
+    "errorButton": "TRY AGAIN"
+  },
+
+  "global": {
+    "careersLink": "https://sapientnitro.de/careers",
+    "careersLinkText": "sapientNitro.de/careers",
+    "title": "KaleidoMe | SapientNitro at BTconf",
+    "description": "SapientNitro's Germany developers experiment with WebRTC",
+    "logoText": "Powered by"
+  },
+  "navbar": {
+    "cancel": "CANCEL",
+    "again": "AGAIN",
+    "kaleidome": "KALEIDOME!",
+    "share": "SHARE",
+    "tweet": "TWEET"
+  }
+}

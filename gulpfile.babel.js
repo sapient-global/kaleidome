@@ -22,6 +22,7 @@ const paths = {
   main: `${config.main}.js`,
   src: path.join( __dirname, 'src' ),
   dist: config.dist,
+  server: path.join( __dirname, 'server' ),
   bundleName: path.basename( config.main, path.extname( config.main ) )
 };
 
@@ -30,7 +31,7 @@ const paths = {
    ========================================================================== */
 
 function clean( done ) {
-  del( [ `${paths.dist}/*`,`!${paths.dist}/.git`,`!${paths.dist}/Dockerfile`,`!${paths.dist}/nginx.conf.sigil` ] ).then( () => done() );
+  del( [ `${paths.dist}/*`, `!${paths.dist}/.git`, `!${paths.dist}/Dockerfile`, `!${paths.dist}/nginx.conf.sigil` ] ).then( () => done() );
 }
 
 function onError() {
@@ -80,14 +81,24 @@ function sass() {
     .pipe( gulp.dest( paths.dist ) );
 }
 
-function html() {
-  return gulp.src( 'src/*.html' )
-    .pipe( gulp.dest( paths.dist ) );
+function jade() {
+  const locals = require( `${paths.src}/texts.json` );
+
+  gulp.src( `${paths.src}/html/*.jade` )
+    .pipe( $.jade( {
+      locals: locals
+    } ) )
+    .pipe( gulp.dest( './dist/' ) );
 }
 
 function copyImgs() {
   return gulp.src( `${paths.src}/images/*.png` )
     .pipe( gulp.dest( `${paths.dist}/images/` ) );
+}
+
+function copyServer() {
+  return gulp.src( `${paths.server}/**/*` )
+    .pipe( gulp.dest( `${paths.dist}/` ) );
 }
 
 function copyFonts() {
@@ -135,13 +146,15 @@ function serve() {
    Taks declarations
    ========================================================================== */
 
-gulp.task( 'html', html );
+gulp.task( 'jade', jade );
 
 gulp.task( 'copyImgs', copyImgs );
 
 gulp.task( 'copyFonts', copyFonts );
 
-gulp.task( 'copy', [ 'copyImgs', 'copyFonts' ] );
+gulp.task( 'copyServer', copyServer );
+
+gulp.task( 'copy', [ 'copyImgs', 'copyFonts', 'copyServer' ] );
 
 gulp.task( 'sass', sass );
 
@@ -164,14 +177,14 @@ gulp.task( 'bundle', bundleDev );
 
 gulp.task( 'bundleDev', [ 'lint' ], bundleDev );
 
-gulp.task( 'build', [ 'clean', 'sass', 'copy', 'html', 'bundleDist' ] );
+gulp.task( 'build', [ 'clean', 'sass', 'copy', 'jade', 'bundleDist' ] );
 
-gulp.task( 'build-dev', [ 'clean', 'html', 'copy', 'sass', 'bundleDev' ] );
+gulp.task( 'build-dev', [ 'clean', 'jade', 'copy', 'sass', 'bundleDev' ] );
 
 gulp.task( 'serve', function( cb ) {
   runSequence( 'clean', [ 'build-dev', 'watch' ], serve );
 } );
 
 gulp.task( 'watch', function() {
-  gulp.watch( `${paths.src}/**/*`, [ 'html', 'sass', 'bundle' ] );
+  gulp.watch( `${paths.src}/**/*`, [ 'jade', 'sass', 'bundle' ] );
 } );

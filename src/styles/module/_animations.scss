@@ -1,3 +1,5 @@
+$animation-duration: 10s;
+
 .icon-loading-animation {
   background-color: $brand-grey;
   width: $button-height;
@@ -6,17 +8,19 @@
   z-index: $zindex-loading-animation-container;
   overflow: hidden;
   position: relative;
+  perspective: 1000;
   top: 50%;
 
   .bg {
     background-color: $primary-color;
-    animation: animation-loading 6s;
+    animation: $animation-duration linear 0s animation-loading;
     animation-iteration-count: infinite;
     position: absolute;
     width: $button-height;
     height: $button-height;
     z-index: $zindex-loading-animation-waves;
     transform: translateY(100%);
+    transform-style: preserve-3d;
     top: 0;
     left: 0;
   }
@@ -24,9 +28,34 @@
   .icon {
     position: relative;
     z-index: $zindex-loading-animation-icon;
+    animation: ($animation-duration - 1) cubic-bezier(0, 0.25, 0.17, 1.23) 0s flip;
+    animation-iteration-count: infinite;
   }
 }
+@keyframes flip {
+  0%,
+  30%,
+  40%,
+  5%,
+  50%,
+  60%,
+  80%,
+  90% {
+    transform: rotateY(0deg);
+  }
 
+  95% {
+    transform: rotateY(90deg);
+  }
+
+  97% {
+    transform: rotateY(180deg);
+  }
+
+  100% {
+    transform: rotateY(90deg);
+  }
+}
 @keyframes animation-loading {
   0% {
     transform: translateY(100%);
@@ -37,7 +66,7 @@
   }
 
   10% {
-    transform: translateY(60%);
+    transform: translateY(70%);
   }
 
   15% {
@@ -45,83 +74,71 @@
   }
 
   20% {
-    transform: translateY(50%);
+    transform: translateY(70%);
   }
 
   25% {
-    transform: translateY(60%);
+    transform: translateY(50%);
   }
 
   30% {
-    transform: translateY(40%);
+    transform: translateY(60%);
   }
 
   35% {
-    transform: translateY(50%);
+    transform: translateY(45%);
   }
 
   40% {
-    transform: translateY(20%);
+    transform: translateY(27%);
   }
 
   45% {
-    transform: translateY(40%);
-  }
-
-  46% {
-    transform: translateY(10%);
-  }
-
-  47% {
-    transform: translateY(5%);
+    transform: translateY(37%);
   }
 
   50% {
-    transform: translateY(0);
-  }
-
-  52% {
-    transform: translateY(5%);
-  }
-
-  53% {
-    transform: translateY(10%);
-  }
-
-  55% {
-    transform: translateY(40%);
-  }
-
-  60% {
     transform: translateY(20%);
   }
 
+  52% {
+    transform: translateY(25%);
+  }
+
+  55% {
+    transform: translateY(12%);
+  }
+
+  60% {
+    transform: translateY(15%);
+  }
+
   65% {
-    transform: translateY(50%);
+    transform: translateY(7%);
   }
 
   70% {
-    transform: translateY(40%);
+    transform: translateY(10%);
   }
 
   75% {
-    transform: translateY(60%);
+    transform: translateY(5%);
   }
 
   80% {
-    transform: translateY(50%);
+    transform: translateY(0%);
   }
 
   85% {
-    transform: translateY(80%);
+    transform: translateY(0%);
   }
 
   90% {
-    transform: translateY(60%);
+    transform: translateY(80%);
   }
 
   95% {
-    transform: translateY(80%);
+    transform: translateY(90%);
   }
 
   100% {
