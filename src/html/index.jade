@@ -1,0 +1,16 @@
+extend ./layout/indexLayout.jade
+
+block content
+  section.content.content--no-nav--big-header
+    .u-full-size.u-center-vertically.content-box
+      h1.main-title.u-text-center.u-italic=index.title
+      h2.subtitle.u-text-center=index.welcomeText
+      .content-text-box
+        p.u-text-centers=index.description
+        ol
+          li=index.step1
+          li=index.step2
+          li=index.step3
+      a.btn.btn-raised.u-text-center(href='kaleidome.html')=index.start
+      small.u-text-center.non-storage-policy
+        i=index.noStorage

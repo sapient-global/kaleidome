@@ -1,6 +1,11 @@
 body {
   display: flex;
   flex-direction: column;
+  height: 100vh;
+}
+
+.input-focused-body-min-height {
+  min-height: $body-min-height-input-focused;
 }
 
 .header {
@@ -32,6 +37,10 @@ article {
 
 .content--no-nav--big-header {
   height: $content-height--no-nav--big-header;
+}
+
+.content-kaleidoscope {
+  min-height: $content-min-height;
 }
 
 .navbar {

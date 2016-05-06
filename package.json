@@ -25,6 +25,7 @@
   "homepage": "https://tools.sapient.com/confluence/display/ETD/Beyond+Tellerand",
   "devDependencies": {
     "autoprefixer": "^6.3.3",
+    "async": "latest",
     "babel-core": "^6.3.26",
     "babel-eslint": "^4.1.6",
     "babel-loader": "^6.2.0",
@@ -45,6 +46,7 @@
     "gulp-eslint": "^1.1.1",
     "gulp-filter": "^3.0.0",
     "gulp-htmlmin": "^1.3.0",
+    "gulp-jade": "^1.1.0",
     "gulp-jscs": "^3.0.0",
     "gulp-load-plugins": "^1.2.0",
     "gulp-plumber": "^1.0.1",

@@ -1,39 +1,50 @@
+import texts from '../texts.json';
+
+const TWEET_TEXT = texts.step4tweet.defaultText;
+const TWEET_MAX_CHARS = parseInt( texts.step4tweet.maxChars, 10 );
+
+function handleResponse( response ) {
+  if ( response.readyState === 4 && response.status === 200 ) {
+    window.location.href = '/goodbye.html';
+
+  } else if ( response.readyState !== 4 && response.status !== 200 ) {
+    const loading = document.querySelector( '.step-4-share-it .icon-loading-animation' );
+    loading.classList.add( 'u-hidden' );
+
+    const tweetErrorBox = document.querySelector( '.js-tweet-error' );
+    tweetErrorBox.classList.remove( 'u-hidden' );
+
+    const tweetForm = document.querySelector( '.tweet-content-form' );
+    tweetForm.classList.add( 'u-hidden' );
+
+    const header = document.querySelector( '.header' );
+    header.classList.remove( 'u-light-background' );
+
+    const navbar = document.querySelector( '.navbar' );
+    navbar.classList.add( 'u-hidden' );
+  }
+}
+
 function request( data ) {
   const xhttp = new XMLHttpRequest();
 
-  xhttp.open( 'POST', 'https://localhost:1947/tweet', true );
+  xhttp.open( 'POST', '/tweet', true );
+
   xhttp.send( data );
 
   xhttp.onreadystatechange = () => {
-    if ( xhttp.readyState === 4 && xhttp.status === 200 ) {
-      window.location.href = '/goodbye.html';
-    } else {
-      const tweetErrorBox = document.querySelector( '.js-tweet-error' );
-      tweetErrorBox.classList.remove( 'u-hidden' );
-
-      const tweetForm = document.querySelector( '.tweet-content-form' );
-      tweetForm.classList.add( 'u-hidden' );
-
-      const header = document.querySelector( '.header' );
-      header.classList.remove( 'u-light-background' );
-    }
+    handleResponse( xhttp );
   };
 
   xhttp.onload = function() {
-    // do something to response
-    console.log( this.responseText );
+    handleResponse( this );
   };
 }
-
-const TWEET_TEXT = ', I am at the #eventHashtag! Amazing, @sapientxt is also here!';
-const TWEET_MAX_CHARS = 120;
 
 function _getTweetText() {
   const tweetTextarea = document.querySelector( '.js-tweet-text' );
   const username = document.querySelector( '.js-username' );
-
   const tweetText = `@${username.value}` + TWEET_TEXT + ` ${tweetTextarea.value}`;
-  console.log( tweetText );
   return tweetText;
 }
 
@@ -46,6 +57,25 @@ function _getTweetMedia() {
 }
 
 function _shareImage() {
+
+  const loading = document.querySelector( '.step-4-share-it .icon-loading-animation' );
+  loading.classList.remove( 'u-hidden' );
+
+  const header = document.querySelector( '.header' );
+  header.classList.remove( 'u-light-background' );
+
+  const image = document.querySelector( '.js-image-to-share' );
+  image.classList.add( 'u-hidden' );
+
+  const tweetErrorBox = document.querySelector( '.js-tweet-error' );
+  tweetErrorBox.classList.add( 'u-hidden' );
+
+  const tweetForm = document.querySelector( '.tweet-content-form' );
+  tweetForm.classList.add( 'u-hidden' );
+
+  const navbar = document.querySelector( '.navbar' );
+  navbar.classList.add( 'u-hidden' );
+
   const imageData = _getTweetMedia();
   const tweetText = _getTweetText();
 
@@ -67,40 +97,53 @@ function _setCharsLeft() {
 }
 
 function _checkCharsLeft() {
-  const tweetButton = document.querySelector( '.js-button-tweet' );
   const shareContainer = document.querySelector( '.js-tweet-content' );
-  const data = new FormData();
 
   if ( _getCharsLeft() < 0 ) {
-    if ( !shareContainer.classList.contains( 'error' ) ) {
-      shareContainer.classList.add( 'error' );
+    if ( !shareContainer.classList.contains( 'tweet-form-error' ) ) {
+      shareContainer.classList.add( 'tweet-form-error' );
     }
-    tweetButton.disabled = true;
   } else {
-    shareContainer.classList.remove( 'error' );
-    tweetButton.disabled = false;
+    shareContainer.classList.remove( 'tweet-form-error' );
   }
-
-  data.append( 'tweetText', tweetText );
-  data.append( 'imageData', imageData );
-
-  request( data );
 }
 
 function init() {
   const tweetButton = document.querySelector( '.js-button-tweet' );
-  const tweetContent = document.querySelector( '.js-tweet-content' );
+  const shareContainer = document.querySelector( '.js-tweet-content' );
+  const usernameInput = shareContainer.querySelector( '.js-username' );
+  const inputs = shareContainer.querySelectorAll( '.js-input' );
+  const body = document.querySelector( 'body' );
 
-  tweetContent.querySelector( '.js-message' ).innerHTML = TWEET_TEXT;
+  for ( let i = 0; i < inputs.length; i++ ) {
+    const currentInput = inputs[ i ];
+    currentInput.addEventListener( 'focus', () => {
+      body.classList.add( 'input-focused-body-min-height' );
+    } );
 
-  tweetContent.querySelector( 'input' ).addEventListener( 'input', ( e ) => {
-    _setCharsLeft( e );
-  } );
+    currentInput.addEventListener( 'blur', () => {
+      body.classList.remove( 'input-focused-body-min-height' );
+    } );
+
+    currentInput.addEventListener( 'input', ( e ) => {
+      _setCharsLeft( e );
+
+      if ( ( _getCharsLeft() > 0 && usernameInput.value.length > 0 ) || !shareContainer.classList.contains( 'tweet-form-error' ) ) {
+        tweetButton.disabled = false;
+      } else {
+        tweetButton.disabled = true;
+      }
+    } );
+  }
 
   tweetButton.addEventListener( 'click', ( e ) => {
     e.preventDefault();
-    _shareImage( e );
+    if ( usernameInput.value.length > 0 ) {
+      _shareImage( e );
+    }
   } );
+
+  _setCharsLeft();
 }
 
 export default {

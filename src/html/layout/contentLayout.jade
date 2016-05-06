@@ -1,0 +1,9 @@
+doctype html
+html(lang=en)
+  include ./../partials/head.jade
+  body
+    include ./../partials/header.jade
+    section.content.content-kaleidoscope.content--no-nav.js-all-content
+      block steps
+    include ./../partials/navigation.jade
+    script(async='', defer='', src='btconf-2016.js')

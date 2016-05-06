@@ -18,41 +18,34 @@ module.exports = function( req, res, fields, files ) {
   const tweetText = fields.tweetText;
   const tweetImageData = fields.imageData;
 
-  client.post( 'media/upload', {
-    media_data: tweetImageData
-  }, function( error, media, response ) {
-    if ( !error ) {
-      // If successful, a media object will be returned.
-      console.log( media );
-      // Lets tweet it
-      const status = {
-        status: tweetText,
-        media_ids: [ media.media_id_string ]
-      };
-  // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
-      client.post( 'statuses/update', status, function( error, data, response ) {
+  async.waterfall([
+    function(callback){
+      client.post( 'media/upload', {
+        media_data: tweetImageData
+      }, function( error, media, response ) {
+
         if ( !error ) {
-          console.log( 'data', data );
-
-          client.get( 'statuses/home_timeline', {
-            exclude_replies: true,
-            count: 10
-          }, function( error, data, response ) {
-            if ( !error ) {
-              //show the last 10 tweet (?)
-              console.log( 'data', data.length );
-            }
-          } );
-        } else {
-          console.log( error );
+          var status = {
+            status: tweetText,
+            media_ids: [ media.media_id_string ]
+          };
+          callback(null, status);
         }
-      } );
-    } else {
-      console.error( error );
+      });
+      // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
+    },
+    function(status, callback){
+      client.post( 'statuses/update', status, function( error, data, response ) {
+          callback(error, data, response);
+      });
     }
-  } );
-
-  res.send( 'OK' );
+  ], function(error, data, response) {
+    if(!error){
+      res.status( 200 ).send( data );
+    }else{
+      res.status( 500 ).send( error );
+    }
+  });
 };
 
 //https://dev.twitter.com/rest/reference/post/statuses/update_with_media

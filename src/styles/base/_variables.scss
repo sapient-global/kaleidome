@@ -44,9 +44,11 @@ $navbar-height: 48px;
 $header-height: 28px;
 $header-height--no-nav: 20vh;
 $content-height: 80vh;
-$content-height--no-nav: 94vh;
+$content-min-height: 350px;
+$content-height--no-nav: 87vh;
 $content-height--no-nav--big-header: 80vh;
 $global-padding: 1.3%;
+$body-min-height-input-focused: 530px;
 
 // ==========================================================================
 // z-index
@@ -85,7 +87,7 @@ $input-success-color: $success-color;
 $input-focus-color: $secondary-color;
 $input-invalid-border: 1px solid $input-error-color;
 $input-font-size: 1rem;
-$input-margin: 0 0 15px 0;
+$input-margin: 5px 0 15px 0;
 $input-padding: 0 $global-padding;
 $input-transition: all .3s;
 $placeholder-text-color: lighten($dark-grey, 20%);
@@ -97,4 +99,4 @@ $navbar-font-color: $brand-white;
 $navbar-brand-font-size: 2.1rem;
 
 $kaleidoscope-height: 270px;
-$kaleidoscope-height--thumbnail: 210px;
+$kaleidoscope-height--thumbnail: 170px;

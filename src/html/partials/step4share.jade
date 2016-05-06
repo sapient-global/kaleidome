@@ -1,0 +1,19 @@
+article.step-4-share-it.u-top-vertically.u-full-size.u-hidden
+  div.tweet-content-form.js-tweet-content
+    span @
+    input.js-username.js-input(type='text', name='username', required='', placeholder=step4tweet.inputPlaceholder)
+    span.js-message
+      | #{step4tweet.defaultText}
+    textarea.js-tweet-text.js-input.u-top-spacer--half(placeholder=step4tweet.textareaPlaceholder, name='tweet-text')
+    small.characters-left-counter
+      span.js-characters-left=step4tweet.maxChars
+      | #{step4tweet.charsLeft}
+  include ./loadingAnimation.jade
+  +loading('u-hidden')
+  div.js-tweet-error.u-bottom-spacer.u-top-spacer.u-text-center.u-hidden
+    h2
+      | #{step4tweet.errorTitle}
+    p=step4tweet.errorMessage
+    a.btn.btn-raised.u-text-center(href='index.html')
+      | #{step4tweet.errorButton}
+  img.tweet-thumbnail.responsive-img.js-image-to-share(src='#', alt='Your kaleidoscope')
