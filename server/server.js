@@ -62,10 +62,15 @@ app.get( '/', ( req, res ) => {
 } );
 
 app.post( '/tweet', function( req, res ) {
-  var formData = new multiparty.Form();
+  let formData = new multiparty.Form();
+  const isTweetEnabled = isProd() ? process.env.TWEET_ENABLED : true;
 
-  formData.parse( req, function( err, fields, files ) {
-    tweetRoute( req, res, fields, files );
-  } );
-
+  if ( isTweetEnabled ) {
+    formData.parse( req, function( err, fields, files ) {
+      tweetRoute( req, res, fields, files );
+    } );
+  } else {
+    res.statusCode = 503;
+    res.statusMessage = 'Tweet feature is disabled';
+  }
 } );

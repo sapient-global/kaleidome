@@ -1,6 +1,7 @@
 'use strict';
 
 import kaleidoscope from './kaleidoscope.js';
+import isAConferenceDay from './libs/isAConferenceDay.js';
 
 function isUserMediaSupported() {
   return ( navigator.mediaDevices.getUserMedia !== undefined );
@@ -23,6 +24,7 @@ function init() {
   const header = document.querySelector( '.header' );
   const tweetError = document.querySelector( '.js-tweet-error' );
   const tweetContent = document.querySelector( '.js-tweet-content' );
+  const tweetNotEnabled = document.querySelector( '.js-tweet-disabled' );
 
   const buttonPhoto = document.querySelector( '.js-button-photo' );
   const buttonAgain = document.querySelector( '.js-button-again' );
@@ -88,8 +90,18 @@ function init() {
   //Step 3: Write tweet and tweet
   buttonShare.addEventListener( 'click', () => {
     buttonShare.classList.add( 'u-hidden' );
+
+    if ( isAConferenceDay.test( new Date() ) ) {
+      tweetNotEnabled.classList.add( 'u-hidden' );
+      tweetContent.classList.remove( 'u-hidden' );
+      header.classList.add( 'u-light-background' );
+    } else {
+      tweetNotEnabled.classList.remove( 'u-hidden' );
+      tweetContent.classList.add( 'u-hidden' );
+      buttonTweet.disabled = true;
+    }
+
     buttonTweet.classList.remove( 'u-hidden' );
-    header.classList.add( 'u-light-background' );
 
     step3KaleidoscopeContainer.classList.add( 'u-hidden' );
     step4ShareIt.classList.remove( 'u-hidden' );
