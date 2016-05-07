@@ -71,6 +71,7 @@ function init() {
 
   //Ensure that Pointer can be used
   const moveEvent = ( isPointer.test() ) ? 'pointermove' : 'touchmove';
+
   //Test for mobile
   const pointerMove = ( isMobile.test() ) ? moveEvent : 'mousemove';
 
