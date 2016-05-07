@@ -20,15 +20,15 @@
 
 @font-face {
   font-family: 'sapientCentroSlab';
-  src: url($fonts-path + '/centro-slab-sapient/sapientcentroslab-Ublack.eot');
-  src: url($fonts-path + '/centro-slab-sapient/sapientcentroslab-Ublack.eot?#iefix') format('embedded-opentype'), url($fonts-path + '/centro-slab-sapient/sapientcentroslab-Ublack.woff2') format('woff2'), url($fonts-path + '/centro-slab-sapient/sapientcentroslab-Ublack.woff') format('woff'), url($fonts-path + '/centro-slab-sapient/sapientcentroslab-Ublack.ttf') format('truetype');
+  src: url($fonts-path + '/centro-slab-sapient/sapientcentroslab-ublack.eot');
+  src: url($fonts-path + '/centro-slab-sapient/sapientcentroslab-ublack.eot?#iefix') format('embedded-opentype'), url($fonts-path + '/centro-slab-sapient/sapientcentroslab-ublack.woff2') format('woff2'), url($fonts-path + '/centro-slab-sapient/sapientcentroslab-ublack.woff') format('woff'), url($fonts-path + '/centro-slab-sapient/sapientcentroslab-ublack.ttf') format('truetype');
   font-weight: 800;
 }
 
 
 @font-face {
   font-family: 'sapientCentroSlab';
-  src: url($fonts-path + '/centro-slab-sapient/sapientcentroslab-UblackItalic.eot');
-  src: url($fonts-path + '/centro-slab-sapient/sapientcentroslab-UblackItalic.eot?#iefix') format('embedded-opentype'), url($fonts-path + '/centro-slab-sapient/sapientcentroslab-UblackItalic.woff2') format('woff2'), url($fonts-path + '/centro-slab-sapient/sapientcentroslab-UblackItalic.woff') format('woff'), url($fonts-path + '/centro-slab-sapient/sapientcentroslab-UblackItalic.ttf') format('truetype');
+  src: url($fonts-path + '/centro-slab-sapient/sapientcentroslab-ublackitalic.eot');
+  src: url($fonts-path + '/centro-slab-sapient/sapientcentroslab-ublackitalic.eot?#iefix') format('embedded-opentype'), url($fonts-path + '/centro-slab-sapient/sapientcentroslab-ublackitalic.woff2') format('woff2'), url($fonts-path + '/centro-slab-sapient/sapientcentroslab-ublackitalic.woff') format('woff'), url($fonts-path + '/centro-slab-sapient/sapientcentroslab-ublackitalic.ttf') format('truetype');
   font-style: italic;
 }
