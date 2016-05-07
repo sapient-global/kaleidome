@@ -98,8 +98,17 @@ when connected on the same wifi
 ``sh
 $ gulp build
 ``
-
 Icons:
+``html
 <div>Icons made by <a href="http://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+``
 
 http://www.flaticon.com/packs/multimedia-collection
+
+### Configuring env variables in dokker
+
+$ ssh dokku@sapient.space config wow
+
+You can set a config variable by running
+
+$ ssh dokku@sapient.space config:set wow CONFIG_VARIABLE=value ANOTHER_CONFIG=value

@@ -56,8 +56,7 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
       }, {
         test: /\.scss$/,
         loader: DEBUG ?
-          'style!css?postcss-loader!sass?sourceMap!' :
-          ExtractTextPlugin.extract( 'style-loader', 'css?sourceMap!postcss-loader!sass?sourceMap!' )
+          'style!css?postcss-loader!sass?sourceMap!' : ExtractTextPlugin.extract( 'style-loader', 'css?sourceMap!postcss-loader!sass?sourceMap!' )
       },
       // // Load images
       {
@@ -72,12 +71,10 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
       }, {
         test: /\.svg/,
         loader: 'url-loader?limit=10000&mimetype=image/svg'
-      },
-      {
+      }, {
         test: /\.(woff|woff2|eot|ttf|svg)$/,
         loader: 'file-loader?limit=100000&name=fonts/[name].[ext]'
-      },
-      {
+      }, {
         test: /\.json$/,
         loader: 'json-loader'
       }
@@ -98,6 +95,22 @@ export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
 
     // Aggressively remove duplicate modules:
     new webpack.optimize.DedupePlugin(),
+
+    // This plugin sends to the client the __DEV__ variable that
+    // tells the client in which environment we are running.
+    // Here we are checking aginst debug, because this constant is send to webpack
+    // as true when we are running the dev evironment. It is set to false when
+    // we are creating the bundle for the production environment.
+    // So if in your local computer you run:
+    // $gulp build
+    // $node dist/server.js
+    // The client will be running as if you were in production
+    // (the post requests are made to /tweet instead of the full url of the node server)
+    // But the server will be running in development mode. (The ssl set with a locally
+    // self signed certificate. In the production environment we have a fully valid one)
+    new webpack.DefinePlugin( {
+      __DEV__: JSON.stringify( JSON.parse( DEBUG || 'false' ) )
+    } ),
 
     // Write out CSS bundle to its own file:
     new ExtractTextPlugin( 'style.css', {

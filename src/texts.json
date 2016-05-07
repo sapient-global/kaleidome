@@ -13,9 +13,9 @@
     "title": "awesome",
     "thanks": "Thanks for playing with KaleidoMe",
     "shared": "Your tweet has been shared",
-    "commentedCode": "Take a look at the code here:",
-    "githubLink": "Add github link here",
-    "githubLinkText": "Add github link here",
+    "commentedCode": "You can check the commented code on github by following this link",
+    "githubLink": "https://github.com/sapient-global/kaleidome",
+    "githubLinkText": "github.com/sapient-global/kaleidome",
     "orCareers": "Or visit our careers page:",
     "playAgain": "PLAY AGAIN"
   },
@@ -37,10 +37,11 @@
     "inputPlaceholder": "johnDoesTwitter",
     "charsLeft": " Characters left",
     "errorTitle": "Oops!",
-    "errorMessage": "We could not share your tweet",
-    "errorButton": "TRY AGAIN"
+    "errorSubtitle": "Something happened",
+    "errorMessage": "We could not share your tweet, the tweet feature is either disabled or we could not connect to twitter",
+    "tweetNotEnabled": "Tweeting is disabled at the moment",
+    "tweetDisabledText": "You can share your KaleidoMe only during the Beyond Tellerand dates, between 09:00 and 18:00"
   },
-
   "global": {
     "careersLink": "https://sapientnitro.de/careers",
     "careersLinkText": "sapientNitro.de/careers",

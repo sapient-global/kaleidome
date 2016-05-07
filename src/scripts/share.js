@@ -27,8 +27,15 @@ function handleResponse( response ) {
 
 function request( data ) {
   const xhttp = new XMLHttpRequest();
+  // This variable is made available in the webpack.config file.
+  // Check the plugins section to get to know more about it.
+  // In a nutshell: It allow us to know if we are in production or not.
+  // If we are in development, then we want to make the request to our node server
+  // running standalone. The app in dev environment is served via webpack, because it watches
+  // our changes.
+  const remoteUrl = ( __DEV__ ) ? 'https://localhost:1947' : '';
 
-  xhttp.open( 'POST', '/tweet', true );
+  xhttp.open( 'POST', `${remoteUrl}/tweet`, true );
 
   xhttp.send( data );
 
