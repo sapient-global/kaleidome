@@ -28,7 +28,7 @@ function handleResponse( response ) {
 function request( data ) {
   const xhttp = new XMLHttpRequest();
 
-  xhttp.open( 'POST', 'https://localhost:1947/tweet', true );
+  xhttp.open( 'POST', '/tweet', true );
 
   xhttp.send( data );
 
