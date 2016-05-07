@@ -22,6 +22,10 @@ function isProd() {
   return environment === 'production';
 };
 
+function startedServerCallback() {
+  console.log( `Server running on: ${location} [environment: ${environment}]` );
+}
+
 /* ==========================================================================
    Setup the server config
    ========================================================================== */
@@ -32,18 +36,23 @@ app.use( express.static( opts.baseDir ) );
 /* ==========================================================================
    Init the server
    ========================================================================== */
+if ( !isProd() ) {
+  const sslConf = {
+    key: fs.readFileSync( './server/server.key' ),
+    cert: fs.readFileSync( './server/server.crt' ),
+    requestCert: false,
+    rejectUnauthorized: false
+  };
 
-// const sslConf = {
-//   key: fs.readFileSync( './server/server.key' ),
-//   cert: fs.readFileSync( './server/server.crt' ),
-//   requestCert: isProd() ? true : false,
-//   rejectUnauthorized: isProd() ? true : false
-// };
+  const server = https.createServer( sslConf, app );
+  server.listen( opts.port, opts.host, startedServerCallback );
+  
+} else {
 
-// const server = https.createServer( sslConf, app );
-app.listen( opts.port, opts.host, () => {
-  console.log( `Server running on: ${location} [environment: ${environment}]` );
-} );
+  app.listen( opts.port, opts.host, startedServerCallback );
+}
+
+
 
 /* ==========================================================================
    Routes
