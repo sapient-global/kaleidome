@@ -24,8 +24,8 @@ module.exports = function( req, res, fields, files ) {
    *  Let's do this, take what we have produced here, and give it to the next stage...
    *  and so on and so forth until we are done.
    */
-  async.waterfall([
-    function( callback ){
+  async.waterfall( [
+    function( callback ) {
       /*
        *  so, let's first upload the media (the image in our case).
        */
@@ -36,10 +36,10 @@ module.exports = function( req, res, fields, files ) {
         if ( !error ) {
           callback( null, media );
         }
-      });
+      } );
       // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
     },
-    function( media, callback ){
+    function( media, callback ) {
       /*
        *  'media' is the JSON object returned from the previous HTTP POST call,
        *  from there we get the media ids to add to our tweet together with the
@@ -50,10 +50,10 @@ module.exports = function( req, res, fields, files ) {
         media_ids: [ media.media_id_string ]
       };
       client.post( 'statuses/update', status, function( error, data, response ) {
-          callback( null, error, data, response );
-      });
+        callback( null, error, data, response );
+      } );
     },
-    function( error, data, response, callback ){
+    function( error, data, response, callback ) {
       /*
        *  and than we add it to our twitter collection.
        *
@@ -68,18 +68,18 @@ module.exports = function( req, res, fields, files ) {
       };
 
       client.post( 'collections/entries/add', params, function( error, data, response ) {
-          callback( error, data, response );
-      });
+        callback( error, data, response );
+      } );
     }
   ], function( error, data, response ) {
     /*
      *  at the very end, we can finally respond by sending back the response
      *  status and the response information
      */
-    if(!error){
+    if ( !error ) {
       res.status( 200 ).send( data );
-    }else{
+    } else {
       res.status( 500 ).send( error );
     }
-  });
+  } );
 };
