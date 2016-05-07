@@ -74,7 +74,6 @@ function init() {
   //Test for mobile
   const pointerMove = ( isMobile.test() ) ? moveEvent : 'mousemove';
 
-
   /*
    *  On Move calculate some stuff to get numbers that
    *  Change the Kaleidoscope

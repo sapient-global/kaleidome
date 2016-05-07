@@ -33,15 +33,15 @@ app.use( express.static( opts.baseDir ) );
    Init the server
    ========================================================================== */
 
-const sslConf = {
-  key: fs.readFileSync( './server/server.key' ),
-  cert: fs.readFileSync( './server/server.crt' ),
-  requestCert: isProd() ? true : false,
-  rejectUnauthorized: isProd() ? true : false
-};
+// const sslConf = {
+//   key: fs.readFileSync( './server/server.key' ),
+//   cert: fs.readFileSync( './server/server.crt' ),
+//   requestCert: isProd() ? true : false,
+//   rejectUnauthorized: isProd() ? true : false
+// };
 
-const server = https.createServer( sslConf, app );
-server.listen( opts.port, opts.host, () => {
+// const server = https.createServer( sslConf, app );
+app.listen( opts.port, opts.host, () => {
   console.log( `Server running on: ${location} [environment: ${environment}]` );
 } );
 
