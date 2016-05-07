@@ -31,7 +31,7 @@ const paths = {
    ========================================================================== */
 
 function clean( done ) {
-  del( [ `${paths.dist}/*`, `!${paths.dist}/.git`, `!${paths.dist}/Dockerfile`, `!${paths.dist}/nginx.conf.sigil` ] ).then( () => done() );
+  del( [ `${paths.dist}/*`, `!${paths.dist}/.git` ] ).then( () => done() );
 }
 
 function onError() {

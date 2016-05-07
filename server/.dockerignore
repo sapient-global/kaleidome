@@ -1,0 +1,4 @@
+/node_modules
+.git
+server.key
+server.crt
