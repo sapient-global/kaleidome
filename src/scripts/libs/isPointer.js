@@ -4,6 +4,9 @@
 
 export default {
   test() {
-    return window.navigator.pointerEnabled;
+    if ( window.PointerEvent ) {
+      return true;
+    }
+    return false;
   }
 };

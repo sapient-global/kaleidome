@@ -10,10 +10,34 @@ article.step-4-share-it.u-top-vertically.u-full-size.u-hidden
       | #{step4tweet.charsLeft}
   include ./loadingAnimation.jade
   +loading('u-hidden')
-  div.js-tweet-error.u-bottom-spacer.u-top-spacer.u-text-center.u-hidden
-    h2
+  div.js-tweet-disabled.u-bottom-spacer.u-top-spacer.u-text-center.u-hidden
+    h1.main-title.u-text-center.u-italic
       | #{step4tweet.errorTitle}
-    p=step4tweet.errorMessage
-    a.btn.btn-raised.u-text-center(href='index.html')
-      | #{step4tweet.errorButton}
+    h2.subtitle.u-text-center
+      | #{step4tweet.tweetNotEnabled}
+    div.content-text-box
+      p.u-text-center
+        | #{step4tweet.tweetDisabledText}
+        br
+        | #{goodbye.commentedCode}
+      a.content-link-centered(href='#{goodbye.githubLink}')=goodbye.githubLinkText
+      p.u-text-center=goodbye.orCareers
+      a.u-bottom-top-small-spacer(href=global.careersLink)
+        | #{global.careersLinkText}
+    a.btn.btn-raised.u-text-center(href='index.html')=goodbye.playAgain
+  div.js-tweet-error.u-bottom-spacer.u-top-spacer.u-text-center.u-hidden
+    h1.main-title.u-text-center.u-italic
+      | #{step4tweet.errorTitle}
+    h2.subtitle.u-text-center
+      | #{step4tweet.errorSubtitle}
+    div.content-text-box
+      p.u-text-center
+        | #{step4tweet.errorMessage}
+        br
+        | #{goodbye.commentedCode}
+      a.content-link-centered(href='#{goodbye.githubLink}')=goodbye.githubLinkText
+      p.u-text-center=goodbye.orCareers
+      a.u-bottom-top-small-spacer(href=global.careersLink)
+        | #{global.careersLinkText}
+    a.btn.btn-raised.u-text-center(href='index.html')=goodbye.playAgain
   img.tweet-thumbnail.responsive-img.js-image-to-share(src='#', alt='Your kaleidoscope')

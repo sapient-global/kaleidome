@@ -46,7 +46,7 @@ function updateKaledo( kaleidoscope ) {
 }
 
 function updateKaleidoscopeShape( kaleidoscope ) {
-  animationframeID = requestAnimationFrame( updateKaledo.bind( this, kaleidoscope ) );
+  animationframeID = window.requestAnimationFrame( updateKaledo.bind( this, kaleidoscope ) );
 };
 
 function init() {
@@ -71,27 +71,24 @@ function init() {
 
   //Ensure that Pointer can be used
   const moveEvent = ( isPointer.test() ) ? 'pointermove' : 'touchmove';
-  const stopEvent = ( isPointer.test() ) ? 'pointerup' : 'touchend';
 
+  //Test for mobile
   const pointerMove = ( isMobile.test() ) ? moveEvent : 'mousemove';
-  const pointerStop = ( isMobile.test() ) ? stopEvent : 'mousestop';
 
-  kaleidoscopeContainer.addEventListener( pointerStop, ( e ) => {
-    animationframeID = cancelAnimationFrame( animationframeID );
-  } );
-
+  /*
+   *  On Move calculate some stuff to get numbers that
+   *  Change the Kaleidoscope
+   */
   kaleidoscopeContainer.addEventListener( pointerMove, ( e ) => {
-    const cx = window.innerWidth / 2;
-    const cy = window.innerHeight / 2;
     const dx = e.pageX / window.innerWidth;
     const dy = e.pageY / window.innerHeight;
-    const hx = dx - 0.5;
-    const hy = dy - 0.5;
+    const hx = dx * 0.5;
+    const hy = dy * 0.5;
     options.tx = hx * kaleidoscope.radius * -2;
     options.ty = hy * kaleidoscope.radius * 2;
     options.tr = Math.atan2( hy, hx );
     updateKaleidoscopeShape( kaleidoscope );
-  }, false );
+  } );
 }
 
 export default {
