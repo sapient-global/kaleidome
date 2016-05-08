@@ -1,5 +1,7 @@
+// We could have done this with vanillaJS also
+// but the logic behind date comparison can be quite tricky,
+// so we save lines of code by using momentJS
 import moment from 'moment';
-import range from 'moment-range';
 
 export default {
   test( now ) {

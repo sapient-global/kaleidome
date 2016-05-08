@@ -1,6 +1,6 @@
 {
   "name": "btconf-2016",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A kaleidoscope app for BT2016",
   "main": "dist/btconf-2016.js",
   "scripts": {
@@ -14,15 +14,15 @@
   },
   "engineStrict": true,
   "repository": {
-    "type": "stash",
-    "url": "https://tools.sapient.com/stash/scm/etde/btconf-2016.git"
+    "type": "git",
+    "url": "https://github.com/sapient-global/kaleidome"
   },
   "author": "Sapient Nitro Team Black XT Developers",
   "license": "GPL-2.0",
   "bugs": {
-    "url": "https://tools.sapient.com/confluence/display/ETD/Beyond+Tellerand"
+    "url": "https://github.com/sapient-global/kaleidome"
   },
-  "homepage": "https://tools.sapient.com/confluence/display/ETD/Beyond+Tellerand",
+  "homepage": "https://wow.sapient.space",
   "devDependencies": {
     "async": "latest",
     "autoprefixer": "^6.3.3",

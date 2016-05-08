@@ -57,7 +57,9 @@ module.exports = function( req, res, fields, files ) {
     },
     function( error, data, response, callback ) {
       /*
-       *  and than we add it to our twitter collection.
+       *  and than we add it to our twitter collection, so
+       *  the tweets are displayed in our timeline.html screen in a nice
+       *  twitter wall
        *
        *  NOTE:
        *  for some reason you MUST prefix your collection id with 'custom-' it

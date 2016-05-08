@@ -1,9 +1,34 @@
-'use strict';
+/*
+  In the KaleidoMe page, we have a section with four articles.
+  Each one is a step of the app.
+  Below there is a navigation bar that allows you go further of start again.
+  Each time you tap on a button of the navigation bar, to go to the next screen
+  The listeners in this file will toggle the visibility of the elements of the next screen,
+  and its next step button.
+
+  When you click on the KalidoMe button, the kaleidoscope module will be initialized,
+  when we do that, the kaleidoscope will be generated.
+ */
 
 import kaleidoscope from './kaleidoscope.js';
+// This is a mini lib with moment.js to check if today is a day in which BTconf is happening
+// if so, then the tweet feature is enabled. Otherwise, well, is not.
 import isAConferenceDay from './libs/isAConferenceDay.js';
+// Safari does not support WebRTC... Infinite Sadness.
 import isWebRTCsupported from './libs/isWebRTCsupported.js';
 
+/**
+ * This function is called when you tap on the take photo button
+ * or when the webRTC is not supported, in which case we just dont show the first step.
+ *
+ * @param  {domElement} buttonKaleidoMe
+ * @param  {domElement} buttonAgain
+ * @param  {domElement} step1TakePhoto
+ * @param  {domElement} step2ReviewPhoto
+ * @param  {domElement} navbar
+ * @param  {domElement} content   container of the four steps
+ *
+ */
 function hideVideoScreen( buttonKaleidoMe, buttonAgain, step1TakePhoto, step2ReviewPhoto, navbar, content ) {
   buttonKaleidoMe.classList.remove( 'u-hidden' );
   buttonAgain.classList.remove( 'u-hidden' );
@@ -14,7 +39,19 @@ function hideVideoScreen( buttonKaleidoMe, buttonAgain, step1TakePhoto, step2Rev
   step2ReviewPhoto.classList.remove( 'u-hidden' );
 }
 
+/**
+ * Initialization and setup of the event listeners
+ */
 function init() {
+  // We are using the js- prefix for the buttons and some elements.
+  // Now that I am adding these comments, I would say that it would be more consistent
+  // to use it for all the selectors. One idea to keep in mind for future projects.
+  // but the advantage of using the 'js-' prefix, is that you can change your dom element
+  // as you wish, or even the CSS class that you apply to your element. Your JS wont break.
+  // This goes particularly well with projects in which you keep styles short by adding lots of classes
+  // to a DOMElement
+  //
+  // Note 2: the DOM elements wont change, therefore we use const :)
   const step1TakePhoto = document.querySelector( '.step-1-take-photo' );
   const step2ReviewPhoto = document.querySelector( '.step-2-review-photo' );
   const step3KaleidoscopeContainer = document.querySelector( '.step-3-play-with-kaleidoscope' );
@@ -98,7 +135,8 @@ function init() {
     step3KaleidoscopeContainer.classList.remove( 'u-hidden' );
   } );
 
-  //Step 3: Write tweet and tweet
+  //Step 3: Write tweet and tweet... Or show a screen with a preview
+  //of the kaleidoscope, so people can download it
   buttonShare.addEventListener( 'click', () => {
     buttonShare.classList.add( 'u-hidden' );
 
@@ -120,6 +158,13 @@ function init() {
     step4ShareIt.classList.remove( 'u-hidden' );
   } );
 };
+
+/*
+  This is the new Object Literal syntax of ES2015, normally in ES5, you would Write
+  module.exports = {
+    init: init
+  }
+*/
 
 export default {
   init

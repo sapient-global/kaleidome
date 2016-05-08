@@ -1,8 +1,15 @@
 import texts from '../texts.json';
+import isMobile from './libs/isMobile.js';
 
 const TWEET_TEXT = texts.step4tweet.defaultText;
 const TWEET_MAX_CHARS = parseInt( texts.step4tweet.maxChars, 10 );
 
+/**
+ * Well this function is quite straight forward, basically gives the
+ * feedback to the user after the tweet post request was sent.
+ *
+ * response is any of these types https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType
+ */
 function handleResponse( response ) {
   if ( response.readyState === 4 && response.status === 200 ) {
     window.location.href = '/goodbye.html';
@@ -38,6 +45,12 @@ function handleResponse( response ) {
   }
 }
 
+/**
+ * Other fearull thing of using vanillaJS is to do your own Ajax requests.
+ * Good thing is that we are not anymore in 2005 and we have a nice API for it.
+ *
+ * @param  {FormData} data data to send to twitter
+ */
 function request( data ) {
   const xhttp = new XMLHttpRequest();
   // This variable is made available in the webpack.config file.
@@ -52,15 +65,25 @@ function request( data ) {
 
   xhttp.send( data );
 
+  //This funtion is called whenever the server sent a response.
+  //Whatever that response was. Theoretically, we could use only this one, and not
+  //use .onload...
   xhttp.onreadystatechange = () => {
     handleResponse( xhttp );
   };
 
+  //This was added in the XMLHttpRequest 2, and is called when a
+  //successful response is available
   xhttp.onload = function() {
     handleResponse( this );
   };
 }
 
+/**
+ * We get here the text which is in a given moment in the tweet form
+ *
+ * @return {String} The full text which will be tweeted
+ */
 function _getTweetText() {
   const tweetTextarea = document.querySelector( '.js-tweet-text' );
   const username = document.querySelector( '.js-username' );
@@ -68,6 +91,11 @@ function _getTweetText() {
   return tweetText;
 }
 
+/**
+ * Gets the image out of the dom.
+ *
+ * @return {Img} data-uri image
+ */
 function _getTweetMedia() {
   let imageData = document.querySelector( '.js-image-to-share' ).src;
   const indexOfComma = imageData.indexOf( ',' );
@@ -76,8 +104,10 @@ function _getTweetMedia() {
   return imageData;
 }
 
+/**
+ * Shares the image, and shows a loading indicator while the tweet is sent
+ */
 function _shareImage() {
-
   const loading = document.querySelector( '.step-4-share-it .icon-loading-animation' );
   loading.classList.remove( 'u-hidden' );
 
@@ -106,16 +136,26 @@ function _shareImage() {
   request( data );
 }
 
+/* ==========================================================================
+   Calculation of chars left
+   ========================================================================== */
+
 function _getCharsLeft() {
   return TWEET_MAX_CHARS - _getTweetText().length;
 }
 
+/**
+ * Sets the remaining chars the user has to write the tweet
+ */
 function _setCharsLeft() {
   const tweetCharLeft = document.querySelector( '.js-characters-left' );
   tweetCharLeft.innerHTML = _getCharsLeft();
   _checkCharsLeft();
 }
 
+/**
+ * Gives feedback the user about the chars they have used.
+ */
 function _checkCharsLeft() {
   const shareContainer = document.querySelector( '.js-tweet-content' );
 
@@ -137,17 +177,26 @@ function init() {
 
   for ( let i = 0; i < inputs.length; i++ ) {
     const currentInput = inputs[ i ];
-    currentInput.addEventListener( 'focus', () => {
-      body.classList.add( 'input-focused-body-min-height' );
-    } );
 
-    currentInput.addEventListener( 'blur', () => {
-      body.classList.remove( 'input-focused-body-min-height' );
-    } );
+    if ( isMobile.test() ) {
+      //This is a hack of us.
+      //It allows us to set he height of the body bigger when in a mobile the user
+      //has focused the inputs. This is due to the fact that for the recording video and taking photo
+      //we need to have everything inside the viewport, including the navbar. To do so we use viewportHeight
+      //in a mobile device, the viewportHeight is smaller when the keyboard is shown.
+      currentInput.addEventListener( 'focus', () => {
+        body.classList.add( 'input-focused-body-min-height' );
+      } );
+
+      currentInput.addEventListener( 'blur', () => {
+        body.classList.remove( 'input-focused-body-min-height' );
+      } );
+    }
 
     currentInput.addEventListener( 'input', ( e ) => {
       _setCharsLeft( e );
 
+      //The tweet button is disabled if there is no username or if the user used more chars than allowed.
       if ( ( _getCharsLeft() > 0 && usernameInput.value.length > 0 ) || !shareContainer.classList.contains( 'tweet-form-error' ) ) {
         tweetButton.disabled = false;
       } else {

@@ -10,10 +10,10 @@ block content
       .content-text-box
         p.u-text-center
           | #{goodbye.shared}
-          br
+        p.u-text-center
           | #{goodbye.commentedCode}
-        a.content-link-centered(href='#{goodbye.githubLink}')=goodbye.githubLinkText
+        a.content-link-centered(href='#{goodbye.githubLink}', target='_blank')=goodbye.githubLinkText
         p.u-text-center=goodbye.orCareers
-        a.u-bottom-top-small-spacer(href=global.careersLink)
+        a.u-bottom-top-small-spacer(href=global.careersLink, target='_blank')
           | #{global.careersLinkText}
       a.btn.btn-raised.u-text-center(href='index.html')=goodbye.playAgain
