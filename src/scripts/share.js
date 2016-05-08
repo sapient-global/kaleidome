@@ -7,7 +7,8 @@ function handleResponse( response ) {
   if ( response.readyState === 4 && response.status === 200 ) {
     window.location.href = '/goodbye.html';
 
-  } else if ( response.readyState !== 4 && response.status !== 200 ) {
+  } else {
+    // Hide all the elements of the screen related to sharing a tweet
     const loading = document.querySelector( '.step-4-share-it .icon-loading-animation' );
     loading.classList.add( 'u-hidden' );
 
@@ -20,8 +21,20 @@ function handleResponse( response ) {
     const header = document.querySelector( '.header' );
     header.classList.remove( 'u-light-background' );
 
+    const buttonPlayAgain = document.querySelector( '.js-button-play-again' );
+    buttonPlayAgain.classList.remove( 'u-hidden' );
+
+    const buttonTweet = document.querySelector( '.js-button-tweet' );
+    buttonTweet.classList.add( 'u-hidden' );
+
     const navbar = document.querySelector( '.navbar' );
-    navbar.classList.add( 'u-hidden' );
+    navbar.classList.remove( 'u-hidden' );
+
+    const image = document.querySelector( '.js-image-to-share' );
+    image.classList.remove( 'u-hidden' );
+
+    const content = document.querySelector( '.content' );
+    content.classList.add( 'content--long-page' );
   }
 }
 

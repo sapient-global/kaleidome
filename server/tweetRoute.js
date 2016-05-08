@@ -8,6 +8,8 @@ module.exports = function( req, res, fields, files ) {
 
   // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
   const client = new Twitter( {
+    //These are keys that you generate in: https://apps.twitter.com/app/id-of-your-app/keys
+    //The keys listed below are of course not working :) We have secret ones!
     consumer_key: process.env.TWITTER_CONSUMER_KEY || 'BIJ5EV4sUAFy701YijAzsOob3',
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET || 'MFoNd75YhKQ7zqhUavUD9ahXT1dWMK53zS0mqgPQGjpp8eKGdH',
     access_token: process.env.TWITTER_ACCESS_TOKEN_KEY || '723478728811134976-OxKxoXCFRj12cQYxO26Oj4mJIwWE56g',

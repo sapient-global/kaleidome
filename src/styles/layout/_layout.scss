@@ -12,6 +12,7 @@ body {
   height: $header-height;
   order: 1;
   padding: $global-padding;
+  position: relative;
 }
 
 article {
@@ -29,6 +30,8 @@ article {
   align-self: center;
   padding: 0;
   position: relative;
+
+  @include clearfix;
 }
 
 .content--no-nav {
@@ -43,16 +46,17 @@ article {
   min-height: $content-min-height;
 }
 
+.content--long-page {
+  min-height: $content-min-height--long-page;
+  height: 100%;
+}
+
 .navbar {
   order: 3;
   align-self: flex-end;
   height: $navbar-height;
   line-height: $navbar-height;
   width: 100vw;
-}
-
-.header {
-  position: relative;
 }
 
 .header,

@@ -8,6 +8,14 @@
   position: absolute;
 }
 
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
 .u-light-background {
   background-color: $brand-white;
 }

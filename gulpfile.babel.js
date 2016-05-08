@@ -186,5 +186,5 @@ gulp.task( 'serve', function( cb ) {
 } );
 
 gulp.task( 'watch', function() {
-  gulp.watch( `${paths.src}/**/*`, [ 'jade', 'sass', 'bundle' ] );
+  gulp.watch( `${paths.src}/**/*`, [  'jade', 'copy', 'sass', 'bundleDev' ] );
 } );

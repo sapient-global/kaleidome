@@ -2,18 +2,18 @@
   "index": {
     "title": "Hi there!",
     "welcomeText": "Welcome to KaleidoMe",
-    "description": "Have fun with your mates and create an awesome kaleidoscope with you in it!",
+    "description": "Play with KaleidoMe and get a kaleidoscope with you in it. It's easy, just follow these three steps:",
     "step1": "Take a Selfie",
-    "step2": "Set your favourite kaleidoscope pattern",
-    "step3": "Share it on Twitter",
+    "step2": "Transform your selfie into a kaleidoscope",
+    "step3": "Share it on Twitter or download it",
     "start": "START",
     "noStorage": "We will not store your photo, we will use it only to create a kaleidoscope"
   },
   "goodbye": {
-    "title": "awesome",
+    "title": "Awesome",
     "thanks": "Thanks for playing with KaleidoMe",
     "shared": "Your tweet has been shared",
-    "commentedCode": "You can check the commented code on github by following this link",
+    "commentedCode": "You can also check the commented code on github by following this link",
     "githubLink": "https://github.com/sapient-global/kaleidome",
     "githubLinkText": "github.com/sapient-global/kaleidome",
     "orCareers": "Or visit our careers page:",
@@ -26,21 +26,23 @@
     "notSupported": "You are seeing this image because your device does not support yet MediaDevices.getUserMedia()"
   },
   "step3kaleidome": {
-    "title": "How it works!",
+    "title": "How it works",
     "description": "Slide your finger over the Kaleidoscope to generate new patterns",
-    "shareThen": "When you are ready, simply Share!"
+    "shareThen": "When you are ready, simply hit share"
   },
   "step4tweet": {
-    "defaultText": ", I am at #test and visited the @Sapientxt guys! ",
+    "defaultText": " is also having fun with #kaleidoMe at #BTconf",
     "maxChars": "120",
     "textareaPlaceholder": "Enter your tweet message here",
     "inputPlaceholder": "johnDoesTwitter",
     "charsLeft": " Characters left",
-    "errorTitle": "Oops!",
-    "errorSubtitle": "Something happened",
-    "errorMessage": "We could not share your tweet, the tweet feature is either disabled or we could not connect to twitter",
-    "tweetNotEnabled": "Tweeting is disabled at the moment",
-    "tweetDisabledText": "You can share your KaleidoMe only during the Beyond Tellerand dates, between 09:00 and 18:00"
+    "alternativeTitle": "Awesome!",
+    "errorTitle": "Something happened",
+    "subitleError": "We could not share your kaleidoscope on Twitter",
+    "errorMessage": "But you still can download your kaleidoMe and share it with your friends! Just tap on it and download it.",
+    "tweetNotEnabled": "Your kaliedoscope is ready",
+    "tweetDisabledText1": "Now download it by tapping on the image!",
+    "tweetDisabledText2": "During the dates of the Beyond Tellerand 2016 you can also tweet it from our web app."
   },
   "global": {
     "careersLink": "https://sapientnitro.de/careers",
@@ -54,6 +56,7 @@
     "again": "AGAIN",
     "kaleidome": "KALEIDOME!",
     "share": "SHARE",
-    "tweet": "TWEET"
+    "tweet": "TWEET",
+    "playAgain": "PLAY AGAIN"
   }
 }

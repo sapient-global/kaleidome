@@ -2,14 +2,13 @@
 
 import kaleidoscope from './kaleidoscope.js';
 import isAConferenceDay from './libs/isAConferenceDay.js';
+import isWebRTCsupported from './libs/isWebRTCsupported.js';
 
-function isUserMediaSupported() {
-  return ( navigator.mediaDevices.getUserMedia !== undefined );
-}
-
-function hideVideoScreen( buttonKaleidoMe, buttonAgain, step1TakePhoto, step2ReviewPhoto ) {
+function hideVideoScreen( buttonKaleidoMe, buttonAgain, step1TakePhoto, step2ReviewPhoto, navbar, content ) {
   buttonKaleidoMe.classList.remove( 'u-hidden' );
   buttonAgain.classList.remove( 'u-hidden' );
+  navbar.classList.remove( 'u-hidden' );
+  content.classList.remove( 'content--no-nav' );
 
   step1TakePhoto.classList.add( 'u-hidden' );
   step2ReviewPhoto.classList.remove( 'u-hidden' );
@@ -25,13 +24,20 @@ function init() {
   const tweetError = document.querySelector( '.js-tweet-error' );
   const tweetContent = document.querySelector( '.js-tweet-content' );
   const tweetNotEnabled = document.querySelector( '.js-tweet-disabled' );
+  const content = document.querySelector( '.content' );
+  const navbar = document.querySelector( '.navbar' );
 
   const buttonPhoto = document.querySelector( '.js-button-photo' );
   const buttonAgain = document.querySelector( '.js-button-again' );
   const buttonShare = document.querySelector( '.js-button-share' );
   const buttonTweet = document.querySelector( '.js-button-tweet' );
+  const buttonPlayAgain = document.querySelector( '.js-button-play-again' );
   const buttonKaleidoMe = document.querySelector( '.js-button-kaleidome' );
   const buttonCancel = document.querySelector( '.js-button-cancel' );
+
+  buttonPlayAgain.addEventListener( 'click', () => {
+    window.location.href = '/index.html';
+  } );
 
   buttonCancel.addEventListener( 'click', () => {
     buttonShare.classList.add( 'u-hidden' );
@@ -42,23 +48,26 @@ function init() {
     header.classList.remove( 'u-light-background' );
     tweetError.classList.add( 'u-hidden' );
     tweetContent.classList.remove( 'u-hidden' );
+    content.classList.remove( 'content--long-page' );
 
     step1TakePhoto.classList.remove( 'u-hidden' );
     step2ReviewPhoto.classList.add( 'u-hidden' );
     step3KaleidoscopeContainer.classList.add( 'u-hidden' );
     step4ShareIt.classList.add( 'u-hidden' );
+    buttonPlayAgain.classList.add( 'u-hidden' );
   } );
 
   const notSupportedText = document.querySelector( '.js-not-supported' );
 
-  if ( !isUserMediaSupported() ) {
+  if ( !isWebRTCsupported.test() ) {
     notSupportedText.classList.remove( 'u-hidden' );
-    hideVideoScreen( buttonKaleidoMe, buttonAgain, step1TakePhoto, step2ReviewPhoto );
+    buttonAgain.disabled = true;
+    hideVideoScreen( buttonKaleidoMe, buttonAgain, step1TakePhoto, step2ReviewPhoto, navbar, content );
   }
 
   // Step 1: Take the photo
   buttonPhoto.addEventListener( 'click', () => {
-    hideVideoScreen( buttonKaleidoMe, buttonAgain, step1TakePhoto, step2ReviewPhoto );
+    hideVideoScreen( buttonKaleidoMe, buttonAgain, step1TakePhoto, step2ReviewPhoto, navbar, content );
     return false;
   } );
 
@@ -66,6 +75,8 @@ function init() {
   buttonAgain.addEventListener( 'click', () => {
     buttonKaleidoMe.classList.add( 'u-hidden' );
     buttonAgain.classList.add( 'u-hidden' );
+    navbar.classList.add( 'u-hidden' );
+    content.classList.add( 'content--no-nav' );
 
     //Elems.
     step2ReviewPhoto.classList.add( 'u-hidden' );
@@ -95,13 +106,15 @@ function init() {
       tweetNotEnabled.classList.add( 'u-hidden' );
       tweetContent.classList.remove( 'u-hidden' );
       header.classList.add( 'u-light-background' );
+      buttonPlayAgain.classList.add( 'u-hidden' );
+      buttonTweet.classList.remove( 'u-hidden' );
     } else {
       tweetNotEnabled.classList.remove( 'u-hidden' );
       tweetContent.classList.add( 'u-hidden' );
       buttonTweet.disabled = true;
+      buttonPlayAgain.classList.remove( 'u-hidden' );
+      content.classList.add( 'content--long-page' );
     }
-
-    buttonTweet.classList.remove( 'u-hidden' );
 
     step3KaleidoscopeContainer.classList.add( 'u-hidden' );
     step4ShareIt.classList.remove( 'u-hidden' );
