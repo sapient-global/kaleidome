@@ -1,4 +1,5 @@
 import isMobile from './libs/isMobile.js';
+import isWebRTCsupported from './libs/isWebRTCsupported.js';
 
 let isStreaming = false;
 
@@ -71,7 +72,7 @@ function _captureMedia( successCallback ) {
     //or available via the Peer connection API (Yes, the one to make calls)
     navigator.mediaDevices.getUserMedia( mediaSettings ).then( successCallback ).catch( _errorCallback );
   } catch ( e ) {
-    console.log( 'navigator.getUserMedia error: ', e );
+    console.log( 'navigator.mediaDevices.getUserMedia error: ', e );
   }
 };
 
@@ -83,15 +84,15 @@ function init() {
   const content = document.querySelector( '.js-all-content' );
 
   const buttonPhoto = document.querySelector( '.js-button-photo' );
-  const buttonClear = document.querySelector( '.js-button-again' );
+  const buttonAgain = document.querySelector( '.js-button-again' );
   const buttonCancel = document.querySelector( '.js-button-cancel' );
 
-  _captureMedia( _recordVideo );
+  if ( isWebRTCsupported.test() ) {
+    _captureMedia( _recordVideo );
+  }
 
   buttonPhoto.addEventListener( 'click', () => {
     _takePicture( canvas, video, photo );
-    navbar.classList.remove( 'u-hidden' );
-    content.classList.remove( 'content--no-nav' );
     //The stream is of type MediaStream, is available in the callback when we star recording
     //and we make it available here. The tracks is of type MediaStreamTrack. This object represents
     //a source of media available in the UserAgent, in our case is a video.
@@ -101,10 +102,8 @@ function init() {
     mediaObjects.tracks.stop();
   } );
 
-  buttonClear.addEventListener( 'click', () => {
+  buttonAgain.addEventListener( 'click', () => {
     _clearPhoto( canvas, photo, video );
-    navbar.classList.add( 'u-hidden' );
-    content.classList.add( 'content--no-nav' );
     //As we have stoped completely the mediaStream when we took the photo,
     //in case we want to start it again, we need to get again the mediaStream
     _captureMedia( _recordVideo );

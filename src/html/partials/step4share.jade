@@ -10,34 +10,29 @@ article.step-4-share-it.u-top-vertically.u-full-size.u-hidden
       | #{step4tweet.charsLeft}
   include ./loadingAnimation.jade
   +loading('u-hidden')
-  div.js-tweet-disabled.u-bottom-spacer.u-top-spacer.u-text-center.u-hidden
+  div.js-tweet-disabled.u-top-spacer.u-text-center.u-hidden
     h1.main-title.u-text-center.u-italic
-      | #{step4tweet.errorTitle}
+      | #{step4tweet.alternativeTitle}
     h2.subtitle.u-text-center
       | #{step4tweet.tweetNotEnabled}
-    div.content-text-box
+    div.content-text-box--half
       p.u-text-center
-        | #{step4tweet.tweetDisabledText}
-        br
+        | #{step4tweet.tweetDisabledText1}
+      p.u-text-center
+        | #{step4tweet.tweetDisabledText2}
+      p.u-text-center
         | #{goodbye.commentedCode}
       a.content-link-centered(href='#{goodbye.githubLink}')=goodbye.githubLinkText
-      p.u-text-center=goodbye.orCareers
-      a.u-bottom-top-small-spacer(href=global.careersLink)
-        | #{global.careersLinkText}
-    a.btn.btn-raised.u-text-center(href='index.html')=goodbye.playAgain
-  div.js-tweet-error.u-bottom-spacer.u-top-spacer.u-text-center.u-hidden
+  div.js-tweet-error.u-top-spacer.u-text-center.u-hidden
     h1.main-title.u-text-center.u-italic
       | #{step4tweet.errorTitle}
     h2.subtitle.u-text-center
-      | #{step4tweet.errorSubtitle}
-    div.content-text-box
+      | #{step4tweet.subitleError}
+    div.content-text-box--half
       p.u-text-center
         | #{step4tweet.errorMessage}
-        br
+      p.u-text-center
         | #{goodbye.commentedCode}
       a.content-link-centered(href='#{goodbye.githubLink}')=goodbye.githubLinkText
-      p.u-text-center=goodbye.orCareers
-      a.u-bottom-top-small-spacer(href=global.careersLink)
-        | #{global.careersLinkText}
-    a.btn.btn-raised.u-text-center(href='index.html')=goodbye.playAgain
-  img.tweet-thumbnail.responsive-img.js-image-to-share(src='#', alt='Your kaleidoscope')
+  div
+    img.tweet-thumbnail.responsive-img.js-image-to-share(src='#', alt='Your kaleidoscope')

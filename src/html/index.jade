@@ -6,7 +6,8 @@ block content
       h1.main-title.u-text-center.u-italic=index.title
       h2.subtitle.u-text-center=index.welcomeText
       .content-text-box
-        p.u-text-centers=index.description
+        p.u-text-centers
+          | #{index.description}
         ol
           li=index.step1
           li=index.step2
