@@ -12,7 +12,7 @@
   "goodbye": {
     "title": "Awesome",
     "thanks": "Thanks for playing with KaleidoMe",
-    "shared": "Your tweet has been shared",
+    "shared": "Your tweet has been shared. Show us your Kaleioscope at our booth to participate in the tombola to win a price.",
     "commentedCode": "You can also check the commented code on github by following this link",
     "githubLink": "https://github.com/sapient-global/kaleidome",
     "githubLinkText": "github.com/sapient-global/kaleidome",

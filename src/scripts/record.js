@@ -1,21 +1,32 @@
+/**
+ * Here we get via webRTC a the mediaStream that contains the
+ * MediaStreamTracks (video) that contains whatever the camera is recording.
+ * Once we get it, we set it in the video tag's src, so it is displayed in the browser.
+ *
+ * When the user wants to get a photo out of it, with the canvas API, we capture whatever is happening
+ * in the video tag, and make a png image out of it.
+ */
 import isMobile from './libs/isMobile.js';
 import isWebRTCsupported from './libs/isWebRTCsupported.js';
 
 let isStreaming = false;
 
+// These are the settings that the webRTC needs, it tells it that
+// we want to record only video
 const mediaSettings = {
   audio: false,
   video: true
 };
 
+//This is the size of the video and photo
 let size = {
   width: 489,
   height: 360,
 };
 
 let mediaObjects = {
-  stream: false,
-  tracks: false
+  mediaStream: false,
+  mediaStreamTracks: false
 };
 
 function detectAspectRatio() {
@@ -41,29 +52,53 @@ function _clearPhoto( canvas, photo, video ) {
   }
 }
 
+/**
+ * Given the video, it tells the canvas to capture an image out of it
+ *
+ * @param  {DOMElement} canvas
+ * @param  {DOMElement} video
+ * @param  {DOMElement} photo
+ */
 function _takePicture( canvas, video, photo ) {
   const context = canvas.getContext( '2d' );
   canvas.width = size.width;
   canvas.height = size.height;
   context.drawImage( video, 0, 0, size.width, size.height );
   const data = canvas.toDataURL( 'image/png' );
+
   photo.setAttribute( 'src', data );
   photo.setAttribute( 'width', size.width );
   photo.setAttribute( 'height', size.height );
 }
 
+/**
+ * Logs in the console if something bad happened...
+ *
+ * @param  {Error} error Error that happening when trying to record
+ */
 function _errorCallback( error ) {
   console.log( 'navigator.getUserMedia error: ', error );
 }
 
+/**
+ * Starts recording video if the userMedia is supported
+ *
+ * @param  {mediaStream} mediaStream MediaStream sent by getUserMedia
+ */
 function _recordVideo( mediaStream ) {
   //A mediaStream consist of cero or more MediaStreamTracks (audio or video)
   //A mediaStream also has channels, they are using to transfer data across peers
   const video = document.querySelector( 'video' );
-  mediaObjects.stream = mediaStream;
+  //Here we give the video the input of the camera.
+  mediaObjects.mediaStream = mediaStream;
   video.srcObject = mediaStream;
 }
 
+/**
+ * Starts capturing video
+ *
+ * @param  {Function} successCallback callback to call if we can record video
+ */
 function _captureMedia( successCallback ) {
   try {
     //When we call getUserMedia, we are getting an object called MediaStream.
@@ -96,10 +131,11 @@ function init() {
     //The stream is of type MediaStream, is available in the callback when we star recording
     //and we make it available here. The tracks is of type MediaStreamTrack. This object represents
     //a source of media available in the UserAgent, in our case is a video.
-    mediaObjects.tracks = mediaObjects.stream.getTracks()[ 0 ];
+    mediaObjects.mediaStreamTracks = mediaObjects.mediaStream.getTracks()[ 0 ];
+
     //By calling stop, the mediaStreamTrack will be ended, this means that we will stop
     //recording the video. To start it again, we need to add a new track to the mediaStream
-    mediaObjects.tracks.stop();
+    mediaObjects.mediaStreamTracks.stop();
   } );
 
   buttonAgain.addEventListener( 'click', () => {
@@ -115,8 +151,12 @@ function init() {
     _captureMedia( _recordVideo );
   } );
 
+  //Each device has a different aspect ratio on their cameras
+  //This is a very simple version to detect aspect ratios, and sets the
+  //size of our sizes object, this is used below when we set the size of the video and canvas
   detectAspectRatio();
 
+  //It it is not yet playing, then sets up the size of the video and canvas
   video.addEventListener( 'canplay', () => {
     if ( !isStreaming ) {
       video.setAttribute( 'width', size.width );

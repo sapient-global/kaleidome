@@ -10,7 +10,7 @@
 
 @mixin clearfix {
   &:after {
-    content: "";
+    content: '';
     display: table;
     clear: both;
   }
@@ -76,8 +76,8 @@
   align-items: center;
   justify-content: flex-start;
 }
-//scss-lint:disable ImportantRule
 
+//scss-lint:disable ImportantRule
 .u-hidden {
   display: none !important;
 }

@@ -15,10 +15,6 @@ body {
   position: relative;
 }
 
-article {
-  position: relative;
-}
-
 .header--no-nav {
   height: $header-height--no-nav;
 }
@@ -49,6 +45,10 @@ article {
 .content--long-page {
   min-height: $content-min-height--long-page;
   height: 100%;
+}
+
+.content-article {
+  position: relative;
 }
 
 .navbar {

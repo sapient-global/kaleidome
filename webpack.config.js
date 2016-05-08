@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * This setup is working in conjunction with gulp.
+ * Here we setup the webpack configuration, and in gulp
+ * depending on the task we call it.
+ */
+
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import pkg from './package.json';
@@ -18,6 +24,12 @@ const browsers = {
   browsers: [ 'last 2 version', 'ie >= 11' ]
 };
 
+/**
+ * This config file is used by the development bundle
+ * and by the production bundle.
+ *
+ * If DEBUG is set to true, then we are on development.
+ */
 export default ( DEBUG, PATH, PORT = 3000, WEBPACKSERVER ) => ( {
   cache: DEBUG,
   debug: DEBUG,
