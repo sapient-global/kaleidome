@@ -1,4 +1,18 @@
 'use strict';
+
+/**
+ * In here we are using commonJS instead of the ES2015 modules.
+ * This is because the server is executed by node, and in there,
+ * the modules are not yet supported. At least in the version 5.8.
+ * To see what is supported check this site: http://node.green/
+ *
+ * The server will serve our site and will receive the POST request
+ * from the browser to send it to the twitter API to post our tweet.
+ *
+ * Setting up a express server is simple and there are bunch of great tutorials online
+ * about it. Therefore we are not explaining it here with all the details, if you are courious
+ * you can start here: http://expressjs.com/en/guide/routing.html
+  */
 const async = require( 'async' );
 const multiparty = require( 'multiparty' );
 const express = require( 'express' );
@@ -37,6 +51,8 @@ app.use( express.static( opts.baseDir ) );
    Init the server
    ========================================================================== */
 if ( !isProd() ) {
+  //If we are in development mode,
+  //we want to use a node server that requires our sample self signed keys.
   const sslConf = {
     key: fs.readFileSync( './server/server.key' ),
     cert: fs.readFileSync( './server/server.crt' ),
@@ -46,9 +62,8 @@ if ( !isProd() ) {
 
   const server = https.createServer( sslConf, app );
   server.listen( opts.port, opts.host, startedServerCallback );
-  
-} else {
 
+} else {
   app.listen( opts.port, opts.host, startedServerCallback );
 }
 
@@ -72,6 +87,9 @@ app.get( '/', ( req, res ) => {
 
 app.post( '/tweet', function( req, res ) {
   let formData = new multiparty.Form();
+  //We want to allow tweeting to the #btConf hashtag only during
+  //BTconf, in the client side we are doing this with momentJS, in
+  //the server side we do it via environment variable
   const isTweetEnabled = isProd() ? process.env.TWEET_ENABLED : true;
 
   if ( isTweetEnabled ) {

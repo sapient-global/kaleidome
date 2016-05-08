@@ -1,3 +1,9 @@
+/**
+ * We owe you a more thought code-commented gulpfile.
+ *
+ * What it matters here, is that it also uses ES2015
+ * And that it integrates webpack.
+ */
 import gulp from 'gulp';
 import loadPlugins from 'gulp-load-plugins';
 import del from 'del';
@@ -64,7 +70,7 @@ function lintGulpfile() {
 }
 
 /* ==========================================================================
-   Styles and other webapp stuff
+   Styles, tempaltes and copy assets
    ========================================================================== */
 
 function sass() {
@@ -106,6 +112,10 @@ function copyFonts() {
     .pipe( gulp.dest( `${paths.dist}/fonts/` ) );
 }
 
+/* ==========================================================================
+   Create the bundles
+   ========================================================================== */
+
 function bundleDev() {
   const config = webpackConfig( true, `${paths.src}/scripts/${paths.main}`, PORT, false );
   return gulp.src( `${paths.src}/scripts/${paths.main}` )
@@ -121,6 +131,10 @@ function bundleDist() {
     .pipe( webpackStream( config ) )
     .pipe( gulp.dest( paths.dist ) );
 }
+
+/* ==========================================================================
+   Create the webpack development server
+   ========================================================================== */
 
 function serve() {
   const config = webpackConfig( true, `${paths.src}/scripts/${paths.main}`, PORT, true );
@@ -186,5 +200,5 @@ gulp.task( 'serve', function( cb ) {
 } );
 
 gulp.task( 'watch', function() {
-  gulp.watch( `${paths.src}/**/*`, [  'jade', 'copy', 'sass', 'bundleDev' ] );
+  gulp.watch( `${paths.src}/**/*`, [ 'jade', 'copy', 'sass', 'bundleDev' ] );
 } );

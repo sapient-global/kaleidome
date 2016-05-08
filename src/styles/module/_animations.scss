@@ -1,5 +1,8 @@
 $animation-duration: 10s;
-
+// This is our container, it has a grey background,
+// the svg of the icon,
+// and a div with blue background which is translated to the bottom,
+// with the animation, it will slowly be translated to the top, giving a effect of loading buble
 .icon-loading-animation {
   background-color: $brand-grey;
   width: $button-height;
@@ -28,10 +31,15 @@ $animation-duration: 10s;
   .icon {
     position: relative;
     z-index: $zindex-loading-animation-icon;
-    animation: ($animation-duration - 1) cubic-bezier(0, 0.25, 0.17, 1.23) 0s flip;
+    animation: ($animation-duration - 1) cubic-bezier(0, .25, .17, 1.23) 0s flip;
     animation-iteration-count: infinite;
   }
 }
+
+// As the background animation is infinite,
+// The flip animation also needs to be infinite. As the logo needs to flip when the background comes
+// back down.
+// In order to add a delay for each loop, we just add more stages to the frames.
 @keyframes flip {
   0%,
   30%,
@@ -56,6 +64,10 @@ $animation-duration: 10s;
     transform: rotateY(90deg);
   }
 }
+
+// A way to write this shorter would be to have all the percentages as a map,
+// and iterate over the map and render the values.
+// I guess that is a thing to do for next time. No body will scroll to the end of this file anyways.
 @keyframes animation-loading {
   0% {
     transform: translateY(100%);

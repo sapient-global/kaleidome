@@ -1,12 +1,9 @@
 /**
- * Detects if pointer is available
+ * Detects if the pointer events are available
  */
 
 export default {
   test() {
-    if ( window.PointerEvent ) {
-      return true;
-    }
-    return false;
+    return ( window.PointerEvent ) ? true : false;
   }
 };
